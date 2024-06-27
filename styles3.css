@@ -1,0 +1,112 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
+
+/* Global Styles */
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 1.5;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  border: 0 solid;
+}
+
+/* Selection Styles */
+::selection {
+  color: #fff;
+  background: #1890ff;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(158, 158, 158, 0.3);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Anchor Tag Styles */
+a {
+  color: #1890ff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #40a9ff;
+  text-decoration: underline;
+}
+
+/* Tag Styles */
+.tag__24Rd {
+  display: inline-block;
+  line-height: 14px;
+  border-radius: 16px;
+  user-select: none;
+  cursor: pointer;
+  transition: color 0.3s, background-color 0.3s;
+  color: #546e7a;
+  background: #fafafa;
+}
+
+.tag__24Rd[data-size="xs"] {
+  padding: 5px 8px;
+}
+
+.tag__24Rd:hover {
+  color: #37474f;
+  background: #eceff1;
+}
+
+/* Specific Blog Post Styles */
+.post {
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  max-width: 800px; /* Adjust based on your layout */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.post-content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+}
+
+.post a {
+  color: #1890ff;
+  text-decoration: none;
+}
+
+.post a:hover {
+  color: #40a9ff;
+  text-decoration: underline;
+}

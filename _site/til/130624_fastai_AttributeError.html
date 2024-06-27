@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.45">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-06-13">
+
+<title>TabularPandas AttributeError: classes – Sarah Hannes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Sarah Hannes</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../til.html"> 
+<span class="menu-text">Today I learn</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#error-example" id="toc-error-example" class="nav-link active" data-scroll-target="#error-example">Error Example</a></li>
+  <li><a href="#working-example" id="toc-working-example" class="nav-link" data-scroll-target="#working-example">Working Example</a></li>
+  <li><a href="#why-did-we-get-this-error" id="toc-why-did-we-get-this-error" class="nav-link" data-scroll-target="#why-did-we-get-this-error">Why did we get this error?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TabularPandas AttributeError: classes</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">fastai</div>
+    <div class="quarto-category">TabularPandas</div>
+    <div class="quarto-category">error</div>
+    <div class="quarto-category">python</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 13, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p>Specify <em>procs</em> <code>TabularPandas(..., procs = [Categorify])</code> when you have categorical columns</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This post was written using: - <code>pandas</code>: 2.2.2 - <code>fastai</code>: 2.7.15</p>
+</div>
+</div>
+<div id="83735e84-1717-4ea5-aa95-49463995caa3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-13T05:12:06.825672Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-13T05:12:06.824942Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-13T05:12:09.556134Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-13T05:12:09.555035Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-06-13T05:12:06.825629Z&quot;}" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastai.tabular.<span class="bu">all</span> <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="bc13f0b1-51d3-4481-8de8-9f753d1a267f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-13T06:15:26.361750Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-13T06:15:26.361209Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-13T06:15:26.417501Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-13T06:15:26.415786Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-06-13T06:15:26.361715Z&quot;}" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># looking at unique values in each columns to split categorical / continuous features</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> df.keys():</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Column </span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">:</span><span class="ch">\n</span><span class="sc">{</span>Counter(df[k])<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Column a:
+Counter({2.0: 8435, 1.0: 2580, 3.0: 2011})
+
+Column b:
+Counter({12.0: 9853, 32.0: 2911, 80.0: 87, 16.0: 72, 11.0: 47, 8.0: 28, 10.0: 25, 40.0: 3})
+
+Column c:
+Counter({0: 1579, 5: 1517, 6: 1271, 7: 1213, 4: 1211, 8: 1081, 3: 898, 9: 831, 10: 682, 2: 608, 1: 342, 11: 278, 14: 216, 12: 206, 16: 184, 13: 165, 15: 145, 17: 131, 18: 94, 19: 88, 20: 66, 21: 57, 23: 54, 29: 24, 26: 18, 24: 16, 27: 16, 22: 12, 30: 12, 25: 7, 28: 4})
+
+Column d:
+Counter({15.0: 7521, -1.0: 1433, 8.0: 374, 0.0: 372, 7.0: 365, 9.0: 334, 10.0: 319, 6.0: 316, 5.0: 272, 11.0: 264, 4.0: 241, 12.0: 220, 3.0: 217, 13.0: 205, 14.0: 176, 2.0: 170, 1.0: 164, -3.0: 14, -2.0: 4, -4.0: 3, -27.0: 3, -5.0: 3, -22.0: 2, -26.0: 2, -30.0: 2, -16.0: 2, -7.0: 2, -17.0: 2, -21.0: 1, -23.0: 1, -25.0: 1, -28.0: 1, -31.0: 1, -32.0: 1, -53.0: 1, -56.0: 1, -57.0: 1, -58.0: 1, -59.0: 1, -88.0: 1, -93.0: 1, -98.0: 1, -38.0: 1, -8.0: 1, -11.0: 1, -14.0: 1, -18.0: 1, -9.0: 1, -10.0: 1, -43.0: 1, -49.0: 1, -6.0: 1})
+
+Column e:
+Counter({4.1: 1285, 3.4: 912, 3.3: 905, 4.0: 884, 4.2: 812, 3.5: 797, 3.6: 713, 3.7: 708, 3.2: 666, 3.9: 640, 3.8: 628, 4.3: 512, 4.4: 359, 2.1: 351, 4.5: 294, 3.1: 276, 2.2: 269, 4.6: 216, 2.3: 185, 4.7: 175, 2.4: 145, 4.8: 142, 4.9: 135, 5.0: 130, 5.1: 90, 2.5: 88, 5.2: 72, 2.6: 66, 2.8: 64, 2.7: 64, 5.3: 58, 3.0: 54, 2.9: 50, 2.0: 38, 5.4: 34, 5.5: 28, 6.3: 22, 6.6: 21, 5.7: 16, 6.2: 16, 5.6: 16, 5.8: 15, 6.7: 14, 6.8: 12, 6.1: 12, 6.5: 9, 5.9: 8, 6.4: 6, 6.0: 4, 7.2: 4, 6.9: 3, 7.0: 1, 7.5: 1, 7.1: 1})
+
+Column f:
+Counter({0.7: 1475, 0.6: 1472, 0.8: 1444, 1.0: 1385, 0.9: 1335, 0.5: 1249, 0.4: 1014, 1.1: 974, 0.3: 708, 0.0: 482, 0.2: 423, 0.1: 294, 1.2: 241, 1.3: 119, 1.4: 81, 1.5: 56, 1.6: 37, 1.8: 33, 1.9: 25, -0.1: 23, 1.7: 22, -1.1: 19, 2.3: 15, 2.4: 12, 2.1: 9, -1.3: 9, -0.6: 8, -0.9: 8, -0.7: 7, 2.0: 7, -0.8: 5, -1.9: 5, -1.2: 4, 2.2: 4, -0.2: 4, 2.8: 3, 2.6: 2, 2.5: 2, -0.3: 2, -0.5: 2, 5.1: 1, -1.0: 1, 2.7: 1, 3.0: 1, -1.8: 1, -1.6: 1, -4.5: 1})
+
+Column label:
+Counter({0.0: 11000, 1.0: 2026})
+</code></pre>
+</div>
+</div>
+<div id="5dfad572-4d1a-4157-9edf-fbe322a2aeb4" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-13T06:15:26.680408Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-13T06:15:26.679492Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-13T06:15:26.689729Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-13T06:15:26.687973Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-06-13T06:15:26.680345Z&quot;}" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define categorical and continuous features</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cat_names <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>y_names <span class="op">=</span> <span class="st">'label'</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>cont_names <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> df.keys() <span class="cf">if</span> c <span class="kw">not</span> <span class="kw">in</span> cat_names<span class="op">+</span>[y_names]]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'cat_names:'</span>,cat_names)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'cont_names:'</span>,cont_names)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'y_names:'</span>,y_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>cat_names: ['a', 'b']
+cont_names: ['c', 'd', 'e', 'f']
+y_names: label</code></pre>
+</div>
+</div>
+<div id="5d7fe4ce-7643-48d6-91f5-ec21008515ed" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-13T06:15:27.571545Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-13T06:15:27.571030Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-13T06:15:30.359768Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-13T06:15:30.358871Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-06-13T06:15:27.571499Z&quot;}" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split into train and test</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>val_index <span class="op">=</span> <span class="bu">list</span>(df.sample(frac<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">0</span>).index) <span class="co"># 20% from total df</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>train_index <span class="op">=</span> <span class="bu">list</span>(df[<span class="op">~</span>df.index.isin(val_index)].index)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (<span class="bu">len</span>([i <span class="cf">for</span> i <span class="kw">in</span> train_index <span class="cf">if</span> i <span class="kw">in</span> <span class="bu">set</span>(val_index)])<span class="op">==</span><span class="dv">0</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">and</span> <span class="bu">len</span>([i <span class="cf">for</span> i <span class="kw">in</span> val_index <span class="cf">if</span> i <span class="kw">in</span> <span class="bu">set</span>(train_index)])<span class="op">==</span><span class="dv">0</span>), <span class="st">'train and val set are overlapping!'</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'train set len'</span>, <span class="bu">len</span>(train_index))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'val set len'</span>, <span class="bu">len</span>(val_index))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>train set len 10421
+val set len 2605</code></pre>
+</div>
+</div>
+<section id="error-example" class="level3">
+<h3 class="anchored" data-anchor-id="error-example">Error Example</h3>
+<div id="1c7ce076-fc0a-4a47-8b9d-de2fabc3f5ed" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-13T05:43:46.684188Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-13T05:43:46.683791Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-13T05:43:46.957597Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-13T05:43:46.925742Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-06-13T05:43:46.684160Z&quot;}" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># oh no, can't train!</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dl <span class="op">=</span> TabularPandas(df, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                   cat_names<span class="op">=</span>cat_names, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                   cont_names<span class="op">=</span>cont_names, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                   y_names<span class="op">=</span>y_names,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                   y_block <span class="op">=</span> CategoryBlock(vocab<span class="op">=</span>df[y_names]), </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                   splits<span class="op">=</span>(train_index, val_index))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>dls <span class="op">=</span> dl.dataloaders(bs<span class="op">=</span><span class="dv">64</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dls.show_batch())</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>learn <span class="op">=</span> tabular_learner(dls, metrics<span class="op">=</span>[accuracy])</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>learn.fit_one_cycle(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">a</th>
+<th data-quarto-table-cell-role="th">b</th>
+<th data-quarto-table-cell-role="th">c</th>
+<th data-quarto-table-cell-role="th">d</th>
+<th data-quarto-table-cell-role="th">e</th>
+<th data-quarto-table-cell-role="th">f</th>
+<th data-quarto-table-cell-role="th">label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1.0</td>
+<td>12.0</td>
+<td>7.0</td>
+<td>9.0</td>
+<td>3.9</td>
+<td>0.6</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2.0</td>
+<td>12.0</td>
+<td>3.0</td>
+<td>15.0</td>
+<td>4.1</td>
+<td>0.3</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2.0</td>
+<td>12.0</td>
+<td>4.0</td>
+<td>-1.0</td>
+<td>4.0</td>
+<td>0.7</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2.0</td>
+<td>12.0</td>
+<td>11.0</td>
+<td>15.0</td>
+<td>4.1</td>
+<td>1.4</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2.0</td>
+<td>12.0</td>
+<td>4.0</td>
+<td>12.0</td>
+<td>4.2</td>
+<td>0.6</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>2.0</td>
+<td>32.0</td>
+<td>14.0</td>
+<td>6.0</td>
+<td>5.2</td>
+<td>0.2</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>1.0</td>
+<td>12.0</td>
+<td>4.0</td>
+<td>9.0</td>
+<td>3.2</td>
+<td>0.3</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>3.0</td>
+<td>32.0</td>
+<td>5.0</td>
+<td>15.0</td>
+<td>3.5</td>
+<td>0.7</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>2.0</td>
+<td>12.0</td>
+<td>3.0</td>
+<td>14.0</td>
+<td>2.6</td>
+<td>0.5</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>3.0</td>
+<td>12.0</td>
+<td>0.0</td>
+<td>-2.0</td>
+<td>4.1</td>
+<td>-0.0</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>None</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[43], line 10</span>
+<span class="ansi-green-fg ansi-bold">      8</span> dls <span style="color:rgb(98,98,98)">=</span> dl<span style="color:rgb(98,98,98)">.</span>dataloaders(bs<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">64</span>)
+<span class="ansi-green-fg ansi-bold">      9</span> <span style="color:rgb(0,135,0)">print</span>(dls<span style="color:rgb(98,98,98)">.</span>show_batch())
+<span class="ansi-green-fg">---&gt; 10</span> learn <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">tabular_learner</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">dls</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">metrics</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">accuracy</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">     11</span> learn<span style="color:rgb(98,98,98)">.</span>fit_one_cycle(<span style="color:rgb(98,98,98)">3</span>)
+
+File <span class="ansi-green-fg">/opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastai/tabular/learner.py:42</span>, in <span class="ansi-cyan-fg">tabular_learner</span><span class="ansi-blue-fg">(dls, layers, emb_szs, config, n_out, y_range, **kwargs)</span>
+<span class="ansi-green-fg ansi-bold">     40</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> layers <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>: layers <span style="color:rgb(98,98,98)">=</span> [<span style="color:rgb(98,98,98)">200</span>,<span style="color:rgb(98,98,98)">100</span>]
+<span class="ansi-green-fg ansi-bold">     41</span> to <span style="color:rgb(98,98,98)">=</span> dls<span style="color:rgb(98,98,98)">.</span>train_ds
+<span class="ansi-green-fg">---&gt; 42</span> emb_szs <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">get_emb_sz</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">dls</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">train_ds</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">{</span><span class="ansi-yellow-bg">}</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">if</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">emb_szs</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(175,0,255)" class="ansi-yellow-bg">is</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">None</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">else</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">emb_szs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">     43</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> n_out <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>: n_out <span style="color:rgb(98,98,98)">=</span> get_c(dls)
+<span class="ansi-green-fg ansi-bold">     44</span> <span style="font-weight:bold;color:rgb(0,135,0)">assert</span> n_out, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">`n_out` is not defined, and could not be inferred from data, set `dls.c` or pass `n_out`</span><span style="color:rgb(175,0,0)">"</span>
+
+File <span class="ansi-green-fg">/opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastai/tabular/model.py:32</span>, in <span class="ansi-cyan-fg">get_emb_sz</span><span class="ansi-blue-fg">(to, sz_dict)</span>
+<span class="ansi-green-fg ansi-bold">     27</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">get_emb_sz</span>(
+<span class="ansi-green-fg ansi-bold">     28</span>     to:Tabular<span style="color:rgb(98,98,98)">|</span>TabularPandas, 
+<span class="ansi-green-fg ansi-bold">     29</span>     sz_dict:<span style="color:rgb(0,135,0)">dict</span><span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">None</span> <span style="font-style:italic;color:rgb(95,135,135)"># Dictionary of {'class_name' : size, ...} to override default `emb_sz_rule` </span>
+<span class="ansi-green-fg ansi-bold">     30</span> ) <span style="color:rgb(98,98,98)">-</span><span style="color:rgb(98,98,98)">&gt;</span> <span style="color:rgb(0,135,0)">list</span>: <span style="font-style:italic;color:rgb(95,135,135)"># List of embedding sizes for each category</span>
+<span class="ansi-green-fg ansi-bold">     31</span>     <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Get embedding size for each cat_name in `Tabular` or `TabularPandas`, or populate embedding size manually using sz_dict</span><span style="color:rgb(175,0,0)">"</span>
+<span class="ansi-green-fg">---&gt; 32</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">_one_emb_sz</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">to</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">classes</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">n</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">sz_dict</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">for</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">n</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(175,0,255)" class="ansi-yellow-bg">in</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">to</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">cat_names</span><span class="ansi-yellow-bg">]</span>
+
+File <span class="ansi-green-fg">/opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastai/tabular/model.py:32</span>, in <span class="ansi-cyan-fg">&lt;listcomp&gt;</span><span class="ansi-blue-fg">(.0)</span>
+<span class="ansi-green-fg ansi-bold">     27</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">get_emb_sz</span>(
+<span class="ansi-green-fg ansi-bold">     28</span>     to:Tabular<span style="color:rgb(98,98,98)">|</span>TabularPandas, 
+<span class="ansi-green-fg ansi-bold">     29</span>     sz_dict:<span style="color:rgb(0,135,0)">dict</span><span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">None</span> <span style="font-style:italic;color:rgb(95,135,135)"># Dictionary of {'class_name' : size, ...} to override default `emb_sz_rule` </span>
+<span class="ansi-green-fg ansi-bold">     30</span> ) <span style="color:rgb(98,98,98)">-</span><span style="color:rgb(98,98,98)">&gt;</span> <span style="color:rgb(0,135,0)">list</span>: <span style="font-style:italic;color:rgb(95,135,135)"># List of embedding sizes for each category</span>
+<span class="ansi-green-fg ansi-bold">     31</span>     <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Get embedding size for each cat_name in `Tabular` or `TabularPandas`, or populate embedding size manually using sz_dict</span><span style="color:rgb(175,0,0)">"</span>
+<span class="ansi-green-fg">---&gt; 32</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> [_one_emb_sz(<span class="ansi-yellow-bg">to</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">classes</span>, n, sz_dict) <span style="font-weight:bold;color:rgb(0,135,0)">for</span> n <span style="font-weight:bold;color:rgb(175,0,255)">in</span> to<span style="color:rgb(98,98,98)">.</span>cat_names]
+
+File <span class="ansi-green-fg">/opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastcore/basics.py:507</span>, in <span class="ansi-cyan-fg">GetAttr.__getattr__</span><span class="ansi-blue-fg">(self, k)</span>
+<span class="ansi-green-fg ansi-bold">    505</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_component_attr_filter(k):
+<span class="ansi-green-fg ansi-bold">    506</span>     attr <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">getattr</span>(<span style="color:rgb(0,135,0)">self</span>,<span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_default,<span style="font-weight:bold;color:rgb(0,135,0)">None</span>)
+<span class="ansi-green-fg">--&gt; 507</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> attr <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>: <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">getattr</span>(attr,k)
+<span class="ansi-green-fg ansi-bold">    508</span> <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">AttributeError</span>(k)
+
+File <span class="ansi-green-fg">/opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastcore/transform.py:212</span>, in <span class="ansi-cyan-fg">Pipeline.__getattr__</span><span class="ansi-blue-fg">(self, k)</span>
+<span class="ansi-green-fg">--&gt; 212</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">__getattr__</span>(<span style="color:rgb(0,135,0)">self</span>,k): <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">gather_attrs</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">k</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">fs</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">/opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastcore/transform.py:173</span>, in <span class="ansi-cyan-fg">gather_attrs</span><span class="ansi-blue-fg">(o, k, nm)</span>
+<span class="ansi-green-fg ansi-bold">    171</span> att <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">getattr</span>(o,nm)
+<span class="ansi-green-fg ansi-bold">    172</span> res <span style="color:rgb(98,98,98)">=</span> [t <span style="font-weight:bold;color:rgb(0,135,0)">for</span> t <span style="font-weight:bold;color:rgb(175,0,255)">in</span> att<span style="color:rgb(98,98,98)">.</span>attrgot(k) <span style="font-weight:bold;color:rgb(0,135,0)">if</span> t <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>]
+<span class="ansi-green-fg">--&gt; 173</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> res: <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">AttributeError</span>(k)
+<span class="ansi-green-fg ansi-bold">    174</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> res[<span style="color:rgb(98,98,98)">0</span>] <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">len</span>(res)<span style="color:rgb(98,98,98)">==</span><span style="color:rgb(98,98,98)">1</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span> L(res)
+
+<span class="ansi-red-fg">AttributeError</span>: classes</pre>
+</div>
+</div>
+</div>
+<p>How to fix this?</p>
+<p>I actually went down the rabbit hole and provided the <code>emb_szs</code> manually as mentioned in the source code hinted by error message above, but there is actually an easier way – just add <code>procs=[Categorify]</code> when initializing TabularPandas.</p>
+<ul>
+<li>In the source code, <code>emb_szs</code> is expected to be <code>{'class_name' : size, ...}</code>. So for example if column <code>a</code> is a categorical column in our df, then <code>emb_szs = {'a': len(unique value in column 'a')}</code>.</li>
+</ul>
+</section>
+<section id="working-example" class="level3">
+<h3 class="anchored" data-anchor-id="working-example">Working Example</h3>
+<div id="d4eab532-add5-4b25-91d3-7e7786474a8a" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-13T05:45:18.439221Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-13T05:45:18.438537Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-13T05:45:43.448328Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-13T05:45:43.446194Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-06-13T05:45:18.439164Z&quot;}" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now we can train</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>dl <span class="op">=</span> TabularPandas(df, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                   cat_names<span class="op">=</span>cat_names, </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                   cont_names<span class="op">=</span>cont_names, </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                   y_names<span class="op">=</span>y_names,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                   y_block <span class="op">=</span> CategoryBlock(vocab<span class="op">=</span>df[y_names]), </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                   splits<span class="op">=</span>(train_index, val_index),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                   procs<span class="op">=</span>[Categorify])  <span class="co"># &lt;------ add procs!</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>dls <span class="op">=</span> dl.dataloaders(bs<span class="op">=</span><span class="dv">64</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dls.show_batch())</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>learn <span class="op">=</span> tabular_learner(dls, metrics<span class="op">=</span>[accuracy])</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>learn.fit_one_cycle(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">a</th>
+<th data-quarto-table-cell-role="th">b</th>
+<th data-quarto-table-cell-role="th">c</th>
+<th data-quarto-table-cell-role="th">d</th>
+<th data-quarto-table-cell-role="th">e</th>
+<th data-quarto-table-cell-role="th">f</th>
+<th data-quarto-table-cell-role="th">label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2.0</td>
+<td>32.0</td>
+<td>15.0</td>
+<td>15.0</td>
+<td>3.6</td>
+<td>0.8</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>3.0</td>
+<td>32.0</td>
+<td>9.0</td>
+<td>15.0</td>
+<td>4.5</td>
+<td>0.7</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2.0</td>
+<td>32.0</td>
+<td>9.0</td>
+<td>14.0</td>
+<td>3.9</td>
+<td>0.5</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2.0</td>
+<td>12.0</td>
+<td>6.0</td>
+<td>-1.0</td>
+<td>4.0</td>
+<td>1.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2.0</td>
+<td>12.0</td>
+<td>8.0</td>
+<td>15.0</td>
+<td>3.7</td>
+<td>0.9</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>2.0</td>
+<td>12.0</td>
+<td>4.0</td>
+<td>15.0</td>
+<td>3.7</td>
+<td>0.7</td>
+<td>1.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>1.0</td>
+<td>12.0</td>
+<td>0.0</td>
+<td>15.0</td>
+<td>4.0</td>
+<td>0.7</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>3.0</td>
+<td>12.0</td>
+<td>0.0</td>
+<td>15.0</td>
+<td>3.3</td>
+<td>0.5</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>2.0</td>
+<td>12.0</td>
+<td>5.0</td>
+<td>15.0</td>
+<td>4.3</td>
+<td>0.9</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>2.0</td>
+<td>12.0</td>
+<td>9.0</td>
+<td>15.0</td>
+<td>4.3</td>
+<td>0.9</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>None</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<style>
+    /* Turns off some styling */
+    progress {
+        /* gets rid of default border in Firefox and Opera. */
+        border: none;
+        /* Needs to be in here for Safari polyfill so background images work as expected. */
+        background-size: auto;
+    }
+    progress:not([value]), progress:not([value])::-webkit-progress-bar {
+        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
+    }
+    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+        background: #F44336;
+    }
+</style>
+</div>
+<div class="cell-output cell-output-display">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">epoch</th>
+<th data-quarto-table-cell-role="th">train_loss</th>
+<th data-quarto-table-cell-role="th">valid_loss</th>
+<th data-quarto-table-cell-role="th">accuracy</th>
+<th data-quarto-table-cell-role="th">time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0.482110</td>
+<td>0.418015</td>
+<td>0.832246</td>
+<td>00:09</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0.349364</td>
+<td>0.333562</td>
+<td>0.852591</td>
+<td>00:07</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>0.322106</td>
+<td>0.323014</td>
+<td>0.854511</td>
+<td>00:07</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr>
+</section>
+<section id="why-did-we-get-this-error" class="level3">
+<h3 class="anchored" data-anchor-id="why-did-we-get-this-error">Why did we get this error?</h3>
+<div id="3a70bb99-f308-4a81-84ec-51be48987a72" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-13T06:15:39.886569Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-13T06:15:39.886018Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-13T06:15:39.897208Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-13T06:15:39.896134Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-06-13T06:15:39.886541Z&quot;}" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>get_emb_sz??</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">Signature:</span> get_emb_sz<span class="ansi-blue-fg">(</span>to<span class="ansi-blue-fg">:</span> <span class="ansi-blue-fg">'Tabular | TabularPandas'</span><span class="ansi-blue-fg">,</span> sz_dict<span class="ansi-blue-fg">:</span> <span class="ansi-blue-fg">'dict'</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-blue-fg">'list'</span>
+<span class="ansi-red-fg">Source:</span>   
+<span class="ansi-green-fg">def</span> get_emb_sz<span class="ansi-blue-fg">(</span>
+    to<span class="ansi-blue-fg">:</span>Tabular<span class="ansi-blue-fg">|</span>TabularPandas<span class="ansi-blue-fg">,</span> 
+    sz_dict<span class="ansi-blue-fg">:</span>dict<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span> <span class="ansi-red-fg"># Dictionary of {'class_name' : size, ...} to override default `emb_sz_rule` </span>
+<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> list<span class="ansi-blue-fg">:</span> <span class="ansi-red-fg"># List of embedding sizes for each category</span>
+    <span class="ansi-blue-fg">"Get embedding size for each cat_name in `Tabular` or `TabularPandas`, or populate embedding size manually using sz_dict"</span>
+    <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">[</span>_one_emb_sz<span class="ansi-blue-fg">(</span>to<span class="ansi-blue-fg">.</span>classes<span class="ansi-blue-fg">,</span> n<span class="ansi-blue-fg">,</span> sz_dict<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> n <span class="ansi-green-fg">in</span> to<span class="ansi-blue-fg">.</span>cat_names<span class="ansi-blue-fg">]</span>
+<span class="ansi-red-fg">File:</span>      /opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastai/tabular/model.py
+<span class="ansi-red-fg">Type:</span>      function</pre>
+</div>
+</div>
+</div>
+<div id="29ce133e-f076-4be6-b531-453488422239" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-13T06:39:12.617950Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-13T06:39:12.617337Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-13T06:39:12.697252Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-13T06:39:12.695663Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-06-13T06:39:12.617911Z&quot;}" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastai.tabular.model <span class="im">import</span> _one_emb_sz</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>_one_emb_sz??</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">Signature:</span> _one_emb_sz<span class="ansi-blue-fg">(</span>classes<span class="ansi-blue-fg">,</span> n<span class="ansi-blue-fg">,</span> sz_dict<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">Source:</span>   
+<span class="ansi-green-fg">def</span> _one_emb_sz<span class="ansi-blue-fg">(</span>classes<span class="ansi-blue-fg">,</span> n<span class="ansi-blue-fg">,</span> sz_dict<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+    <span class="ansi-blue-fg">"Pick an embedding size for `n` depending on `classes` if not given in `sz_dict`."</span>
+    sz_dict <span class="ansi-blue-fg">=</span> ifnone<span class="ansi-blue-fg">(</span>sz_dict<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">}</span><span class="ansi-blue-fg">)</span>
+    n_cat <span class="ansi-blue-fg">=</span> len<span class="ansi-blue-fg">(</span>classes<span class="ansi-blue-fg">[</span>n<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+    sz <span class="ansi-blue-fg">=</span> sz_dict<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span>n<span class="ansi-blue-fg">,</span> int<span class="ansi-blue-fg">(</span>emb_sz_rule<span class="ansi-blue-fg">(</span>n_cat<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>  <span class="ansi-red-fg"># rule of thumb</span>
+    <span class="ansi-green-fg">return</span> n_cat<span class="ansi-blue-fg">,</span>sz
+<span class="ansi-red-fg">File:</span>      /opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastai/tabular/model.py
+<span class="ansi-red-fg">Type:</span>      function</pre>
+</div>
+</div>
+</div>
+<p>We see that the error is due to <code>get_emb_sz(dls.train_ds, {} if emb_szs is None else emb_szs)</code> line. The <code>get_emb_sz</code> function tries to return <code>[_one_emb_sz(to.classes, n, sz_dict) for n in to.cat_names]</code>. We get error because our dataloaders has no <code>classes</code> attributes .</p>
+<p>Here, <code>classes</code> attributes is what category do we have in each of our categorical columns. In <code>simple_df</code> below, we would declare <code>aa</code> column as categorical feature, with 3 separate classes <code>[1, 2, 3]</code>. The learner doesn’t know this because we did not specify to <code>Categorify</code> our categorical column when initializing our dataloaders.</p>
+<div id="a7531ec8-95cb-4d57-942e-6c6be2135107" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-13T06:30:06.212669Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-13T06:30:06.212095Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-13T06:30:06.227768Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-13T06:30:06.226600Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-06-13T06:30:06.212634Z&quot;}">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>simple_df <span class="op">=</span> pd.DataFrame({<span class="st">'aa'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>], <span class="st">'bb'</span>:[<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>, <span class="fl">5.0</span>], <span class="st">'label'</span>:[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>]})</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>simple_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">aa</th>
+<th data-quarto-table-cell-role="th">bb</th>
+<th data-quarto-table-cell-role="th">label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>1.1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>2.2</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>3.3</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1</td>
+<td>5.0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="8bcfeeaf-2703-4efb-8508-5bf4db918305" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-13T06:32:43.225802Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-13T06:32:43.225322Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-13T06:32:43.347979Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-13T06:32:43.345607Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-06-13T06:32:43.225761Z&quot;}" data-scrolled="true">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no classes attributes</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>TabularPandas(simple_df, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>              cat_names <span class="op">=</span> [<span class="st">'aa'</span>], </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>              cont_names <span class="op">=</span> [<span class="st">'bb'</span>],</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>              y_names <span class="op">=</span> [<span class="st">'label'</span>],</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>              y_block <span class="op">=</span> CategoryBlock(vocab<span class="op">=</span>simple_df[y_names]), </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>              splits <span class="op">=</span> ([<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>], [<span class="dv">3</span>]),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>             ).dataloaders(bs<span class="op">=</span><span class="dv">64</span>).classes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[32], line 7</span>
+<span class="ansi-green-fg ansi-bold">      1</span> <span class="ansi-yellow-bg">TabularPandas</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">simple_df</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span>
+<span class="ansi-green-fg ansi-bold">      2</span> <span class="ansi-yellow-bg">              </span><span class="ansi-yellow-bg">cat_names</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">[</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">aa</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span>
+<span class="ansi-green-fg ansi-bold">      3</span> <span class="ansi-yellow-bg">              </span><span class="ansi-yellow-bg">cont_names</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">[</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">bb</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">      4</span> <span class="ansi-yellow-bg">              </span><span class="ansi-yellow-bg">y_names</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">[</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">label</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">      5</span> <span class="ansi-yellow-bg">              </span><span class="ansi-yellow-bg">y_block</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">CategoryBlock</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">vocab</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">simple_df</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">y_names</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span>
+<span class="ansi-green-fg ansi-bold">      6</span> <span class="ansi-yellow-bg">              </span><span class="ansi-yellow-bg">splits</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">0</span><span class="ansi-yellow-bg">,</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">1</span><span class="ansi-yellow-bg">,</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">2</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">[</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">3</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">----&gt; 7</span> <span class="ansi-yellow-bg">             </span><span class="ansi-yellow-bg">)</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">dataloaders</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">bs</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">64</span><span class="ansi-yellow-bg">)</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">classes</span>
+
+File <span class="ansi-green-fg">/opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastcore/basics.py:507</span>, in <span class="ansi-cyan-fg">GetAttr.__getattr__</span><span class="ansi-blue-fg">(self, k)</span>
+<span class="ansi-green-fg ansi-bold">    505</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_component_attr_filter(k):
+<span class="ansi-green-fg ansi-bold">    506</span>     attr <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">getattr</span>(<span style="color:rgb(0,135,0)">self</span>,<span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_default,<span style="font-weight:bold;color:rgb(0,135,0)">None</span>)
+<span class="ansi-green-fg">--&gt; 507</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> attr <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>: <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">getattr</span>(attr,k)
+<span class="ansi-green-fg ansi-bold">    508</span> <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">AttributeError</span>(k)
+
+File <span class="ansi-green-fg">/opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastcore/basics.py:507</span>, in <span class="ansi-cyan-fg">GetAttr.__getattr__</span><span class="ansi-blue-fg">(self, k)</span>
+<span class="ansi-green-fg ansi-bold">    505</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_component_attr_filter(k):
+<span class="ansi-green-fg ansi-bold">    506</span>     attr <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">getattr</span>(<span style="color:rgb(0,135,0)">self</span>,<span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_default,<span style="font-weight:bold;color:rgb(0,135,0)">None</span>)
+<span class="ansi-green-fg">--&gt; 507</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> attr <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>: <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">getattr</span>(attr,k)
+<span class="ansi-green-fg ansi-bold">    508</span> <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">AttributeError</span>(k)
+
+File <span class="ansi-green-fg">/opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastcore/basics.py:507</span>, in <span class="ansi-cyan-fg">GetAttr.__getattr__</span><span class="ansi-blue-fg">(self, k)</span>
+<span class="ansi-green-fg ansi-bold">    505</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_component_attr_filter(k):
+<span class="ansi-green-fg ansi-bold">    506</span>     attr <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">getattr</span>(<span style="color:rgb(0,135,0)">self</span>,<span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_default,<span style="font-weight:bold;color:rgb(0,135,0)">None</span>)
+<span class="ansi-green-fg">--&gt; 507</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> attr <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>: <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">getattr</span>(attr,k)
+<span class="ansi-green-fg ansi-bold">    508</span> <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">AttributeError</span>(k)
+
+File <span class="ansi-green-fg">/opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastcore/transform.py:212</span>, in <span class="ansi-cyan-fg">Pipeline.__getattr__</span><span class="ansi-blue-fg">(self, k)</span>
+<span class="ansi-green-fg">--&gt; 212</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">__getattr__</span>(<span style="color:rgb(0,135,0)">self</span>,k): <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">gather_attrs</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">k</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">fs</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">/opt/homebrew/Caskroom/miniforge/base/envs/fastai/lib/python3.11/site-packages/fastcore/transform.py:173</span>, in <span class="ansi-cyan-fg">gather_attrs</span><span class="ansi-blue-fg">(o, k, nm)</span>
+<span class="ansi-green-fg ansi-bold">    171</span> att <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">getattr</span>(o,nm)
+<span class="ansi-green-fg ansi-bold">    172</span> res <span style="color:rgb(98,98,98)">=</span> [t <span style="font-weight:bold;color:rgb(0,135,0)">for</span> t <span style="font-weight:bold;color:rgb(175,0,255)">in</span> att<span style="color:rgb(98,98,98)">.</span>attrgot(k) <span style="font-weight:bold;color:rgb(0,135,0)">if</span> t <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>]
+<span class="ansi-green-fg">--&gt; 173</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> res: <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">AttributeError</span>(k)
+<span class="ansi-green-fg ansi-bold">    174</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> res[<span style="color:rgb(98,98,98)">0</span>] <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">len</span>(res)<span style="color:rgb(98,98,98)">==</span><span style="color:rgb(98,98,98)">1</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span> L(res)
+
+<span class="ansi-red-fg">AttributeError</span>: classes</pre>
+</div>
+</div>
+</div>
+<div id="e0b074ad-35d2-4c15-b531-d0de29910ea6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-06-13T06:34:11.357487Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-06-13T06:34:11.355832Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-06-13T06:34:11.412460Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-06-13T06:34:11.409640Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-06-13T06:34:11.357424Z&quot;}">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now we have classes attributes</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>TabularPandas(simple_df, </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>              cat_names <span class="op">=</span> [<span class="st">'aa'</span>], </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>              cont_names <span class="op">=</span> [<span class="st">'bb'</span>],</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>              y_names <span class="op">=</span> [<span class="st">'label'</span>],</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>              y_block <span class="op">=</span> CategoryBlock(vocab<span class="op">=</span>simple_df[y_names]), </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>              splits <span class="op">=</span> ([<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>], [<span class="dv">3</span>]),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>              procs <span class="op">=</span> [Categorify]</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>             ).dataloaders(bs<span class="op">=</span><span class="dv">64</span>).classes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<pre><code>{'aa': ['#na#', 1, 2, 3]}</code></pre>
+</div>
+</div>
+<p>That’s all for now, bye!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

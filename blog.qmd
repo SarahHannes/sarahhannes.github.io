@@ -1,0 +1,9 @@
+---
+title: "Blog"
+listing:
+    contents: blog
+    type: grid
+    categories: true
+    sort: ["date desc"]
+    fields: [date, title, description, image, reading-time]
+---

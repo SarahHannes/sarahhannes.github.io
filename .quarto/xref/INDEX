@@ -1,0 +1,53 @@
+{
+  "til.qmd": {
+    "til.html": "a4a1ee56"
+  },
+  "index.qmd": {
+    "index.html": "69b9ac64"
+  },
+  "about.qmd": {
+    "about.html": "a0fdb9c9"
+  },
+  "til/conda_ValueError.ipynb": {
+    "conda_ValueError.html": "63d8ae44"
+  },
+  "til/conda_ImportError.ipynb": {
+    "conda_ImportError.html": "10a0d981"
+  },
+  "til/fastai_AttributeError.ipynb": {
+    "fastai_AttributeError.html": "8758b22a"
+  },
+  "til/130524_conda_ValueError.ipynb": {
+    "130524_conda_ValueError.html": "cd1be046"
+  },
+  "til/140524_conda_ImportError.ipynb": {
+    "140524_conda_ImportError.html": "ce73b10b"
+  },
+  "til/130624_fastai_AttributeError.ipynb": {
+    "130624_fastai_AttributeError.html": "296f5a47"
+  },
+  "til/190624_howtodocker.ipynb": {
+    "190624_howtodocker.html": "bf350ff3"
+  },
+  "til/190624_Lesson0.ipynb": {
+    "190624_Lesson0.html": "69b5f72c"
+  },
+  "readme.md": {
+    "readme.html": "badb2f28"
+  },
+  "til/200624_incompleteread.ipynb": {
+    "200624_incompleteread.html": "221ea9ac"
+  },
+  "til/mnist.ipynb": {
+    "mnist.html": "89af3a93"
+  },
+  "til/200624_numpy_datablock.ipynb": {
+    "200624_numpy_datablock.html": "19df75ce"
+  },
+  "blog/visualizing_arrays.ipynb": {
+    "visualizing_arrays.html": "e5541a06"
+  },
+  "blog.qmd": {
+    "blog.html": "b8698696"
+  }
+}

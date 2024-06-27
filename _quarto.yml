@@ -1,0 +1,26 @@
+project:
+  type: website
+
+website:
+  title: "Sarah Hannes"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: CV
+      - href: til.qmd
+        text: Today I learn
+      - href: blog.qmd
+        text: Blog
+
+      
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+

@@ -1,0 +1,10 @@
+---
+title: "Today I learn"
+listing:
+    contents: til
+    type: default
+    categories: true
+    sort: ["date desc"]
+    fields: [date, title, description, image, reading-time]
+    image-height: 10em
+---
