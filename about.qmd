@@ -9,9 +9,6 @@ about:
   image-shape: round
   links:
     - icon: linkedin
-      text: ''
-      href: ''
-    - icon: linkedin
       text: LinkedIn
       href: https://linkedin.com/in/hannes-sarah
     - icon: github
