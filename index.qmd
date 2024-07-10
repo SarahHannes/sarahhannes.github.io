@@ -2,21 +2,6 @@
 title: "Home"
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-  <style>
-    .justified {
-      text-align: justify;
-    }
-  </style>
-</head>
-<body>
-  <div class="justified">
-    <p>Hi and welcome to my site! I'm Siti Sarah Amirah, a data scientist passionate about automating processes. I am currently focusing on ML projects to automate subscription services within my organization. Previously, I worked as a fraud investigation analyst within the e-commerce sector. I'm dedicated to continual learning and self-improvement.</p>
-  </div>
-</body>
-</html>
+Hi and welcome to my site!
+
+I'm Siti Sarah Amirah, a data scientist passionate about automating processes. I am currently focusing on ML use-cases to automate subscription services within my organization. Previously, I worked as a fraud investigation analyst within the e-commerce sector. I'm dedicated to continual learning and self-improvement.
