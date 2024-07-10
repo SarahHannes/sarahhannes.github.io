@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/about.html</loc>
-    <lastmod>2024-07-10T06:09:57.305Z</lastmod>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/index.html</loc>
+    <lastmod>2024-07-10T06:23:11.525Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/visualizing_arrays.html</loc>
-    <lastmod>2024-07-10T06:09:57.513Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190624_howtodocker.html</loc>
-    <lastmod>2024-07-10T06:09:57.529Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190624_lesson0.html</loc>
-    <lastmod>2024-07-10T06:09:57.533Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/130624_fastai_AttributeError.html</loc>
-    <lastmod>2024-07-10T06:09:57.517Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/200624_numpy_datablock.html</loc>
-    <lastmod>2024-07-10T06:09:57.541Z</lastmod>
+    <lastmod>2024-07-10T06:23:11.521Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til.html</loc>
-    <lastmod>2024-07-10T06:09:57.513Z</lastmod>
+    <lastmod>2024-07-10T06:23:11.525Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/140524_conda_ImportError.html</loc>
-    <lastmod>2024-07-10T06:09:57.517Z</lastmod>
+    <lastmod>2024-07-10T06:23:11.525Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/130624_fastai_AttributeError.html</loc>
+    <lastmod>2024-07-10T06:23:11.525Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/200624_numpy_datablock.html</loc>
+    <lastmod>2024-07-10T06:23:11.553Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/130524_conda_ValueError.html</loc>
-    <lastmod>2024-07-10T06:09:57.517Z</lastmod>
+    <lastmod>2024-07-10T06:23:11.525Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190624_howtodocker.html</loc>
+    <lastmod>2024-07-10T06:23:11.541Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/200624_incompleteread.html</loc>
-    <lastmod>2024-07-10T06:09:57.537Z</lastmod>
+    <lastmod>2024-07-10T06:23:11.549Z</lastmod>
   </url>
   <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/index.html</loc>
-    <lastmod>2024-07-10T06:09:57.513Z</lastmod>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190624_lesson0.html</loc>
+    <lastmod>2024-07-10T06:23:11.545Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/about.html</loc>
+    <lastmod>2024-07-10T06:23:11.317Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog.html</loc>
-    <lastmod>2024-07-10T06:09:57.305Z</lastmod>
+    <lastmod>2024-07-10T06:23:11.317Z</lastmod>
   </url>
 </urlset>
