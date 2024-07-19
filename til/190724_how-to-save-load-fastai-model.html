@@ -1013,7 +1013,7 @@ File <span class="ansi-green-fg">/opt/conda/lib/python3.10/site-packages/torch/s
 </div>
 </div>
 <p>All is well, but for some reason, I could not plot a confusion matrix.</p>
-<p>::: {#cell-46 .cell _kg_hide-input=‘true’ execution=‘{“iopub.execute_input”:“2024-07-19T07:53:17.065474Z”,“iopub.status.busy”:“2024-07-19T07:53:17.065081Z”,“iopub.status.idle”:“2024-07-19T07:53:17.477511Z”,“shell.execute_reply”:“2024-07-19T07:53:17.475962Z”,“shell.execute_reply.started”:“2024-07-19T07:53:17.065439Z”}’ trusted=‘true’}</p>
+<div id="cell-45" class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>interp <span class="op">=</span> ClassificationInterpretation.from_learner(learn3)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>interp.plot_confusion_matrix()</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1046,7 +1046,7 @@ File <span class="ansi-green-fg">/opt/conda/lib/python3.10/site-packages/torch/s
 <span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a><span class="co">ValueError: not enough values to unpack (expected 3, got 2)"</span></span>
 <span id="cb47-31"><a href="#cb47-31" aria-hidden="true" tabindex="-1"></a><span class="co">}</span></span>
 <span id="cb47-32"><a href="#cb47-32" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>:::</p>
+</div>
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
@@ -1078,8 +1078,9 @@ learn = vision_learner(dls, models.resnet18, loss_func=CrossEntropyLossFlat(), m
 # load model
 checkpoint_path = '/kaggle/input/ordergen_timeseries_fastai/other/default/1/fastai_timeseries'
 learn.load(checkpoint_path)        #### &lt;-------- diff is here</code></pre>
-<p>So, in short: 1. We save model by <code>learn.export(checkpoint_path)</code></p>
-<ol start="2" type="1">
+<p>So, in short:</p>
+<ol type="1">
+<li><p>We save model by <code>learn.export(checkpoint_path)</code></p></li>
 <li><p>The file extension for <code>checkpoint_path</code> does not matter. When I omit the file extension entirely, we can still load and get predictions. Here is what I tried as <code>checkpoint_path</code>: [‘model’, ‘model.pth’, ‘model.pkl’].</p></li>
 <li><p>We need to redefine all functions we used to trained the model (ie <code>get_x</code>, <code>get_y</code>, …).</p></li>
 <li><p>We load model by:</p></li>
