@@ -211,16 +211,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch <span class="im">import</span> tensor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In deep learning world, we are always working with arrays and tensors. They are data structure in which we store data for our model to train on. Both are multi-dimensional data structure and have similar functionality, but tensors had more restrictions than arrays.</p>
-<p>Tensor must: - use a single basic numerical type for all components in the array. - can not be jagged. It is always regularly shaped multi-dimensional rectangular structure.</p>
+<p>Tensor must:</p>
+<ul>
+<li><p>use a single basic numerical type for all components in the array.</p></li>
+<li><p>can not be jagged. It is always regularly shaped multi-dimensional rectangular structure.</p></li>
+</ul>
 <p>I always had trouble trying to understand what exactly happen when we perform operations on any data structure that has higher dimension than a list (dimension of 1).</p>
 <p>So, let’s use Excel to visualize some basic operations on arrays (or tensors)! Say we have 2 tensors, a and b. Both of dimension of 3.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualizing_arrays_files/figure-html/cell-4-1-image-2.png" class="img-fluid figure-img"></p>
+<p><img src="visualizing_arrays_files/figure-html/cell-7-1-image-2.png" class="img-fluid figure-img"></p>
 <figcaption>image-2.png</figcaption>
 </figure>
 </div>
-<div id="cell-5" class="cell" data-execution_count="11">
+<div id="cell-8" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> tensor([[[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">40</span>,<span class="dv">50</span>,<span class="dv">60</span>,<span class="dv">70</span>],</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>]], </span>
@@ -249,12 +253,12 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 <h1>Element wise operation</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualizing_arrays_files/figure-html/cell-7-1-image-2.png" class="img-fluid figure-img"></p>
+<p><img src="visualizing_arrays_files/figure-html/cell-10-1-image-2.png" class="img-fluid figure-img"></p>
 <figcaption>image-2.png</figcaption>
 </figure>
 </div>
 <p>If we subtract tensor a - tensor b, we are doing elementwise operation because both tensors a and b are of the same shape.</p>
-<div id="cell-9" class="cell" data-execution_count="12">
+<div id="cell-12" class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>a_b <span class="op">=</span> a <span class="op">-</span> b</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'a_b shape:</span><span class="ch">\t</span><span class="st">'</span>, a_b.shape)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>a_b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -276,12 +280,12 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 <h1>Sum across tensor</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualizing_arrays_files/figure-html/cell-11-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="visualizing_arrays_files/figure-html/cell-14-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 <p>If we sum across the whole tensor, we will get a scalar value (dimension 0). Scalar value is another name for <em>a number</em>.</p>
-<div id="cell-13" class="cell" data-execution_count="46">
+<div id="cell-16" class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>().shape)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -300,11 +304,11 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 <p>Originally, our <code>a_b</code> tensor is of shape (2, 3, 4). If we <em>add all rows</em>, keeping everything else the same. Our resulting shape would be (2, <strong>3</strong>, 4) –&gt; (2, <strong>1</strong>, 4)</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualizing_arrays_files/figure-html/cell-16-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="visualizing_arrays_files/figure-html/cell-19-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
-<div id="cell-17" class="cell" data-execution_count="28">
+<div id="cell-20" class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>(<span class="op">-</span><span class="dv">2</span>, keepdim<span class="op">=</span><span class="va">True</span>).shape)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>(<span class="op">-</span><span class="dv">2</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -317,7 +321,7 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 </div>
 </div>
 <p>Yup, this below is the same. The only difference here is that we use index here. Above, we use negative indexing style. The same thing, just different way of writing, don’t let it confuse you.</p>
-<div id="cell-19" class="cell" data-execution_count="29">
+<div id="cell-22" class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>(<span class="dv">1</span>, keepdim<span class="op">=</span><span class="va">True</span>).shape)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>(<span class="dv">1</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -332,12 +336,12 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualizing_arrays_files/figure-html/cell-20-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="visualizing_arrays_files/figure-html/cell-23-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 <p>Similarly, if we <em>add all columns</em>, keeping everything the same. Then our resulting shape would be (2, 3, <strong>4</strong>) –&gt; (2, 3, <strong>1</strong>)</p>
-<div id="cell-22" class="cell" data-execution_count="24">
+<div id="cell-25" class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>(<span class="op">-</span><span class="dv">1</span>, keepdim<span class="op">=</span><span class="va">True</span>).shape)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>(<span class="op">-</span><span class="dv">1</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -353,7 +357,7 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
          [ 62]]])</code></pre>
 </div>
 </div>
-<div id="cell-23" class="cell" data-execution_count="30">
+<div id="cell-26" class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>(<span class="dv">2</span>, keepdim<span class="op">=</span><span class="va">True</span>).shape)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>(<span class="dv">2</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -371,12 +375,12 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualizing_arrays_files/figure-html/cell-24-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="visualizing_arrays_files/figure-html/cell-27-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 <p>Now, if we <em>add all samples</em>, keeping everything else the same. Our result would be from shape (<strong>2</strong>, 3, 4) –&gt; (<strong>1</strong>, 3, 4).</p>
-<div id="cell-26" class="cell" data-execution_count="32">
+<div id="cell-29" class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>(<span class="dv">0</span>, keepdim<span class="op">=</span><span class="va">True</span>).shape)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>(<span class="dv">0</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -388,7 +392,7 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
          [ 18,  20,  22,  24]]])</code></pre>
 </div>
 </div>
-<div id="cell-27" class="cell" data-execution_count="33">
+<div id="cell-30" class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>(<span class="op">-</span><span class="dv">3</span>, keepdim<span class="op">=</span><span class="va">True</span>).shape)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>(<span class="op">-</span><span class="dv">3</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -405,12 +409,12 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 <h1>Sum across multiple axis</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualizing_arrays_files/figure-html/cell-29-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="visualizing_arrays_files/figure-html/cell-32-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 <p>We can also do sum across multiple axis. Remember that our original tensor is of shape (2, 3, 4), if we do sum operation across both rows and columns, then we would be <em>collapsing both of these axis</em>, keeping everything else the same. So the resulting tensor would be from shape (2, <strong>3, 4</strong>) –&gt; (2, <strong>1, 1</strong>).</p>
-<div id="cell-31" class="cell" data-execution_count="44">
+<div id="cell-34" class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>((<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>), keepdim<span class="op">=</span><span class="va">True</span>).shape)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>((<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>), keepdim<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -423,7 +427,7 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 </div>
 </div>
 <p>Also notice that the order in which we specify the axes does not matter. <code>.sum((-1, -2))</code> is the same as <code>.sum((-2, -1))</code>.</p>
-<div id="cell-33" class="cell" data-execution_count="43">
+<div id="cell-36" class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>((<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>), keepdim<span class="op">=</span><span class="va">True</span>).shape)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>((<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>), keepdim<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -437,12 +441,12 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualizing_arrays_files/figure-html/cell-34-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="visualizing_arrays_files/figure-html/cell-37-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 <p>Now we <em>sum all samples and rows</em>, keeping everything else the same. The resulting tensor would be from (<strong>2, 3,</strong> 4) –&gt; (<strong>1, 1,</strong> 4).</p>
-<div id="cell-36" class="cell" data-execution_count="40">
+<div id="cell-39" class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>((<span class="dv">0</span>,<span class="dv">1</span>), keepdim<span class="op">=</span><span class="va">True</span>).shape)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>((<span class="dv">0</span>,<span class="dv">1</span>), keepdim<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -454,13 +458,13 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="visualizing_arrays_files/figure-html/cell-37-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="visualizing_arrays_files/figure-html/cell-40-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 <p>Lastly, if we sum all samples and columns, then the resulting tensor would be from (<strong>2</strong>, 3, <strong>4</strong>) –&gt; (<strong>1</strong>, 3, <strong>1</strong>).</p>
 <p>Notice that for resulting value 52, our excel formula is E23:H23 + E27:H27 ≈ we add everything from first row in sample 1, plus everything from first row in sample 2.</p>
-<div id="cell-39" class="cell" data-execution_count="39">
+<div id="cell-42" class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>((<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>), keepdim<span class="op">=</span><span class="va">True</span>).shape)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>((<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>), keepdim<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -473,7 +477,7 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 </div>
 </div>
 <p>Hopefully, now it is easy to notice that any axis we choose to perform operations on would be <em>collapsed</em> to 1. Which means, when we collapsed all axes, it is equivalent to sum across everything in the tensor. ie in code, this is:</p>
-<div id="cell-41" class="cell" data-execution_count="56">
+<div id="cell-44" class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>((<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)).shape)</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>((<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -484,7 +488,7 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 </div>
 </div>
 <p>which is the same as:</p>
-<div id="cell-43" class="cell" data-execution_count="57">
+<div id="cell-46" class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_b.<span class="bu">sum</span>().shape)</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>a_b.<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -495,7 +499,7 @@ b shape:     torch.Size([2, 3, 4])</code></pre>
 </div>
 </div>
 <p>All above operations can be also performed using numpy arrays. For example, the equivalent summing across samples and rows in numpy is:</p>
-<div id="cell-45" class="cell" data-execution_count="54">
+<div id="cell-48" class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.array(a_b).<span class="bu">sum</span>((<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>), keepdims<span class="op">=</span><span class="va">True</span>).shape)</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>np.array(a_b).<span class="bu">sum</span>((<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>), keepdims<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
