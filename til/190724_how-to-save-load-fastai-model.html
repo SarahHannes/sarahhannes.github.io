@@ -200,8 +200,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<blockquote class="blockquote">
+<p>Save model using <code>learn.export(checkpoint_path)</code>. Load using <code>learn = load_learner(checkpoint_path)</code></p>
+</blockquote>
 <p>I had a hard time figuring out how to save and load trained fastai model. So, this is a guide to remind myself of what I’ve tried (and failed), and what works.</p>
-<div id="cell-2" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:47:46.178321Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:47:46.177943Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:47:54.321721Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:47:54.320477Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:47:46.178291Z&quot;}" data-trusted="true" data-execution_count="3">
+<div id="cell-3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:47:46.178321Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:47:46.177943Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:47:54.321721Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:47:54.320477Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:47:46.178291Z&quot;}" data-trusted="true" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gc</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -213,14 +216,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastai.vision.<span class="bu">all</span> <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-3" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T06:55:45.879250Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T06:55:45.878786Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T06:55:45.888100Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T06:55:45.886795Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T06:55:45.879215Z&quot;}" data-trusted="true" data-execution_count="3">
+<div id="cell-4" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T06:55:45.879250Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T06:55:45.878786Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T06:55:45.888100Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T06:55:45.886795Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T06:55:45.879215Z&quot;}" data-trusted="true" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> fastai</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fastai.__version__</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>'2.7.15'</code></pre>
 </div>
 </div>
-<div id="cell-4" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:47:56.445196Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:47:56.444367Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:47:56.456561Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:47:56.454899Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:47:56.445158Z&quot;}" data-trusted="true" data-execution_count="4">
+<div id="cell-5" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:47:56.445196Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:47:56.444367Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:47:56.456561Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:47:56.454899Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:47:56.445158Z&quot;}" data-trusted="true" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unpickle(fp):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'loading'</span>, fp)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(fp, <span class="st">'rb'</span>) <span class="im">as</span> f:</span>
@@ -273,14 +276,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>        pickle.dump(x, f)</span>
 <span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'saved pickle'</span>, fp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-5" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:03:35.231256Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:03:35.230801Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:04:01.961993Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:04:01.960700Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:03:35.231220Z&quot;}" data-trusted="true" data-execution_count="3">
+<div id="cell-6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:03:35.231256Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:03:35.230801Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:04:01.961993Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:04:01.960700Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:03:35.231220Z&quot;}" data-trusted="true" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fp <span class="op">=</span> <span class="st">'/kaggle/input/ordergen-transformers-prepostprocesd-17072024/Archive2/20210104_20231031_trainxyz_testxyz_ori.pkl'</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Xtrain, ytrain, train_annos, Xtest, ytest, test_annos <span class="op">=</span> unpickle(fp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>loading /kaggle/input/ordergen-transformers-prepostprocesd-17072024/Archive2/20210104_20231031_trainxyz_testxyz_ori.pkl</code></pre>
 </div>
 </div>
-<div id="cell-6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T06:11:07.729186Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T06:11:07.728455Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T06:11:07.737523Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T06:11:07.736436Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T06:11:07.729152Z&quot;}" data-trusted="true" data-execution_count="8">
+<div id="cell-7" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T06:11:07.729186Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T06:11:07.728455Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T06:11:07.737523Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T06:11:07.736436Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T06:11:07.729152Z&quot;}" data-trusted="true" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Xtrain.shape)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Xtrain</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -302,7 +305,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
          0.        ,  0.6666667 ]], dtype=float32)</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T06:11:08.603985Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T06:11:08.603488Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T06:11:08.611527Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T06:11:08.610434Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T06:11:08.603952Z&quot;}" data-trusted="true" data-execution_count="9">
+<div id="cell-8" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T06:11:08.603985Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T06:11:08.603488Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T06:11:08.611527Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T06:11:08.610434Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T06:11:08.603952Z&quot;}" data-trusted="true" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ytrain.shape)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ytrain</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -318,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
        [0]], dtype=uint8)</code></pre>
 </div>
 </div>
-<div id="cell-8" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:04:01.964487Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:04:01.964005Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:04:01.970445Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:04:01.969058Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:04:01.964447Z&quot;}" data-trusted="true" data-execution_count="4">
+<div id="cell-9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:04:01.964487Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:04:01.964005Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:04:01.970445Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:04:01.969058Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:04:01.964447Z&quot;}" data-trusted="true" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pass_index(idx):</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> idx</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -328,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_y(i):</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> label[i]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-9" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:04:01.972685Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:04:01.972284Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:04:02.158105Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:04:02.156665Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:04:01.972651Z&quot;}" data-trusted="true" data-execution_count="5">
+<div id="cell-10" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:04:01.972685Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:04:01.972284Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:04:02.158105Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:04:02.156665Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:04:01.972651Z&quot;}" data-trusted="true" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>SLICE <span class="op">=</span> <span class="dv">1000</span> <span class="co"># for demonstration, we will work on small sample slice only</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>image <span class="op">=</span> Xtrain[:SLICE]</span>
@@ -372,14 +375,14 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
 </code></pre>
 <section id="train-model" class="level1">
 <h1>Train model</h1>
-<div id="cell-12" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:04:07.578447Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:04:07.577369Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:04:08.456472Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:04:08.455108Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:04:07.578406Z&quot;}" data-trusted="true" data-execution_count="6">
+<div id="cell-13" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:04:07.578447Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:04:07.577369Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:04:08.456472Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:04:08.455108Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:04:07.578406Z&quot;}" data-trusted="true" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>learn <span class="op">=</span> vision_learner(dls, models.resnet18, loss_func<span class="op">=</span>CrossEntropyLossFlat(), metrics<span class="op">=</span>accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Downloading: "https://download.pytorch.org/models/resnet18-f37072fd.pth" to /root/.cache/torch/hub/checkpoints/resnet18-f37072fd.pth
 100%|██████████| 44.7M/44.7M [00:00&lt;00:00, 133MB/s] </code></pre>
 </div>
 </div>
-<div id="cell-13" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:09:36.010036Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:09:36.009532Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:21:14.888808Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:21:14.887366Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:09:36.009992Z&quot;}" data-trusted="true" data-execution_count="15">
+<div id="cell-14" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:09:36.010036Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:09:36.009532Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:21:14.888808Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:21:14.887366Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:09:36.009992Z&quot;}" data-trusted="true" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>learn.fine_tune(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
@@ -526,7 +529,7 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
 </div>
 </div>
 <p>For fun, let’s plot the model’s loss, and confusion matrix.</p>
-<div id="cell-15" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:21:18.089920Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:21:18.089359Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:21:18.522852Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:21:18.521708Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:21:18.089874Z&quot;}" data-trusted="true" data-execution_count="16">
+<div id="cell-16" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:21:18.089920Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:21:18.089359Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:21:18.522852Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:21:18.521708Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:21:18.089874Z&quot;}" data-trusted="true" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>learn.recorder.plot_loss()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -536,7 +539,7 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
 </div>
 </div>
 </div>
-<div id="cell-16" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:21:18.809879Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:21:18.809259Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:21:32.057868Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:21:32.056469Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:21:18.809835Z&quot;}" data-trusted="true" data-execution_count="17">
+<div id="cell-17" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:21:18.809879Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:21:18.809259Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:21:32.057868Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:21:32.056469Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:21:18.809835Z&quot;}" data-trusted="true" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>interp <span class="op">=</span> ClassificationInterpretation.from_learner(learn)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>interp.plot_confusion_matrix()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -593,15 +596,15 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
 <section id="save-trained-model" class="level1">
 <h1>Save trained model</h1>
 <p>I saved my trained model in 3 different file extensions (1 of them is actually saved without any specified file extension).</p>
-<div id="cell-19" class="cell">
+<div id="cell-20" class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>checkpoint_path <span class="op">=</span> <span class="st">'/kaggle/working/my_fastai_model_export'</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>learn.export(checkpoint_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-20" class="cell">
+<div id="cell-21" class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>checkpoint_path <span class="op">=</span> <span class="st">'/kaggle/working/my_fastai_model_pth_export.pth'</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>learn.export(checkpoint_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-21" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:22:29.223197Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:22:29.222735Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:22:29.322499Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:22:29.321008Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:22:29.223165Z&quot;}" data-trusted="true" data-execution_count="21">
+<div id="cell-22" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:22:29.223197Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:22:29.222735Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:22:29.322499Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:22:29.321008Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:22:29.223165Z&quot;}" data-trusted="true" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>checkpoint_path <span class="op">=</span> <span class="st">'/kaggle/working/my_fastai_pkl_export.pkl'</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>learn.export(checkpoint_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -611,7 +614,7 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
 <h1>Load trained model &amp; get batch predictions</h1>
 <p>To load trained model, I restart the kernel so we can test that this actually works. I did not rerun any code cells above, just the importing libraries cell.</p>
 <p>First of, we need to reinitialize all our dataset preprocessing things. But instead of working with the same training data, we will load out of sample test set.</p>
-<div id="cell-24" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:10.420185Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:10.419394Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:11.313389Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:11.312229Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:10.420145Z&quot;}" data-trusted="true" data-execution_count="5">
+<div id="cell-25" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:10.420185Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:10.419394Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:11.313389Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:11.312229Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:10.420145Z&quot;}" data-trusted="true" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>fp <span class="op">=</span> <span class="st">'/kaggle/input/ordergen-transformers-prepostprocesd-17072024/Archive2/20240429_20240503_testxyz_ori.pkl'</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>test_features, test_targets, annotations <span class="op">=</span> unpickle(fp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -619,7 +622,7 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
 <pre><code>loading /kaggle/input/ordergen-transformers-prepostprocesd-17072024/Archive2/20240429_20240503_testxyz_ori.pkl</code></pre>
 </div>
 </div>
-<div id="cell-25" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:11.316344Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:11.315230Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:11.324634Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:11.323574Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:11.316306Z&quot;}" data-trusted="true" data-execution_count="6">
+<div id="cell-26" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:11.316344Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:11.315230Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:11.324634Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:11.323574Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:11.316306Z&quot;}" data-trusted="true" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_features.shape)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>test_features</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -641,7 +644,7 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
          0.        ,  0.        ]], dtype=float32)</code></pre>
 </div>
 </div>
-<div id="cell-26" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:12.898652Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:12.897640Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:12.906097Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:12.905075Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:12.898616Z&quot;}" data-trusted="true" data-execution_count="7">
+<div id="cell-27" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:12.898652Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:12.897640Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:12.906097Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:12.905075Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:12.898616Z&quot;}" data-trusted="true" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_targets.shape)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>test_targets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -658,7 +661,7 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
 </div>
 </div>
 <p>We need to re-define the same functions and DataBlock and dataloaders we used to trained the model.</p>
-<div id="cell-28" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:14.191971Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:14.191026Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:14.197688Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:14.196338Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:14.191934Z&quot;}" data-trusted="true" data-execution_count="8">
+<div id="cell-29" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:14.191971Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:14.191026Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:14.197688Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:14.196338Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:14.191934Z&quot;}" data-trusted="true" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pass_index(idx):</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> idx</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -669,12 +672,12 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
 <span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> label[i]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>But this time, using the new test set.</p>
-<div id="cell-30" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:16.118225Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:16.117720Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:16.124692Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:16.123251Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:16.118188Z&quot;}" data-trusted="true" data-execution_count="9">
+<div id="cell-31" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:16.118225Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:16.117720Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:16.124692Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:16.123251Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:16.118188Z&quot;}" data-trusted="true" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>SLICE <span class="op">=</span> <span class="dv">1000</span> <span class="co"># for demonstration, we will work on small sample slice only</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>image <span class="op">=</span> test_features[:SLICE]</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> test_targets[:SLICE,<span class="dv">0</span>] <span class="co"># select the first axis because my labels are in 2 dimensional ie (total rows, 1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-31" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:19.000989Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:19.000464Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:19.149756Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:19.148601Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:19.000950Z&quot;}" data-trusted="true" data-execution_count="10">
+<div id="cell-32" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:19.000989Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:19.000464Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:19.149756Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:19.148601Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:19.000950Z&quot;}" data-trusted="true" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>dblock <span class="op">=</span> DataBlock(</span>
@@ -688,7 +691,7 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
 <span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>dls <span class="op">=</span> dblock.dataloaders(<span class="bu">list</span>(<span class="bu">range</span>(num_images)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s test loading all our saved model one by one.</p>
-<div id="cell-33" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:21.698417Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:21.698016Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:52.109480Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:52.108280Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:21.698384Z&quot;}" data-trusted="true" data-execution_count="11">
+<div id="cell-34" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:48:21.698417Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:48:21.698016Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:48:52.109480Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:48:52.108280Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:48:21.698384Z&quot;}" data-trusted="true" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>checkpoint_path1 <span class="op">=</span> <span class="st">'/kaggle/input/dummy_fastai_model/other/test2/1/my_fastai_model_export'</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -736,7 +739,7 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
         [9.9948e-01, 5.2483e-04]])</code></pre>
 </div>
 </div>
-<div id="cell-34" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:49:15.604494Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:49:15.603663Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:49:45.568881Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:49:45.567578Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:49:15.604444Z&quot;}" data-trusted="true" data-execution_count="12">
+<div id="cell-35" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:49:15.604494Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:49:15.603663Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:49:45.568881Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:49:45.567578Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:49:15.604444Z&quot;}" data-trusted="true" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>checkpoint_path2 <span class="op">=</span> <span class="st">'/kaggle/input/dummy_fastai_model/other/test2/1/my_fastai_model_pth_export.pth'</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -780,7 +783,7 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
         [9.9948e-01, 5.2483e-04]])</code></pre>
 </div>
 </div>
-<div id="cell-35" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:51:18.102823Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:51:18.102151Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:51:47.464082Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:51:47.462914Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:51:18.102792Z&quot;}" data-trusted="true" data-execution_count="15">
+<div id="cell-36" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:51:18.102823Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:51:18.102151Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:51:47.464082Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:51:47.462914Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:51:18.102792Z&quot;}" data-trusted="true" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>checkpoint_path3 <span class="op">=</span> <span class="st">'/kaggle/input/dummy_fastai_model/other/test2/1/my_fastai_pkl_export.pkl'</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -828,7 +831,7 @@ dls = make_dataloaders_from_numpy_data(Xtrain, ytrain[:,0])
 <section id="what-doesnt-work" class="level1">
 <h1>(…What doesn’t work)</h1>
 <p>Using <code>learn.load(checkpoint_path)</code> does not work. For some reason I get FileNotFoundError but they clearly exist…</p>
-<div id="cell-37" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:52:08.139360Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:52:08.138193Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:52:09.044280Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:52:09.042883Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:52:08.139317Z&quot;}" data-scrolled="true" data-trusted="true" data-execution_count="16">
+<div id="cell-38" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:52:08.139360Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:52:08.138193Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:52:09.044280Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:52:09.042883Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:52:08.139317Z&quot;}" data-scrolled="true" data-trusted="true" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>checkpoint_path01 <span class="op">=</span> <span class="st">'/kaggle/input/dummy_fastai_model/other/test2/1/my_fastai_model_export'</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>learn01 <span class="op">=</span> vision_learner(dls, models.resnet18, loss_func<span class="op">=</span>CrossEntropyLossFlat(), metrics<span class="op">=</span>accuracy)</span>
@@ -880,7 +883,7 @@ File <span class="ansi-green-fg">/opt/conda/lib/python3.10/site-packages/torch/s
 </div>
 </div>
 </div>
-<div id="cell-38" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:52:10.974428Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:52:10.973514Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:52:11.341646Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:52:11.339819Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:52:10.974387Z&quot;}" data-scrolled="true" data-trusted="true" data-execution_count="17">
+<div id="cell-39" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:52:10.974428Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:52:10.973514Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:52:11.341646Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:52:11.339819Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:52:10.974387Z&quot;}" data-scrolled="true" data-trusted="true" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>checkpoint_path02 <span class="op">=</span> <span class="st">'/kaggle/input/dummy_fastai_model/other/test2/1/my_fastai_model_pth_export.pth'</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>learn02 <span class="op">=</span> vision_learner(dls, models.resnet18, loss_func<span class="op">=</span>CrossEntropyLossFlat(), metrics<span class="op">=</span>accuracy)</span>
@@ -932,7 +935,7 @@ File <span class="ansi-green-fg">/opt/conda/lib/python3.10/site-packages/torch/s
 </div>
 </div>
 </div>
-<div id="cell-39" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:54:46.837602Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:54:46.837155Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:54:47.222808Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:54:47.221424Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:54:46.837563Z&quot;}" data-scrolled="true" data-trusted="true" data-execution_count="26">
+<div id="cell-40" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:54:46.837602Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:54:46.837155Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:54:47.222808Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:54:47.221424Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:54:46.837563Z&quot;}" data-scrolled="true" data-trusted="true" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>checkpoint_path03 <span class="op">=</span> <span class="st">'/kaggle/input/dummy_fastai_model/other/test2/1/my_fastai_pkl_export'</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>learn03 <span class="op">=</span> vision_learner(dls, models.resnet18, loss_func<span class="op">=</span>CrossEntropyLossFlat(), metrics<span class="op">=</span>accuracy)</span>
@@ -987,7 +990,7 @@ File <span class="ansi-green-fg">/opt/conda/lib/python3.10/site-packages/torch/s
 </section>
 <section id="checking-our-ypreds" class="level1">
 <h1>Checking our ypreds</h1>
-<div id="cell-41" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:52:41.167930Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:52:41.166914Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:52:41.513326Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:52:41.512270Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:52:41.167896Z&quot;}" data-trusted="true" data-execution_count="19">
+<div id="cell-42" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:52:41.167930Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:52:41.166914Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:52:41.513326Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:52:41.512270Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:52:41.167896Z&quot;}" data-trusted="true" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probabilities for class0</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(ypreds1)[<span class="dv">0</span>].hist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -998,7 +1001,7 @@ File <span class="ansi-green-fg">/opt/conda/lib/python3.10/site-packages/torch/s
 </div>
 </div>
 </div>
-<div id="cell-42" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:52:46.058999Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:52:46.058466Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:52:46.338317Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:52:46.337001Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:52:46.058959Z&quot;}" data-trusted="true" data-execution_count="21">
+<div id="cell-43" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-07-19T07:52:46.058999Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-07-19T07:52:46.058466Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-07-19T07:52:46.338317Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-07-19T07:52:46.337001Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-07-19T07:52:46.058959Z&quot;}" data-trusted="true" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probabilities for class 1</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(ypreds1)[<span class="dv">1</span>].hist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1010,77 +1013,39 @@ File <span class="ansi-green-fg">/opt/conda/lib/python3.10/site-packages/torch/s
 </div>
 </div>
 <p>All is well, but for some reason, I could not plot a confusion matrix.</p>
-<p>::: {#cell-44 .cell _kg_hide-input=‘true’ execution=‘{“iopub.execute_input”:“2024-07-19T07:53:17.065474Z”,“iopub.status.busy”:“2024-07-19T07:53:17.065081Z”,“iopub.status.idle”:“2024-07-19T07:53:17.477511Z”,“shell.execute_reply”:“2024-07-19T07:53:17.475962Z”,“shell.execute_reply.started”:“2024-07-19T07:53:17.065439Z”}’ trusted=‘true’ execution_count=25}</p>
+<p>::: {#cell-46 .cell _kg_hide-input=‘true’ execution=‘{“iopub.execute_input”:“2024-07-19T07:53:17.065474Z”,“iopub.status.busy”:“2024-07-19T07:53:17.065081Z”,“iopub.status.idle”:“2024-07-19T07:53:17.477511Z”,“shell.execute_reply”:“2024-07-19T07:53:17.475962Z”,“shell.execute_reply.started”:“2024-07-19T07:53:17.065439Z”}’ trusted=‘true’}</p>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>interp <span class="op">=</span> ClassificationInterpretation.from_learner(learn3)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>interp.plot_confusion_matrix()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-
-<style>
-    /* Turns off some styling */
-    progress {
-        /* gets rid of default border in Firefox and Opera. */
-        border: none;
-        /* Needs to be in here for Safari polyfill so background images work as expected. */
-        background-size: auto;
-    }
-    progress:not([value]), progress:not([value])::-webkit-progress-bar {
-        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
-    }
-    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-        background: #F44336;
-    }
-</style>
-</div>
-<div class="cell-output cell-output-display">
-
-</div>
-<div class="cell-output cell-output-display">
-
-<style>
-    /* Turns off some styling */
-    progress {
-        /* gets rid of default border in Firefox and Opera. */
-        border: none;
-        /* Needs to be in here for Safari polyfill so background images work as expected. */
-        background-size: auto;
-    }
-    progress:not([value]), progress:not([value])::-webkit-progress-bar {
-        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
-    }
-    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-        background: #F44336;
-    }
-</style>
-</div>
-<div class="cell-output cell-output-display">
-
-</div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[25], line 2</span>
-<span class="ansi-green-fg ansi-bold">      1</span> interp <span style="color:rgb(98,98,98)">=</span> ClassificationInterpretation<span style="color:rgb(98,98,98)">.</span>from_learner(learn3)
-<span class="ansi-green-fg">----&gt; 2</span> <span class="ansi-yellow-bg">interp</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">plot_confusion_matrix</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
-
-File <span class="ansi-green-fg">/opt/conda/lib/python3.10/site-packages/fastai/interpret.py:130</span>, in <span class="ansi-cyan-fg">ClassificationInterpretation.plot_confusion_matrix</span><span class="ansi-blue-fg">(self, normalize, title, cmap, norm_dec, plot_txt, **kwargs)</span>
-<span class="ansi-green-fg ansi-bold">    128</span> <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Plot the confusion matrix, with `title` and using `cmap`.</span><span style="color:rgb(175,0,0)">"</span>
-<span class="ansi-green-fg ansi-bold">    129</span> <span style="font-style:italic;color:rgb(95,135,135)"># This function is mainly copied from the sklearn docs</span>
-<span class="ansi-green-fg">--&gt; 130</span> cm <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">confusion_matrix</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">    131</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> normalize: cm <span style="color:rgb(98,98,98)">=</span> cm<span style="color:rgb(98,98,98)">.</span>astype(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">float</span><span style="color:rgb(175,0,0)">'</span>) <span style="color:rgb(98,98,98)">/</span> cm<span style="color:rgb(98,98,98)">.</span>sum(axis<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">1</span>)[:, np<span style="color:rgb(98,98,98)">.</span>newaxis]
-<span class="ansi-green-fg ansi-bold">    132</span> fig <span style="color:rgb(98,98,98)">=</span> plt<span style="color:rgb(98,98,98)">.</span>figure(<span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>kwargs)
-
-File <span class="ansi-green-fg">/opt/conda/lib/python3.10/site-packages/fastai/interpret.py:114</span>, in <span class="ansi-cyan-fg">ClassificationInterpretation.confusion_matrix</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-fg ansi-bold">    112</span> <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Confusion matrix as an `np.ndarray`.</span><span style="color:rgb(175,0,0)">"</span>
-<span class="ansi-green-fg ansi-bold">    113</span> x <span style="color:rgb(98,98,98)">=</span> torch<span style="color:rgb(98,98,98)">.</span>arange(<span style="color:rgb(98,98,98)">0</span>, <span style="color:rgb(0,135,0)">len</span>(<span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>vocab))
-<span class="ansi-green-fg">--&gt; 114</span> _,targs,decoded <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>learn<span style="color:rgb(98,98,98)">.</span>get_preds(dl<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>dl, with_decoded<span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">True</span>, with_preds<span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">True</span>, 
-<span class="ansi-green-fg ansi-bold">    115</span>                                        with_targs<span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">True</span>, act<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>act)
-<span class="ansi-green-fg ansi-bold">    116</span> d,t <span style="color:rgb(98,98,98)">=</span> flatten_check(decoded, targs)
-<span class="ansi-green-fg ansi-bold">    117</span> cm <span style="color:rgb(98,98,98)">=</span> ((d<span style="color:rgb(98,98,98)">==</span>x[:,<span style="font-weight:bold;color:rgb(0,135,0)">None</span>]) <span style="color:rgb(98,98,98)">&amp;</span> (t<span style="color:rgb(98,98,98)">==</span>x[:,<span style="font-weight:bold;color:rgb(0,135,0)">None</span>,<span style="font-weight:bold;color:rgb(0,135,0)">None</span>]))<span style="color:rgb(98,98,98)">.</span>long()<span style="color:rgb(98,98,98)">.</span>sum(<span style="color:rgb(98,98,98)">2</span>)
-
-<span class="ansi-red-fg">ValueError</span>: not enough values to unpack (expected 3, got 2)</pre>
-</div>
-</div>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>interp.plot_confusion_matrix()</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co">Traceback:</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co">{</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="co">    "name": "ValueError",</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="co">    "message": "not enough values to unpack (expected 3, got 2)",</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="co">    "stack": "---------------------------------------------------------------------------</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="co">ValueError                                Traceback (most recent call last)</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="co">Cell In[25], line 2</span></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a><span class="co">      1 interp = ClassificationInterpretation.from_learner(learn3)</span></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="co">----&gt; 2 interp.plot_confusion_matrix()</span></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a><span class="co">File /opt/conda/lib/python3.10/site-packages/fastai/interpret.py:130, in ClassificationInterpretation.plot_confusion_matrix(self, normalize, title, cmap, norm_dec, plot_txt, **kwargs)</span></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a><span class="co">    128 </span><span class="ch">\"</span><span class="co">Plot the confusion matrix, with `title` and using `cmap`.</span><span class="ch">\"</span></span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a><span class="co">    129 # This function is mainly copied from the sklearn docs</span></span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt; 130 cm = self.confusion_matrix()</span></span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a><span class="co">    131 if normalize: cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]</span></span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a><span class="co">    132 fig = plt.figure(**kwargs)</span></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a><span class="co">File /opt/conda/lib/python3.10/site-packages/fastai/interpret.py:114, in ClassificationInterpretation.confusion_matrix(self)</span></span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a><span class="co">    112 </span><span class="ch">\"</span><span class="co">Confusion matrix as an `np.ndarray`.</span><span class="ch">\"</span></span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a><span class="co">    113 x = torch.arange(0, len(self.vocab))</span></span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt; 114 _,targs,decoded = self.learn.get_preds(dl=self.dl, with_decoded=True, with_preds=True, </span></span>
+<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a><span class="co">    115                                        with_targs=True, act=self.act)</span></span>
+<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a><span class="co">    116 d,t = flatten_check(decoded, targs)</span></span>
+<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a><span class="co">    117 cm = ((d==x[:,None]) &amp; (t==x[:,None,None])).long().sum(2)</span></span>
+<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a><span class="co">ValueError: not enough values to unpack (expected 3, got 2)"</span></span>
+<span id="cb47-31"><a href="#cb47-31" aria-hidden="true" tabindex="-1"></a><span class="co">}</span></span>
+<span id="cb47-32"><a href="#cb47-32" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>:::</p>
 </section>
 <section id="conclusion" class="level1">
@@ -1113,7 +1078,12 @@ learn = vision_learner(dls, models.resnet18, loss_func=CrossEntropyLossFlat(), m
 # load model
 checkpoint_path = '/kaggle/input/ordergen_timeseries_fastai/other/default/1/fastai_timeseries'
 learn.load(checkpoint_path)        #### &lt;-------- diff is here</code></pre>
-<p>So, in short: 1. We save model by <code>learn.export(checkpoint_path)</code> 1. The file extension for <code>checkpoint_path</code> does not matter. When I omit the file extension entirely, we can still load and get predictions. Here is what I tried as <code>checkpoint_path</code>: [‘model’, ‘model.pth’, ‘model.pkl’]. 1. We need to redefine all functions we used to trained the model (ie <code>get_x</code>, <code>get_y</code>, …). 1. We load model by:</p>
+<p>So, in short: 1. We save model by <code>learn.export(checkpoint_path)</code></p>
+<ol start="2" type="1">
+<li><p>The file extension for <code>checkpoint_path</code> does not matter. When I omit the file extension entirely, we can still load and get predictions. Here is what I tried as <code>checkpoint_path</code>: [‘model’, ‘model.pth’, ‘model.pkl’].</p></li>
+<li><p>We need to redefine all functions we used to trained the model (ie <code>get_x</code>, <code>get_y</code>, …).</p></li>
+<li><p>We load model by:</p></li>
+</ol>
 <pre><code>checkpoint_path = any one of ['model', 'model.pth', 'model.pkl']
 
 # load model
