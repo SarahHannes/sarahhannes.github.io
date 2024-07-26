@@ -214,13 +214,18 @@ window.Quarto = {
 <p>The original data is faily clean and has no null entries for any of the columns, so the only preprocessing steps we need to do are: 1. Remove unnecessary column (<code>Id</code>). 1. Categorical encode non-numerical column (<code>Species</code>). We used simple <code>IF(E2="Iris-setosa",1,IF(E2="Iris-versicolor",2,3))</code> condition.</p>
 <p>Here is result after our minimal preprocessing steps. <img src="feed_forward_nn_in_excel_files/figure-html/cell-3-2-image.png" class="img-fluid" alt="image.png"></p>
 <p>Here is a quick pivot table to verify that our <code>Species_encoded</code> target works as we had expected. <img src="feed_forward_nn_in_excel_files/figure-html/cell-3-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
-<p>Some other additional preprocessing we might need to do are: - If our data has column with values that are way bigger than the rest of the columns (eg salary column, vs age column), then we need to normalize these big values columns. Otherwise, these big values columns will carry more weights in our prediction compared to other columns even when they are not necessarily important. One method is to change the values distribution to be between 0..1 using minmax formula. - If our data has column that exhibit exponential distribution (eg normally things to do with money, growth - bacterial growth, population growth etc), we can convert it to log value to change the one-sided tailed distribution into fairly normal distribution. This can be helpful because most of machine learning algorithm assumes normal distribution. We can use <code>log(x + 1)</code>, here, we <code>+1</code> to take care of 0 values in our data, because log(0) is undefined. - If we have categorical features, we need to encode it into numbers because models need to work with numbers. Often, we would use one-hot encoding instead of just encoding it into sequential numbers like how we encoded the <code>Species</code> column above. This is because sequential numbers has natural ordering, and the model might learn this ordering even when it is not intended. We did not use one-hot encoding for our <code>Species</code> column above because it is our target variable.</p>
+<p>Some other additional preprocessing we might need to do are:</p>
+<ul>
+<li><p>If our data has column with values that are way bigger than the rest of the columns (eg salary column, vs age column), then we need to normalize these big values columns. Otherwise, these big values columns will carry more weights in our prediction compared to other columns even when they are not necessarily important. One method is to change the values distribution to be between 0..1 using minmax formula.</p></li>
+<li><p>If our data has column that exhibit exponential distribution (eg normally things to do with money, growth - bacterial growth, population growth etc), we can convert it to log value to change the one-sided tailed distribution into fairly normal distribution. This can be helpful because most of machine learning algorithm assumes normal distribution. We can use <code>log(x + 1)</code>, here, we <code>+1</code> to take care of 0 values in our data, because log(0) is undefined.</p></li>
+<li><p>If we have categorical features, we need to encode it into numbers because models need to work with numbers. Often, we would use one-hot encoding instead of just encoding it into sequential numbers like how we encoded the <code>Species</code> column above. This is because sequential numbers has natural ordering, and the model might learn this ordering even when it is not intended. We did not use one-hot encoding for our <code>Species</code> column above because it is our target variable.</p></li>
+</ul>
 </section>
 <section id="linear-model" class="level1">
 <h1>Linear Model</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-5-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-8-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
@@ -249,12 +254,12 @@ window.Quarto = {
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-14-1-image-3.png" class="img-fluid figure-img"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-17-1-image-3.png" class="img-fluid figure-img"></p>
 <figcaption>image-3.png</figcaption>
 </figure>
 </div>
 <ol start="2" type="1">
-<li>Here is the result from solver. We see that our total loss has decreased from 20.7 to 0.04. <img src="feed_forward_nn_in_excel_files/figure-html/cell-15-1-image.png" class="img-fluid" alt="image.png"></li>
+<li>Here is the result from solver. We see that our total loss has decreased from 20.7 to 0.04. <img src="feed_forward_nn_in_excel_files/figure-html/cell-18-1-image.png" class="img-fluid" alt="image.png"></li>
 </ol>
 <p>The loss decreases, so all is good. But this is not neural network yet, this is just regression.</p>
 </section>
@@ -262,7 +267,7 @@ window.Quarto = {
 <h1>Neural Network</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-17-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-20-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
@@ -291,26 +296,30 @@ window.Quarto = {
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-28-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-31-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 <ol start="2" type="1">
-<li>Here is the result from solver. Our loss reduced from 4.74 to 0.03. This is also slightly better from the loss using linear model (0.04). Great! We’ve built a neural network from scratch using excel. <img src="feed_forward_nn_in_excel_files/figure-html/cell-29-1-image.png" class="img-fluid" alt="image.png"></li>
+<li>Here is the result from solver. Our loss reduced from 4.74 to 0.03. This is also slightly better from the loss using linear model (0.04). Great! We’ve built a neural network from scratch using excel. <img src="feed_forward_nn_in_excel_files/figure-html/cell-32-1-image.png" class="img-fluid" alt="image.png"></li>
 </ol>
 <section id="matrix-multiplication" class="level2">
 <h2 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h2>
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-30-2-image.png" class="img-fluid" alt="image.png"> 1. We can also achieve the same thing using matrix multiplication formula <code>MMULT(all cells in features table, all cells in params table)</code>. Notice that our PARAMS now is transposed. Previously our coefficient values are in row 6 and 7, now they are in column I and J. <img src="feed_forward_nn_in_excel_files/figure-html/cell-30-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-33-2-image.png" class="img-fluid" alt="image.png"> 1. We can also achieve the same thing using matrix multiplication formula <code>MMULT(all cells in features table, all cells in params table)</code>. Notice that our PARAMS now is transposed. Previously our coefficient values are in row 6 and 7, now they are in column I and J. <img src="feed_forward_nn_in_excel_files/figure-html/cell-33-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
 <ol start="2" type="1">
-<li>Here is the result from solver. Notice that we get the same result (0.03) as previous. <img src="feed_forward_nn_in_excel_files/figure-html/cell-31-1-image.png" class="img-fluid" alt="image.png"></li>
+<li>Here is the result from solver. Notice that we get the same result (0.03) as previous. <img src="feed_forward_nn_in_excel_files/figure-html/cell-34-1-image.png" class="img-fluid" alt="image.png"></li>
 </ol>
 </section>
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
 <p>We’ve successfully created a neural network from scratch in excel albeit for a very simple dataset. Here is the <a href="../data/blog-feed_forward_nn_in_excel-Iris.xlsx">final excel file</a> we’ve created. :)</p>
+<section id="reference-credit" class="level4">
+<h4 class="anchored" data-anchor-id="reference-credit">Reference &amp; credit:</h4>
+<p>[1] <a href="https://course.fast.ai/Lessons/lesson3.html">Practical Deep Learning for Coders: Lesson 3</a></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
