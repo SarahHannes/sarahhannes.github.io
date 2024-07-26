@@ -211,9 +211,13 @@ window.Quarto = {
 </div>
 <section id="preprocessing" class="level1">
 <h1>Preprocessing</h1>
-<p>The original data is faily clean and has no null entries for any of the columns, so the only preprocessing steps we need to do are: 1. Remove unnecessary column (<code>Id</code>). 1. Categorical encode non-numerical column (<code>Species</code>). We used simple <code>IF(E2="Iris-setosa",1,IF(E2="Iris-versicolor",2,3))</code> condition.</p>
-<p>Here is result after our minimal preprocessing steps. <img src="feed_forward_nn_in_excel_files/figure-html/cell-3-2-image.png" class="img-fluid" alt="image.png"></p>
-<p>Here is a quick pivot table to verify that our <code>Species_encoded</code> target works as we had expected. <img src="feed_forward_nn_in_excel_files/figure-html/cell-3-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
+<p>The original data is faily clean and has no null entries for any of the columns, so the only preprocessing steps we need to do are:</p>
+<ol type="1">
+<li>Remove unnecessary column (<code>Id</code>).</li>
+<li>Categorical encode non-numerical column (<code>Species</code>). We used simple <code>IF(E2="Iris-setosa",1,IF(E2="Iris-versicolor",2,3))</code> condition.</li>
+</ol>
+<p>Here is result after our minimal preprocessing steps. <img src="feed_forward_nn_in_excel_files/figure-html/cell-5-2-image.png" class="img-fluid" alt="image.png"></p>
+<p>Here is a quick pivot table to verify that our <code>Species_encoded</code> target works as we had expected. <img src="feed_forward_nn_in_excel_files/figure-html/cell-5-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
 <p>Some other additional preprocessing we might need to do are:</p>
 <ul>
 <li><p>If our data has column with values that are way bigger than the rest of the columns (eg salary column, vs age column), then we need to normalize these big values columns. Otherwise, these big values columns will carry more weights in our prediction compared to other columns even when they are not necessarily important. One method is to change the values distribution to be between 0..1 using minmax formula.</p></li>
@@ -225,7 +229,7 @@ window.Quarto = {
 <h1>Linear Model</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-8-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-10-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
@@ -254,12 +258,12 @@ window.Quarto = {
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-17-1-image-3.png" class="img-fluid figure-img"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-19-1-image-3.png" class="img-fluid figure-img"></p>
 <figcaption>image-3.png</figcaption>
 </figure>
 </div>
 <ol start="2" type="1">
-<li>Here is the result from solver. We see that our total loss has decreased from 20.7 to 0.04. <img src="feed_forward_nn_in_excel_files/figure-html/cell-18-1-image.png" class="img-fluid" alt="image.png"></li>
+<li>Here is the result from solver. We see that our total loss has decreased from 20.7 to 0.04. <img src="feed_forward_nn_in_excel_files/figure-html/cell-20-1-image.png" class="img-fluid" alt="image.png"></li>
 </ol>
 <p>The loss decreases, so all is good. But this is not neural network yet, this is just regression.</p>
 </section>
@@ -267,7 +271,7 @@ window.Quarto = {
 <h1>Neural Network</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-20-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-22-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
@@ -296,18 +300,18 @@ window.Quarto = {
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-31-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-33-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 <ol start="2" type="1">
-<li>Here is the result from solver. Our loss reduced from 4.74 to 0.03. This is also slightly better from the loss using linear model (0.04). Great! We’ve built a neural network from scratch using excel. <img src="feed_forward_nn_in_excel_files/figure-html/cell-32-1-image.png" class="img-fluid" alt="image.png"></li>
+<li>Here is the result from solver. Our loss reduced from 4.74 to 0.03. This is also slightly better from the loss using linear model (0.04). Great! We’ve built a neural network from scratch using excel. <img src="feed_forward_nn_in_excel_files/figure-html/cell-34-1-image.png" class="img-fluid" alt="image.png"></li>
 </ol>
 <section id="matrix-multiplication" class="level2">
 <h2 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h2>
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-33-2-image.png" class="img-fluid" alt="image.png"> 1. We can also achieve the same thing using matrix multiplication formula <code>MMULT(all cells in features table, all cells in params table)</code>. Notice that our PARAMS now is transposed. Previously our coefficient values are in row 6 and 7, now they are in column I and J. <img src="feed_forward_nn_in_excel_files/figure-html/cell-33-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-35-2-image.png" class="img-fluid" alt="image.png"> 1. We can also achieve the same thing using matrix multiplication formula <code>MMULT(all cells in features table, all cells in params table)</code>. Notice that our PARAMS now is transposed. Previously our coefficient values are in row 6 and 7, now they are in column I and J. <img src="feed_forward_nn_in_excel_files/figure-html/cell-35-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
 <ol start="2" type="1">
-<li>Here is the result from solver. Notice that we get the same result (0.03) as previous. <img src="feed_forward_nn_in_excel_files/figure-html/cell-34-1-image.png" class="img-fluid" alt="image.png"></li>
+<li>Here is the result from solver. Notice that we get the same result (0.03) as previous. <img src="feed_forward_nn_in_excel_files/figure-html/cell-36-1-image.png" class="img-fluid" alt="image.png"></li>
 </ol>
 </section>
 </section>
