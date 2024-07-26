@@ -152,7 +152,10 @@ window.Quarto = {
   <ul>
   <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link active" data-scroll-target="#preprocessing">Preprocessing</a></li>
   <li><a href="#linear-model" id="toc-linear-model" class="nav-link" data-scroll-target="#linear-model">Linear Model</a></li>
-  <li><a href="#neural-network" id="toc-neural-network" class="nav-link" data-scroll-target="#neural-network">Neural Network</a></li>
+  <li><a href="#neural-network" id="toc-neural-network" class="nav-link" data-scroll-target="#neural-network">Neural Network</a>
+  <ul class="collapse">
+  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication">Matrix Multiplication</a></li>
+  </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
@@ -195,67 +198,116 @@ window.Quarto = {
 </header>
 
 
+<blockquote class="blockquote">
+<p>Built (and train) simple neural network using Excel solver</p>
+</blockquote>
 <p>Let’s make a simple neural network using Excel. We are using the classic Iris dataset for this exercise.</p>
 <p>The dataset has 6 columns and 150 rows. It is a balanced dataset with 3 categorical targets (Iris-setosa, Iris-versicolor, Iris-virginica) with 50 rows belonging to each target species. We are trying to predict the flower species of each row, based on its physical attributes (SepalLengthCm, SepalWidthCm, PetalLengthCm, PetalWidthCm).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-1-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-2-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
-<section id="preprocessing" class="level3">
-<h3 class="anchored" data-anchor-id="preprocessing">Preprocessing</h3>
+<section id="preprocessing" class="level1">
+<h1>Preprocessing</h1>
 <p>The original data is faily clean and has no null entries for any of the columns, so the only preprocessing steps we need to do are: 1. Remove unnecessary column (<code>Id</code>). 1. Categorical encode non-numerical column (<code>Species</code>). We used simple <code>IF(E2="Iris-setosa",1,IF(E2="Iris-versicolor",2,3))</code> condition.</p>
+<p>Here is result after our minimal preprocessing steps. <img src="feed_forward_nn_in_excel_files/figure-html/cell-3-2-image.png" class="img-fluid" alt="image.png"></p>
+<p>Here is a quick pivot table to verify that our <code>Species_encoded</code> target works as we had expected. <img src="feed_forward_nn_in_excel_files/figure-html/cell-3-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
 <p>Some other additional preprocessing we might need to do are: - If our data has column with values that are way bigger than the rest of the columns (eg salary column, vs age column), then we need to normalize these big values columns. Otherwise, these big values columns will carry more weights in our prediction compared to other columns even when they are not necessarily important. One method is to change the values distribution to be between 0..1 using minmax formula. - If our data has column that exhibit exponential distribution (eg normally things to do with money, growth - bacterial growth, population growth etc), we can convert it to log value to change the one-sided tailed distribution into fairly normal distribution. This can be helpful because most of machine learning algorithm assumes normal distribution. We can use <code>log(x + 1)</code>, here, we <code>+1</code> to take care of 0 values in our data, because log(0) is undefined. - If we have categorical features, we need to encode it into numbers because models need to work with numbers. Often, we would use one-hot encoding instead of just encoding it into sequential numbers like how we encoded the <code>Species</code> column above. This is because sequential numbers has natural ordering, and the model might learn this ordering even when it is not intended. We did not use one-hot encoding for our <code>Species</code> column above because it is our target variable.</p>
-<p>Here is result after our minimal preprocessing steps. <img src="feed_forward_nn_in_excel_files/figure-html/cell-2-2-image.png" class="img-fluid" alt="image.png"></p>
-<p>Here is a quick pivot table to verify that our <code>Species_encoded</code> target works as we had expected. <img src="feed_forward_nn_in_excel_files/figure-html/cell-2-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
 </section>
-<section id="linear-model" class="level3">
-<h3 class="anchored" data-anchor-id="linear-model">Linear Model</h3>
+<section id="linear-model" class="level1">
+<h1>Linear Model</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-3-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-5-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
-<p>DATA: 1. All rows under column A6:E6 are our preprocessed data from the previous step. We add column <code>Ones</code> in F5 (values of 1 for all rows) for the constant term (<code>+ c</code>) in <code>y = mx + c</code> linear regression formula. 2. In cells B2:E2 are <code>MIN()</code> for each columns; and in column B3:E3 are <code>MAX()</code> for each columns. We do this to verify that none of the columns are way bigger/smaller than the rest.</p>
-<p>PARAMS: 1. In cells H6:L6 are random coefficients for each of our feature columns. We use <code>RAND()-0.5</code> to get random values. We do <code>- 0.5</code> to get small coefficients.</p>
-<p>MODEL: 1. All rows under column N5 are ypred returned from our linear model (<code>y = mx+c</code>). We use the formula <code>SUMPRODUCT(feature columns, params)</code>. The breakdown of sumproduct formula is <code>(column A value * column A param) + (column B value * column B param) + (column N value * column N param)</code>, where column A..N is our feature columns’ value and param respectively. I think it is easier to see here that <code>... + (Ones value * Constant)</code> is equivalent to <code>+ (1 * Constant)</code>, which is the same as <code>+ Constant</code>. This is what we meant in bullet point DATA.1. 1. All rows under column O5 are loss (<code>(ypred - ytrue)^2</code>) for each row’s prediction. 1. In cell L10 is our average total loss <code>AVERAGE(loss column)</code>.</p>
-<p>SOLVE: 1. We can now optimize using built-in gradient descend algorithm in excel (Data tab –&gt; Solver). - Total loss as our objective that we want to minimize. - Params cells as the thing we want to change to get the minimal total loss. <img src="feed_forward_nn_in_excel_files/figure-html/cell-7-1-image-3.png" class="img-fluid" alt="image-3.png"></p>
+<p>DATA:</p>
+<ol type="1">
+<li>All rows under column A6:E6 are our preprocessed data from the previous step. We add column <code>Ones</code> in F5 (values of 1 for all rows) for the constant term (<code>+ c</code>) in <code>y = mx + c</code> linear regression formula.</li>
+<li>In cells B2:E2 are <code>MIN()</code> for each columns; and in column B3:E3 are <code>MAX()</code> for each columns. We do this to verify that none of the columns are way bigger/smaller than the rest.</li>
+</ol>
+<p>PARAMS:</p>
+<ol type="1">
+<li>In cells H6:L6 are random coefficients for each of our feature columns. We use <code>RAND()-0.5</code> to get random values. We do <code>- 0.5</code> to get small coefficients.</li>
+</ol>
+<p>MODEL:</p>
+<ol type="1">
+<li>All rows under column N5 are ypred returned from our linear model (<code>y = mx+c</code>). We use the formula <code>SUMPRODUCT(feature columns, params)</code>. The breakdown of sumproduct formula is <code>(column A value * column A param) + (column B value * column B param) + (column N value * column N param)</code>, where column A..N is our feature columns’ value and param respectively. I think it is easier to see here that <code>... + (Ones value * Constant)</code> is equivalent to <code>+ (1 * Constant)</code>, which is the same as <code>+ Constant</code>. This is what we meant in bullet point DATA.1.</li>
+<li>All rows under column O5 are loss (<code>(ypred - ytrue)^2</code>) for each row’s prediction.</li>
+<li>In cell L10 is our average total loss <code>AVERAGE(loss column)</code>.</li>
+</ol>
+<p>SOLVE:</p>
+<ol type="1">
+<li>We can now optimize using built-in gradient descend algorithm in excel (Data tab –&gt; Solver).
+<ul>
+<li>Total loss as our objective that we want to minimize.</li>
+<li>Params cells as the thing we want to change to get the minimal total loss.</li>
+</ul></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-14-1-image-3.png" class="img-fluid figure-img"></p>
+<figcaption>image-3.png</figcaption>
+</figure>
+</div>
 <ol start="2" type="1">
-<li>Here is the result from solver. We see that our total loss has decreased from 20.7 to 0.04. <img src="feed_forward_nn_in_excel_files/figure-html/cell-8-1-image.png" class="img-fluid" alt="image.png"></li>
+<li>Here is the result from solver. We see that our total loss has decreased from 20.7 to 0.04. <img src="feed_forward_nn_in_excel_files/figure-html/cell-15-1-image.png" class="img-fluid" alt="image.png"></li>
 </ol>
 <p>The loss decreases, so all is good. But this is not neural network yet, this is just regression.</p>
 </section>
-<section id="neural-network" class="level3">
-<h3 class="anchored" data-anchor-id="neural-network">Neural Network</h3>
+<section id="neural-network" class="level1">
+<h1>Neural Network</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-10-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-17-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
-<p>DATA: 1. All of our data is the same as in previous section.</p>
-<p>PARAMS: 1. Now we add another set of coefficients for each of our features, in cells H7:L7.</p>
-<p>MODEL: 1. For each of the param set, we do sumproduct. - Under column <code>Linear1</code> is <code>SUMPRODUCT(feature columns, params in H6:L6)</code>. This is the same as in previous section. - Under column <code>Linear2</code> is <code>SUMPRODUCT(feature columns, params in H7:L7)</code>. 2. If we just add <code>Linear1 + Linear2</code>, then the formula would still be linear regression. So, we need to add nonlinear function. Nonlinear function is also called activation function. Nonlinear function breaks this linearity so that our model is no longer a linear model. The nonlinear function we add here is ReLU, using formula <code>MAX(0, Linear1)</code> and <code>MAX(0, Linear2)</code>.</p>
-<p>Here, we can observe that adding just linear layers without non-linearity would still give linear regression formula. Assume that <span class="math inline">\(y_a\)</span> is ypred from <code>Linear1</code> and <span class="math inline">\(y_b\)</span> is ypred from <code>Linear2</code>: <span class="math display">\[y_a = m_{1a}x_1 + m_{2a}x_2\]</span> <span class="math display">\[y_b = m_{1b}x_1 + m_{2b}x_2\]</span> <span class="math display">\[y_a + y_b = (m_{1a}x_1 + m_{2a}x_2) + (m_{1b}x_1 + m_{2b}x_2)\]</span></p>
-<ol start="3" type="1">
-<li>Under column R6 is our ypred, using formula <code>ReLU1 + ReLU2</code>.</li>
+<p>DATA:</p>
+<ol type="1">
+<li>All of our data is the same as in previous section.</li>
 </ol>
-<p>SOLVE: 1. We can now solve the model using excel solver. <img src="feed_forward_nn_in_excel_files/figure-html/cell-12-1-image.png" class="img-fluid" alt="image.png"></p>
-<ol start="2" type="1">
-<li>Here is the result from solver. Our loss reduced from 4.74 to 0.03. This is also slightly better from the loss using linear model (0.04). Great! We’ve built a neural network from scratch using excel. <img src="feed_forward_nn_in_excel_files/figure-html/cell-13-1-image.png" class="img-fluid" alt="image.png"></li>
+<p>PARAMS:</p>
+<ol type="1">
+<li>Now we add another set of coefficients for each of our features, in cells H7:L7.</li>
 </ol>
-<section id="matrix-multiplication" class="level4">
-<h4 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h4>
-<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-14-2-image.png" class="img-fluid" alt="image.png"> 1. We can also achieve the same thing using matrix multiplication formula <code>MMULT(all cells in features table, all cells in params table)</code>. Notice that our PARAMS now is transposed. Previously our coefficient values are in row 6 and 7, now they are in column I and J. <img src="feed_forward_nn_in_excel_files/figure-html/cell-14-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
+<p>MODEL:</p>
+<ol type="1">
+<li><p>For each of the param set, we do sumproduct.</p>
+<ul>
+<li>Under column <code>Linear1</code> is <code>SUMPRODUCT(feature columns, params in H6:L6)</code>. This is the same as in previous section.</li>
+<li>Under column <code>Linear2</code> is <code>SUMPRODUCT(feature columns, params in H7:L7)</code>.</li>
+</ul></li>
+<li><p>If we just add <code>Linear1 + Linear2</code>, then the formula would still be linear regression. So, we need to add nonlinear function. Nonlinear function is also called activation function. Nonlinear function breaks this linearity so that our model is no longer a linear model. The nonlinear function we add here is ReLU, using formula <code>MAX(0, Linear1)</code> and <code>MAX(0, Linear2)</code>.</p>
+<p>Here, we can observe that adding just linear layers without non-linearity would still give linear regression formula. Assume that <span class="math inline">\(y_a\)</span> is ypred from <code>Linear1</code> and <span class="math inline">\(y_b\)</span> is ypred from <code>Linear2</code>: <span class="math display">\[y_a = m_{1a}x_1 + m_{2a}x_2\]</span> <span class="math display">\[y_b = m_{1b}x_1 + m_{2b}x_2\]</span> <span class="math display">\[y_a + y_b = (m_{1a}x_1 + m_{2a}x_2) + (m_{1b}x_1 + m_{2b}x_2)\]</span></p></li>
+<li><p>Under column R6 is our ypred, using formula <code>ReLU1 + ReLU2</code>.</p></li>
+</ol>
+<p>SOLVE:</p>
+<ol type="1">
+<li>We can now solve the model using excel solver.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-28-1-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
 <ol start="2" type="1">
-<li>Here is the result from solver. Notice that we get the same result (0.03) as previous. <img src="feed_forward_nn_in_excel_files/figure-html/cell-15-1-image.png" class="img-fluid" alt="image.png"></li>
+<li>Here is the result from solver. Our loss reduced from 4.74 to 0.03. This is also slightly better from the loss using linear model (0.04). Great! We’ve built a neural network from scratch using excel. <img src="feed_forward_nn_in_excel_files/figure-html/cell-29-1-image.png" class="img-fluid" alt="image.png"></li>
+</ol>
+<section id="matrix-multiplication" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h2>
+<p><img src="feed_forward_nn_in_excel_files/figure-html/cell-30-2-image.png" class="img-fluid" alt="image.png"> 1. We can also achieve the same thing using matrix multiplication formula <code>MMULT(all cells in features table, all cells in params table)</code>. Notice that our PARAMS now is transposed. Previously our coefficient values are in row 6 and 7, now they are in column I and J. <img src="feed_forward_nn_in_excel_files/figure-html/cell-30-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
+<ol start="2" type="1">
+<li>Here is the result from solver. Notice that we get the same result (0.03) as previous. <img src="feed_forward_nn_in_excel_files/figure-html/cell-31-1-image.png" class="img-fluid" alt="image.png"></li>
 </ol>
 </section>
 </section>
-<section id="conclusion" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
 <p>We’ve successfully created a neural network from scratch in excel albeit for a very simple dataset. Here is the <a href="../data/blog-feed_forward_nn_in_excel-Iris.xlsx">final excel file</a> we’ve created. :)</p>
 
 
