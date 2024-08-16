@@ -2,58 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/index.html</loc>
-    <lastmod>2024-08-14T14:54:41.644Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.515Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/feed_forward_nn_in_excel.html</loc>
-    <lastmod>2024-08-14T14:54:41.428Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.299Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til.html</loc>
-    <lastmod>2024-08-14T14:54:41.644Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.515Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/200624_incompleteread.html</loc>
-    <lastmod>2024-08-14T14:54:41.668Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.547Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/200624_numpy_datablock.html</loc>
-    <lastmod>2024-08-14T14:54:41.672Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.547Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/130524_conda_ValueError.html</loc>
-    <lastmod>2024-08-14T14:54:41.644Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.515Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190624_lesson0.html</loc>
-    <lastmod>2024-08-14T14:54:41.664Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.539Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190724_how-to-save-load-fastai-model.html</loc>
-    <lastmod>2024-08-14T14:54:41.664Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.539Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/160824_docker_cache.html</loc>
+    <lastmod>2024-08-16T06:38:39.519Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190624_howtodocker.html</loc>
-    <lastmod>2024-08-14T14:54:41.660Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.535Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/140524_conda_ImportError.html</loc>
-    <lastmod>2024-08-14T14:54:41.644Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.515Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/130624_fastai_AttributeError.html</loc>
-    <lastmod>2024-08-14T14:54:41.644Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.515Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/about.html</loc>
-    <lastmod>2024-08-14T14:54:41.400Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.271Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog.html</loc>
-    <lastmod>2024-08-14T14:54:41.400Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.271Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/visualizing_arrays.html</loc>
-    <lastmod>2024-08-14T14:54:41.640Z</lastmod>
+    <lastmod>2024-08-16T06:38:39.511Z</lastmod>
   </url>
 </urlset>
