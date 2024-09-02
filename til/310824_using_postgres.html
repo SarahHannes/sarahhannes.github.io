@@ -177,6 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">September 2, 2024</p>
+    </div>
+  </div>
     
   </div>
   
@@ -210,7 +216,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>image.png</figcaption>
 </figure>
 </div>
-<p><code>USING(pet_id)</code> is similar to <code>ON owner.pet_id = pets.pet_id</code> but will combine all resulting unique ids from both table.</p>
+<p>Let’s use the tables above as an example. Say we want to merge <code>pet_id</code> from both of the tables to find the pet type for each person listed in <code>Owner</code> table.</p>
+<p>An option is to use <code>USING(pet_id)</code> clause. This is similar to <code>JOIN ... ON owner.pet_id = pets.pet_id</code> but will combine all resulting unique ids from both table.</p>
 <div id="a6c053b9-c60a-42b8-9a44-a15125078660" class="cell" data-vscode="{&quot;languageId&quot;:&quot;sql&quot;}">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span>  JOIN <span class="cf">with</span> USING</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -224,9 +231,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>image.png</figcaption>
 </figure>
 </div>
-<p>We can get the same result if we use CASE clause.. but this is definitely more wordy…</p>
+<p>We can get the same result if above it we use normal <code>JOIN ON...</code> with <code>CASE</code> clause.. but this is definitely more wordy…</p>
 <div id="223511a0-6a1b-4ac2-a4d0-9478d0c787b9" class="cell" data-vscode="{&quot;languageId&quot;:&quot;sql&quot;}">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> JOIN <span class="cf">with</span> ON ... <span class="op">=</span> ...</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> Normal JOIN ON... <span class="cf">with</span> CASE</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>SELECT CASE</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        WHEN o.pet_id IS NULL THEN p.pet_id</span>
