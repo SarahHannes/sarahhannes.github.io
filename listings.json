@@ -1,5 +1,13 @@
 [
   {
+    "listing": "/blog.html",
+    "items": [
+      "/blog/get_data_geo2r.html",
+      "/blog/feed_forward_nn_in_excel.html",
+      "/blog/visualizing_arrays.html"
+    ]
+  },
+  {
     "listing": "/til.html",
     "items": [
       "/til/310824_using_postgres.html",
@@ -12,13 +20,6 @@
       "/til/130624_fastai_AttributeError.html",
       "/til/140524_conda_ImportError.html",
       "/til/130524_conda_ValueError.html"
-    ]
-  },
-  {
-    "listing": "/blog.html",
-    "items": [
-      "/blog/feed_forward_nn_in_excel.html",
-      "/blog/visualizing_arrays.html"
     ]
   }
 ]
