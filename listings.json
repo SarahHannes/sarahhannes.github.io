@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/blog/smithwaterman_py.html",
       "/blog/get_data_geo2r.html",
       "/blog/feed_forward_nn_in_excel.html",
       "/blog/visualizing_arrays.html"
