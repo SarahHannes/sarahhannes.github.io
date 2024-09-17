@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -101,6 +101,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -185,12 +188,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Condensed summary of A/B Test course by <a href="https://data36.com/tag/ab-test/">Data36</a>.</p>
-<div id="cell-2" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML, IFrame</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>IFrame(HTML(<span class="st">'&lt;iframe width="500" height="500" style="border: 1px solid #d0d0d0;border-radius: 6px;"src="https://www.mindomo.com/mindmap/ab-test-c8a1fbd9f65e4b16be9d1060bee2d88e" frameborder="0" allowfullscreen&gt;Your browser does not support frames. &lt;a href="https://www.mindomo.com/mindmap/ab-test-c8a1fbd9f65e4b16be9d1060bee2d88e" target="_blank"&gt;View&lt;/a&gt; this map on its original site. It was created using &lt;a href="https://www.mindomo.com" target="_blank"&gt;Mindomo&lt;/a&gt;.&lt;/iframe&gt;'</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>       width<span class="op">=</span><span class="dv">1000</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>       height<span class="op">=</span><span class="dv">500</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-2" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""{python}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: true</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| panel: center</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML, IFrame</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">'&lt;iframe width="500" height="500" style="border: 1px solid #d0d0d0;border-radius: 6px;"src="https://www.mindomo.com/mindmap/ab-test-c8a1fbd9f65e4b16be9d1060bee2d88e" frameborder="0" allowfullscreen&gt;Your browser does not support frames. &lt;a href="https://www.mindomo.com/mindmap/ab-test-c8a1fbd9f65e4b16be9d1060bee2d88e" target="_blank"&gt;View&lt;/a&gt; this map on its original site. It was created using &lt;a href="https://www.mindomo.com" target="_blank"&gt;Mindomo&lt;/a&gt;.&lt;/iframe&gt;'</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<iframe width="500" height="500" style="border: 1px solid #d0d0d0;border-radius: 6px;" src="https://www.mindomo.com/mindmap/ab-test-c8a1fbd9f65e4b16be9d1060bee2d88e" frameborder="0" allowfullscreen="">Your browser does not support frames. <a href="https://www.mindomo.com/mindmap/ab-test-c8a1fbd9f65e4b16be9d1060bee2d88e" target="_blank">View</a> this map on its original site. It was created using <a href="https://www.mindomo.com" target="_blank">Mindomo</a>.</iframe>
+</div>
 </div>
 
 
