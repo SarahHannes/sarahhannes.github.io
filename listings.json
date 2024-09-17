@@ -1,20 +1,5 @@
 [
   {
-    "listing": "/til.html",
-    "items": [
-      "/til/310824_using_postgres.html",
-      "/til/160824_docker_cache.html",
-      "/til/190724_how-to-save-load-fastai-model.html",
-      "/til/200624_incompleteread.html",
-      "/til/200624_numpy_datablock.html",
-      "/til/190624_lesson0.html",
-      "/til/190624_howtodocker.html",
-      "/til/130624_fastai_AttributeError.html",
-      "/til/140524_conda_ImportError.html",
-      "/til/130524_conda_ValueError.html"
-    ]
-  },
-  {
     "listing": "/blog.html",
     "items": [
       "/blog/smithwaterman_py.html",
@@ -22,6 +7,21 @@
       "/blog/get_data_geo2r.html",
       "/blog/feed_forward_nn_in_excel.html",
       "/blog/visualizing_arrays.html"
+    ]
+  },
+  {
+    "listing": "/til.html",
+    "items": [
+      "/til/310824_using_postgres.html",
+      "/til/160824_docker_cache.html",
+      "/til/190724_how-to-save-load-fastai-model.html",
+      "/til/200624_numpy_datablock.html",
+      "/til/200624_incompleteread.html",
+      "/til/190624_howtodocker.html",
+      "/til/190624_lesson0.html",
+      "/til/130624_fastai_AttributeError.html",
+      "/til/140524_conda_ImportError.html",
+      "/til/130524_conda_ValueError.html"
     ]
   }
 ]
