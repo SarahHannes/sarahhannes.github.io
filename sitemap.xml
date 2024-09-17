@@ -2,78 +2,78 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/about.html</loc>
-    <lastmod>2024-09-17T12:37:46.516Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190624_lesson0.html</loc>
-    <lastmod>2024-09-17T12:37:46.912Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/130624_fastai_AttributeError.html</loc>
-    <lastmod>2024-09-17T12:37:46.888Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190724_how-to-save-load-fastai-model.html</loc>
-    <lastmod>2024-09-17T12:37:46.912Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/310824_using_postgres.html</loc>
-    <lastmod>2024-09-17T12:37:46.932Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190624_howtodocker.html</loc>
-    <lastmod>2024-09-17T12:37:46.908Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog.html</loc>
-    <lastmod>2024-09-17T12:37:46.516Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/visualizing_arrays.html</loc>
-    <lastmod>2024-09-17T12:37:46.884Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/ab_test.html</loc>
-    <lastmod>2024-09-17T12:37:46.516Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til.html</loc>
-    <lastmod>2024-09-17T12:37:46.888Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/feed_forward_nn_in_excel.html</loc>
-    <lastmod>2024-09-17T12:37:46.544Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/get_data_geo2r.html</loc>
-    <lastmod>2024-09-17T12:37:46.672Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/smithwaterman_py.html</loc>
-    <lastmod>2024-09-17T12:37:46.676Z</lastmod>
+    <lastmod>2024-09-17T12:48:42.149Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/200624_numpy_datablock.html</loc>
-    <lastmod>2024-09-17T12:37:46.920Z</lastmod>
+    <lastmod>2024-09-17T12:48:42.528Z</lastmod>
   </url>
   <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/200624_incompleteread.html</loc>
-    <lastmod>2024-09-17T12:37:46.920Z</lastmod>
-  </url>
-  <url>
-    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/130524_conda_ValueError.html</loc>
-    <lastmod>2024-09-17T12:37:46.888Z</lastmod>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/130624_fastai_AttributeError.html</loc>
+    <lastmod>2024-09-17T12:48:42.498Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/160824_docker_cache.html</loc>
-    <lastmod>2024-09-17T12:37:46.892Z</lastmod>
+    <lastmod>2024-09-17T12:48:42.503Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/130524_conda_ValueError.html</loc>
+    <lastmod>2024-09-17T12:48:42.498Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/140524_conda_ImportError.html</loc>
-    <lastmod>2024-09-17T12:37:46.888Z</lastmod>
+    <lastmod>2024-09-17T12:48:42.498Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/ab_test.html</loc>
+    <lastmod>2024-09-17T12:48:42.149Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/smithwaterman_py.html</loc>
+    <lastmod>2024-09-17T12:48:42.299Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/get_data_geo2r.html</loc>
+    <lastmod>2024-09-17T12:48:42.295Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/index.html</loc>
-    <lastmod>2024-09-17T12:37:46.888Z</lastmod>
+    <lastmod>2024-09-17T12:48:42.497Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til.html</loc>
+    <lastmod>2024-09-17T12:48:42.497Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/visualizing_arrays.html</loc>
+    <lastmod>2024-09-17T12:48:42.494Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/feed_forward_nn_in_excel.html</loc>
+    <lastmod>2024-09-17T12:48:42.176Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog.html</loc>
+    <lastmod>2024-09-17T12:48:42.149Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190724_how-to-save-load-fastai-model.html</loc>
+    <lastmod>2024-09-17T12:48:42.522Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190624_lesson0.html</loc>
+    <lastmod>2024-09-17T12:48:42.521Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/200624_incompleteread.html</loc>
+    <lastmod>2024-09-17T12:48:42.526Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190624_howtodocker.html</loc>
+    <lastmod>2024-09-17T12:48:42.519Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/310824_using_postgres.html</loc>
+    <lastmod>2024-09-17T12:48:42.538Z</lastmod>
   </url>
 </urlset>
