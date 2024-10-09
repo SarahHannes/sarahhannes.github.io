@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-10-09">
 
-<title>Blog – Sarah Hannes</title>
+<title>Differences between: PAM vs BLOSUM – Sarah Hannes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +21,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +101,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-description','listing-image','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
-    };
 
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -138,7 +116,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Sarah Hannes</span>
     </a>
   </div>
@@ -149,19 +127,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./til.html"> 
+    <a class="nav-link" href="../til.html"> 
 <span class="menu-text">Today I learn</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -175,22 +153,32 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="AB Test">AB Test <span class="quarto-category-count">(1)</span></div><div class="category" data-category="alignment">alignment <span class="quarto-category-count">(1)</span></div><div class="category" data-category="array">array <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bioinformatics">bioinformatics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="biology">biology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="biopython">biopython <span class="quarto-category-count">(1)</span></div><div class="category" data-category="differences">differences <span class="quarto-category-count">(1)</span></div><div class="category" data-category="excel">excel <span class="quarto-category-count">(2)</span></div><div class="category" data-category="gene expression">gene expression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="geo">geo <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ncbi">ncbi <span class="quarto-category-count">(1)</span></div><div class="category" data-category="neural network">neural network <span class="quarto-category-count">(1)</span></div><div class="category" data-category="numpy">numpy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="smith-waterman">smith-waterman <span class="quarto-category-count">(1)</span></div><div class="category" data-category="tensor">tensor <span class="quarto-category-count">(1)</span></div></div></div>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Blog</h1>
-</div>
+<h1 class="title">Differences between: PAM vs BLOSUM</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">biology</div>
+    <div class="quarto-category">differences</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 9, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -200,155 +188,35 @@ window.Quarto = {
 </header>
 
 
+<blockquote class="blockquote">
+<p>PAM and BLOSUM are both substitution matrix for amino acid. This is a high level overview of their differences.</p>
+</blockquote>
+<p>You can download the image from <a href="https://drive.google.com/file/d/1fjtAgobn9ve0DzsDLo7zAyWCGsUtPXRA/view?usp=sharing">here</a>.</p>
+<div id="cell-3" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">'&lt;iframe frameborder="0" style="width:100%;height:1314px;" src="https://viewer.diagrams.net/?tags=%7B%7D&amp;lightbox=1&amp;highlight=0000ff&amp;edit=_blank&amp;layers=1&amp;nav=1&amp;title=blosumVSpam.drawio#Uhttps%3A</span><span class="sc">%2F%2F</span><span class="st">drive.google.com</span><span class="sc">%2F</span><span class="st">uc</span><span class="sc">%3F</span><span class="st">id%3D1fjtAgobn9ve0DzsDLo7zAyWCGsUtPXRA</span><span class="sc">%26e</span><span class="st">xport%3Ddownload"&gt;&lt;/iframe&gt;'</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/opt/homebrew/Caskroom/miniforge/base/envs/bio/lib/python3.10/site-packages/IPython/core/display.py:431: UserWarning: Consider using IPython.display.IFrame instead
+  warnings.warn("Consider using IPython.display.IFrame instead")</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<iframe frameborder="0" style="width:100%;height:1314px;" src="https://viewer.diagrams.net/?tags=%7B%7D&amp;lightbox=1&amp;highlight=0000ff&amp;edit=_blank&amp;layers=1&amp;nav=1&amp;title=blosumVSpam.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1fjtAgobn9ve0DzsDLo7zAyWCGsUtPXRA%26export%3Ddownload"></iframe>
+</div>
+</div>
+<section id="reference-credit" class="level4">
+<h4 class="anchored" data-anchor-id="reference-credit">Reference &amp; credit:</h4>
+<ol type="1">
+<li><a href="https://youtu.be/68lF71zEUF8?si=KFi53Gfc2VOMN17J">Dr.&nbsp;Rob Edwards: BLAST playlist</a><br></li>
+<li><a href="https://en.wikipedia.org/wiki/Tyrosine">Wikipedia: Tyrosine</a><br></li>
+<li><a href="https://en.wikipedia.org/wiki/Phenylalanin">Wikipedia: Phenylalanin</a><br></li>
+<li><a href="https://www.hgvs.org/mutnomen/codon.html">Human Genome Variation Society: Codon &amp; amino acids</a><br></li>
+</ol>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="biology,differences" data-listing-date-sort="1728432000000" data-listing-file-modified-sort="1728487862947" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="48">
-<a href="./blog/diff_pam_blosum.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Differences between: PAM vs BLOSUM
-</h5>
-<div class="listing-reading-time card-text text-muted">
-1 min
-</div>
-<div class="card-text listing-description">
-PAM and BLOSUM are both substitution matrix for amino acid. This is a high level overview of their differences.
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Oct 9, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="bioinformatics,alignment,smith-waterman,biopython" data-listing-date-sort="1726444800000" data-listing-file-modified-sort="1728487863107" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="70">
-<a href="./blog/smithwaterman_py.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="blog/smithwaterman_py_files/figure-html/1abe340a-1-image-3.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Smith-Waterman Local Alignment using Python
-</h5>
-<div class="listing-reading-time card-text text-muted">
-1 min
-</div>
-<div class="card-text listing-description">
-Smith-Waterman is a local alignment method for sequence alignment. Below is example implementation using python.
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Sep 16, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="AB Test" data-listing-date-sort="1725926400000" data-listing-file-modified-sort="1728487862947" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="17">
-<a href="./blog/ab_test.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Condensed A/B Test Summary
-</h5>
-<div class="listing-reading-time card-text text-muted">
-1 min
-</div>
-<div class="card-text listing-description">
-Condensed summary of A/B Test course by Data36. You can download the mind map here.
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Sep 10, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="3" data-categories="geo,ncbi,gene expression,bioinformatics" data-listing-date-sort="1725062400000" data-listing-file-modified-sort="1728487863103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="227">
-<a href="./blog/get_data_geo2r.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="blog/get_data_geo2r_files/figure-html/cell-3-1-image.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Extract data from GEO2R
-</h5>
-<div class="listing-reading-time card-text text-muted">
-2 min
-</div>
-<div class="card-text listing-description">
-Gene Expression Omnibus (GEO) is a place where we can get publicly available datasets on gene expressions uploaded by the scientific community, for free. Here’s how we can…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Aug 31, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="4" data-categories="neural network,excel" data-listing-date-sort="1719360000000" data-listing-file-modified-sort="1728487862975" data-listing-date-modified-sort="1719360000000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1017">
-<a href="./blog/feed_forward_nn_in_excel.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="blog/feed_forward_nn_in_excel_files/figure-html/cell-2-1-image.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Neural Network from scratch using Excel
-</h5>
-<div class="listing-reading-time card-text text-muted">
-6 min
-</div>
-<div class="card-text listing-description">
-Built (and train) simple neural network using Excel solver
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Jun 26, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="5" data-categories="array,numpy,tensor,excel" data-listing-date-sort="1719100800000" data-listing-file-modified-sort="1728487863315" data-listing-date-modified-sort="1719100800000" data-listing-reading-time-sort="4" data-listing-word-count-sort="660">
-<a href="./blog/visualizing_arrays.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="blog/visualizing_arrays_files/figure-html/cell-7-1-image-2.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Visualizing Arrays using Excel
-</h5>
-<div class="listing-reading-time card-text text-muted">
-4 min
-</div>
-<div class="card-text listing-description">
-Visualizing simple operations across arrays
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Jun 23, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
