@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-11-06">
+
+<title>Burrows-Wheeler Transform in Python – Sarah Hannes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Sarah Hannes</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../til.html"> 
+<span class="menu-text">Today I learn</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#extracting-burrow-wheeler-transform-bwt" id="toc-extracting-burrow-wheeler-transform-bwt" class="nav-link active" data-scroll-target="#extracting-burrow-wheeler-transform-bwt">Extracting Burrow-Wheeler Transform (BWT)</a></li>
+  <li><a href="#inverting-the-burrow-wheeler-transform-bwt" id="toc-inverting-the-burrow-wheeler-transform-bwt" class="nav-link" data-scroll-target="#inverting-the-burrow-wheeler-transform-bwt">Inverting the Burrow-Wheeler Transform (BWT)</a>
+  <ul class="collapse">
+  <li><a href="#step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column" id="toc-step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column" class="nav-link" data-scroll-target="#step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column">Step 1: List out BWT as last column and sorted list of the original database as first column</a></li>
+  <li><a href="#step-2-add-the-number-of-times-weve-seen-the-character-at-that-point-as-subscript" id="toc-step-2-add-the-number-of-times-weve-seen-the-character-at-that-point-as-subscript" class="nav-link" data-scroll-target="#step-2-add-the-number-of-times-weve-seen-the-character-at-that-point-as-subscript">Step 2: Add the number of times we’ve seen the character at that point as subscript</a></li>
+  <li><a href="#step-3-add-last-to-first-mapping" id="toc-step-3-add-last-to-first-mapping" class="nav-link" data-scroll-target="#step-3-add-last-to-first-mapping">Step 3: Add last-to-first mapping</a></li>
+  </ul></li>
+  <li><a href="#pattern-matching-using-bwt" id="toc-pattern-matching-using-bwt" class="nav-link" data-scroll-target="#pattern-matching-using-bwt">Pattern Matching using BWT</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Burrows-Wheeler Transform in Python</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Bioinformatics</div>
+    <div class="quarto-category">BWT</div>
+    <div class="quarto-category">data structure</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 6, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p>Burrows-Wheeler Transform is a method used for pattern matching problem. We can use it to find all instances of substrings in the database that matches our query sequence. Here is how to implement it in python.</p>
+</blockquote>
+<div id="ca606f16-efa1-42a9-8b5a-baaa28535277" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:39:27.627665Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:39:27.627255Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:39:27.632020Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:39:27.630566Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:39:27.627638Z&quot;}" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2ff4f87b-ba77-43b1-a5e7-89a835bf7967" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:21:21.162655Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:21:21.161986Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:21:21.177707Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:21:21.175961Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:21:21.162592Z&quot;}" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> <span class="st">'BANANA$'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="extracting-burrow-wheeler-transform-bwt" class="level1">
+<h1>Extracting Burrow-Wheeler Transform (BWT)</h1>
+<div id="ef03af55-181b-4cca-ae42-c044cbbbf605" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:31:22.713895Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:31:22.713439Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:31:22.718621Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:31:22.717827Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:31:22.713864Z&quot;}" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rotations <span class="op">=</span> []</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>rotations.append(db)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> db</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(db)<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> s[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> s[:<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    rotations.append(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="ee41bcec-2074-440b-827f-141638360845" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:32:16.685444Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:32:16.684835Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:32:16.704839Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:32:16.704007Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:32:16.685404Z&quot;}" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">'rotations'</span>:rotations, <span class="st">'sorted_rotations'</span>: <span class="bu">sorted</span>(rotations)})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">rotations</th>
+<th data-quarto-table-cell-role="th">sorted_rotations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>BANANA$</td>
+<td>$BANANA</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>$BANANA</td>
+<td>A$BANAN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>A$BANAN</td>
+<td>ANA$BAN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>NA$BANA</td>
+<td>ANANA$B</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>ANA$BAN</td>
+<td>BANANA$</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>NANA$BA</td>
+<td>NA$BANA</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>ANANA$B</td>
+<td>NANA$BA</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The Burrow - Wheeler Transform (BWT) is the last characters from the list of sorted rotations.</p>
+<div id="87b8a408-7709-4c10-b9a7-878d33a47ca6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:32:55.230626Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:32:55.229963Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:32:55.238559Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:32:55.237319Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:32:55.230595Z&quot;}" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>BWT <span class="op">=</span> [s[<span class="op">-</span><span class="dv">1</span>] <span class="cf">for</span> s <span class="kw">in</span> <span class="bu">sorted</span>(rotations)]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>BWT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>['A', 'N', 'N', 'B', '$', 'A', 'A']</code></pre>
+</div>
+</div>
+</section>
+<section id="inverting-the-burrow-wheeler-transform-bwt" class="level1">
+<h1>Inverting the Burrow-Wheeler Transform (BWT)</h1>
+<p>Burrow-Wheeler transform is reversable. Here’s how to construct the original string from BWT:</p>
+<section id="step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column">Step 1: List out BWT as last column and sorted list of the original database as first column</h3>
+<div id="511f0445-d423-4282-9020-399a5f213f13" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T12:03:08.032044Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T12:03:08.031629Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T12:03:08.043696Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T12:03:08.042618Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T12:03:08.032015Z&quot;}" data-execution_count="111">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'first'</span>: <span class="bu">sorted</span>(db), <span class="st">'last'</span>: BWT})</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="111">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">first</th>
+<th data-quarto-table-cell-role="th">last</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>$</td>
+<td>A</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>A</td>
+<td>N</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>A</td>
+<td>N</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>A</td>
+<td>B</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>B</td>
+<td>$</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>N</td>
+<td>A</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>N</td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-add-the-number-of-times-weve-seen-the-character-at-that-point-as-subscript" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-add-the-number-of-times-weve-seen-the-character-at-that-point-as-subscript">Step 2: Add the number of times we’ve seen the character at that point as subscript</h3>
+<div id="0611a8de-a0bf-4fe3-a586-86a497a61ca6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:44:51.712808Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:44:51.712290Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:44:51.719826Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:44:51.718677Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:44:51.712780Z&quot;}" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">### adding subscript for first column (sorted original database)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dbcounter <span class="op">=</span> Counter(db)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>sorted_db_subs <span class="op">=</span> []</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> <span class="bu">sorted</span>(db, reverse<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    sorted_db_subs.append(c <span class="op">+</span> <span class="bu">str</span>(dbcounter[c]))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    dbcounter[c] <span class="op">=</span> dbcounter[c] <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>sorted_db_subs <span class="op">=</span> <span class="bu">sorted</span>(sorted_db_subs)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>sorted_db_subs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>['$1', 'A1', 'A2', 'A3', 'B1', 'N1', 'N2']</code></pre>
+</div>
+</div>
+<div id="ef11895b-7ad3-4b0a-aa16-0252899904b5" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:48:10.120954Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:48:10.120539Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:48:10.126047Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:48:10.125232Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:48:10.120927Z&quot;}" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">### adding subscript for last column (BWT)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>dbcounter <span class="op">=</span> Counter(BWT)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dbcounter)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>bwt_subs <span class="op">=</span> []</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> BWT[::<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    bwt_subs.append(c <span class="op">+</span> <span class="bu">str</span>(dbcounter[c]))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    dbcounter[c] <span class="op">=</span> dbcounter[c] <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>bwt_subs <span class="op">=</span> bwt_subs[::<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Counter({'A': 3, 'N': 2, 'B': 1, '$': 1})</code></pre>
+</div>
+</div>
+<div id="254fea45-2c76-494a-bb95-370f36ed637f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T12:03:14.280124Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T12:03:14.279692Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T12:03:14.284856Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T12:03:14.284014Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T12:03:14.280096Z&quot;}" data-execution_count="112">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'first_sub'</span>] <span class="op">=</span> sorted_db_subs</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'last_sub'</span>] <span class="op">=</span> bwt_subs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b728f8d8-c69d-44d4-ae81-9760ef1c376f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:57:46.613354Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:57:46.613027Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:57:46.617846Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:57:46.617378Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:57:46.613340Z&quot;}" data-execution_count="90">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="90">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">first</th>
+<th data-quarto-table-cell-role="th">last</th>
+<th data-quarto-table-cell-role="th">first_sub</th>
+<th data-quarto-table-cell-role="th">last_sub</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>$</td>
+<td>A</td>
+<td>$1</td>
+<td>A1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>A</td>
+<td>N</td>
+<td>A1</td>
+<td>N1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>A</td>
+<td>N</td>
+<td>A2</td>
+<td>N2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>A</td>
+<td>B</td>
+<td>A3</td>
+<td>B1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>B</td>
+<td>$</td>
+<td>B1</td>
+<td>$1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>N</td>
+<td>A</td>
+<td>N1</td>
+<td>A2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>N</td>
+<td>A</td>
+<td>N2</td>
+<td>A3</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-add-last-to-first-mapping" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-add-last-to-first-mapping">Step 3: Add last-to-first mapping</h3>
+<div id="75a8b630-d108-4798-b601-0704e9014a11" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:58:01.363251Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:58:01.362814Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:58:01.373579Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:58:01.372331Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:58:01.363221Z&quot;}" data-execution_count="92">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>MAPPING <span class="op">=</span> {k:v <span class="cf">for</span> k,v <span class="kw">in</span> <span class="bu">zip</span>(df[<span class="st">'first_sub'</span>].values, <span class="bu">range</span>(<span class="bu">len</span>(df)))}</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>MAPPING</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="92">
+<pre><code>{'$1': 0, 'A1': 1, 'A2': 2, 'A3': 3, 'B1': 4, 'N1': 5, 'N2': 6}</code></pre>
+</div>
+</div>
+<div id="1b044297-1d86-452d-89ac-e329a4fb63e4" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T12:03:16.616217Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T12:03:16.615498Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T12:03:16.632677Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T12:03:16.631846Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T12:03:16.616164Z&quot;}" data-execution_count="113">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'L2F'</span>] <span class="op">=</span> df.<span class="bu">apply</span>(<span class="kw">lambda</span> row: MAPPING[row[<span class="st">'last_sub'</span>]],axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="113">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">first</th>
+<th data-quarto-table-cell-role="th">last</th>
+<th data-quarto-table-cell-role="th">first_sub</th>
+<th data-quarto-table-cell-role="th">last_sub</th>
+<th data-quarto-table-cell-role="th">L2F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>$</td>
+<td>A</td>
+<td>$1</td>
+<td>A1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>A</td>
+<td>N</td>
+<td>A1</td>
+<td>N1</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>A</td>
+<td>N</td>
+<td>A2</td>
+<td>N2</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>A</td>
+<td>B</td>
+<td>A3</td>
+<td>B1</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>B</td>
+<td>$</td>
+<td>B1</td>
+<td>$1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>N</td>
+<td>A</td>
+<td>N1</td>
+<td>A2</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>N</td>
+<td>A</td>
+<td>N2</td>
+<td>A3</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>We can reconstruct our original database string from this preprocessed data. Here’s how:</p>
+<p>We can start with the null termination character we added, we know it is in the first row, <code>first_sub</code> column, so we retrieve that first.</p>
+<p>Remember that as part of our preprocessing steps we do rotations of the original database string, and from that rotations we save the first column in <code>first_sub</code> and the last column in <code>last_sub</code>? So this tells us that <code>first_sub</code> and <code>last_sub</code> are connected: <code>last_sub</code> character comes before <code>first_sub</code> character.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bwt_in_python_files/figure-html/ca667953-0979-4064-a9ad-1a9380c92f2a-1-74b2416d-2f2b-4bc0-9692-3b809171a1dd.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<p>To illustrate: 1. Start with null termination <code>$1</code>. 1. Find null termination <code>$1</code> in <code>last_sub</code> (row 4). The next character follows it is the corresponding character in <code>first_sub</code> column (red arrow). Now the reconstructed string is <code>$1 B1</code>. 1. Find the last added character in the <code>last_sub</code>. Add its corresponding <code>first_sub</code> to the reconstructed string (blue arrow). Now the reconstructed string is <code>$1 B1 A3</code>. 1. Continue building the reconstructed string until we reached the character <code>last_sub</code> of first row. Why first row? because we started the reconstructed string with <code>$1</code> – which is also the <code>first_sub</code> character in our preprocessed data’s first row.</p>
+<div id="cc5982e1-a2ad-45d0-94a3-49ad5157a39e" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T15:16:13.006342Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T15:16:13.005945Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T15:16:13.019296Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T15:16:13.018229Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T15:16:13.006314Z&quot;}" data-execution_count="167">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>reconstruct <span class="op">=</span> [df.loc[<span class="dv">0</span>,<span class="st">'first_sub'</span>]]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> reconstruct[<span class="op">-</span><span class="dv">1</span>] <span class="op">!=</span> df.loc[<span class="dv">0</span>,<span class="st">'last_sub'</span>]:</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    last_char <span class="op">=</span> reconstruct[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    next_index <span class="op">=</span> df[df[<span class="st">'last_sub'</span>]<span class="op">==</span>last_char].index.values[<span class="dv">0</span>]</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    next_char <span class="op">=</span> df.loc[df.index<span class="op">==</span>next_index, <span class="st">'first_sub'</span>].values[<span class="dv">0</span>]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    reconstruct.append(next_char)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>reconstructed_str_sub <span class="op">=</span> <span class="st">' '</span>.join(reconstruct)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>reconstructed_str <span class="op">=</span> <span class="st">''</span>.join([c[<span class="dv">0</span>] <span class="cf">for</span> c <span class="kw">in</span> reconstruct])</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Reconstructed database string (with subscript):'</span>,reconstructed_str_sub)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Reconstructed database string:'</span>, reconstructed_str)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Original database string:'</span>, db)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reconstructed database string (with subscript): $1 B1 A3 N2 A2 N1 A1
+Reconstructed database string: $BANANA
+Original database string: BANANA$</code></pre>
+</div>
+</div>
+<p>We then move the null termination character to the end of the string and we can get back the original database.</p>
+</section>
+</section>
+<section id="pattern-matching-using-bwt" class="level1">
+<h1>Pattern Matching using BWT</h1>
+<p>Let’s try to do pattern matching using the preprocessed BWT from our toy database.</p>
+<div id="7d2534d8-a710-40b7-8dd1-da66eb6baf43" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T15:22:00.483367Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T15:22:00.482959Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T15:22:00.502743Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T15:22:00.501230Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T15:22:00.483339Z&quot;}" data-execution_count="169">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">'AN'</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>ok_range <span class="op">=</span> <span class="bu">range</span>(<span class="bu">len</span>(df))</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> query[::<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    top <span class="op">=</span> df.loc[df.index.isin(ok_range) <span class="op">&amp;</span> (df[<span class="st">'last'</span>] <span class="op">==</span> c), <span class="st">'L2F'</span>].head(<span class="dv">1</span>).values[<span class="dv">0</span>]</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    bottom <span class="op">=</span> df.loc[df.index.isin(ok_range) <span class="op">&amp;</span> (df[<span class="st">'last'</span>] <span class="op">==</span> c), <span class="st">'L2F'</span>].tail(<span class="dv">1</span>).values[<span class="dv">0</span>]</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    ok_range <span class="op">=</span> <span class="bu">range</span>(top, bottom<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'Found character:'</span>, c, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, df[df.index.isin(ok_range)])</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'-'</span><span class="op">*</span><span class="dv">40</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># exact match to query sequence is located between the top:bottom position of the preprocessed database</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>query_result <span class="op">=</span> df.loc[df.index.isin(ok_range), <span class="st">'first_sub'</span>].values</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Query "</span><span class="sc">{</span>query<span class="sc">}</span><span class="ss">" found in database sequence starting from:'</span>, query_result)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'-'</span><span class="op">*</span><span class="dv">40</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Found character: N 
+   first last first_sub last_sub  L2F
+5     N    A        N1       A2    2
+6     N    A        N2       A3    3
+----------------------------------------
+Found character: A 
+   first last first_sub last_sub  L2F
+2     A    N        A2       N2    6
+3     A    B        A3       B1    4
+----------------------------------------
+Query "AN" found in database sequence starting from: ['A2' 'A3']
+----------------------------------------</code></pre>
+</div>
+</div>
+<p>The <code>query_result</code> does indeed match. - $1 B1 <strong>A3 N2</strong> A2 N1 A1</p>
+<ul>
+<li>$1 B1 A3 N2 <strong>A2 N1</strong> A1</li>
+</ul>
+<p>Let’s make this into a function and try another example.</p>
+<div id="6e024a69-faf3-4fc9-ab8d-9ec19cc42c20" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T15:54:12.466819Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T15:54:12.466402Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T15:54:12.488573Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T15:54:12.487374Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T15:54:12.466791Z&quot;}" data-execution_count="228">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reconstruct_db(df:pd.DataFrame) <span class="op">-&gt;</span> <span class="bu">list</span>:</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Reconstruct database string using preprocessed data"""</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    reconstruct <span class="op">=</span> [df.loc[<span class="dv">0</span>,<span class="st">'first_sub'</span>]]</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> reconstruct[<span class="op">-</span><span class="dv">1</span>] <span class="op">!=</span> df.loc[<span class="dv">0</span>,<span class="st">'last_sub'</span>]:</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        last_char <span class="op">=</span> reconstruct[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        next_index <span class="op">=</span> df[df[<span class="st">'last_sub'</span>]<span class="op">==</span>last_char].index.values[<span class="dv">0</span>]</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        next_char <span class="op">=</span> df.loc[df.index<span class="op">==</span>next_index, <span class="st">'first_sub'</span>].values[<span class="dv">0</span>]</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        reconstruct.append(next_char)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> reconstruct</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> extract_bwt(db:<span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">list</span>:</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Extract Burrow-Wheeler Transform from database string"""</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    rotations <span class="op">=</span> []</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    rotations.append(db)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> db</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(db)<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        s <span class="op">=</span> s[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> s[:<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>        rotations.append(s)</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    BWT <span class="op">=</span> [s[<span class="op">-</span><span class="dv">1</span>] <span class="cf">for</span> s <span class="kw">in</span> <span class="bu">sorted</span>(rotations)]</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> BWT</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> preprocess_database(db:<span class="bu">str</span>) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Preprocess data from database string"""</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    BWT <span class="op">=</span> extract_bwt(db)</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame({<span class="st">'first'</span>: <span class="bu">sorted</span>(db), <span class="st">'last'</span>: BWT})</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">### adding subscript for first column (sorted original database)</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>    dbcounter <span class="op">=</span> Counter(db)    </span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>    sorted_db_subs <span class="op">=</span> []</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">sorted</span>(db, reverse<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>        sorted_db_subs.append(c <span class="op">+</span> <span class="bu">str</span>(dbcounter[c]))</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>        dbcounter[c] <span class="op">=</span> dbcounter[c] <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>    sorted_db_subs <span class="op">=</span> <span class="bu">sorted</span>(sorted_db_subs)</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">### adding subscript for last column (BWT)</span></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>    dbcounter <span class="op">=</span> Counter(BWT)</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>    bwt_subs <span class="op">=</span> []</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> BWT[::<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>        bwt_subs.append(c <span class="op">+</span> <span class="bu">str</span>(dbcounter[c]))</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>        dbcounter[c] <span class="op">=</span> dbcounter[c] <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>    bwt_subs <span class="op">=</span> bwt_subs[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'first_sub'</span>] <span class="op">=</span> sorted_db_subs</span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'last_sub'</span>] <span class="op">=</span> bwt_subs</span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>    MAPPING <span class="op">=</span> {k:v <span class="cf">for</span> k,v <span class="kw">in</span> <span class="bu">zip</span>(df[<span class="st">'first_sub'</span>].values, <span class="bu">range</span>(<span class="bu">len</span>(df)))}</span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'L2F'</span>] <span class="op">=</span> df.<span class="bu">apply</span>(<span class="kw">lambda</span> row: MAPPING[row[<span class="st">'last_sub'</span>]],axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> query_bwt(query:<span class="bu">str</span>, df:pd.DataFrame) <span class="op">-&gt;</span> <span class="bu">list</span>:</span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Perform query matching against preprocessed data using BWT"""</span></span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a>    BOLD <span class="op">=</span> <span class="st">'</span><span class="ch">\033</span><span class="st">[1m'</span></span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a>    END_BOLD <span class="op">=</span> <span class="st">'</span><span class="ch">\033</span><span class="st">[0m'</span></span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a>    reconstruct <span class="op">=</span> reconstruct_db(df)</span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>    ok_range <span class="op">=</span> <span class="bu">range</span>(<span class="bu">len</span>(df))</span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> query[::<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a>        top_row <span class="op">=</span> df.loc[df.index.isin(ok_range) <span class="op">&amp;</span> (df[<span class="st">'last'</span>] <span class="op">==</span> c), <span class="st">'L2F'</span>].head(<span class="dv">1</span>)</span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>        bottom_row <span class="op">=</span> df.loc[df.index.isin(ok_range) <span class="op">&amp;</span> (df[<span class="st">'last'</span>] <span class="op">==</span> c), <span class="st">'L2F'</span>].tail(<span class="dv">1</span>)</span>
+<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(top_row) <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> <span class="bu">len</span>(bottom_row) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a>            top <span class="op">=</span> top_row.values[<span class="dv">0</span>]</span>
+<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a>            bottom <span class="op">=</span> bottom_row.values[<span class="dv">0</span>]</span>
+<span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f'Query "</span><span class="sc">{</span>query<span class="sc">}</span><span class="ss">" not found in database.'</span>)</span>
+<span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> []</span>
+<span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-71"><a href="#cb21-71" aria-hidden="true" tabindex="-1"></a>        ok_range <span class="op">=</span> <span class="bu">range</span>(top, bottom<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb21-72"><a href="#cb21-72" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'Found character:'</span>, c, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, df[df.index.isin(ok_range)])</span>
+<span id="cb21-73"><a href="#cb21-73" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'-'</span><span class="op">*</span><span class="dv">40</span>)</span>
+<span id="cb21-74"><a href="#cb21-74" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-75"><a href="#cb21-75" aria-hidden="true" tabindex="-1"></a>    <span class="co"># exact match to query sequence is located between the top:bottom position of the preprocessed database</span></span>
+<span id="cb21-76"><a href="#cb21-76" aria-hidden="true" tabindex="-1"></a>    query_result <span class="op">=</span> df.loc[df.index.isin(ok_range), <span class="st">'first_sub'</span>].values</span>
+<span id="cb21-77"><a href="#cb21-77" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Query "</span><span class="sc">{</span>query<span class="sc">}</span><span class="ss">" found in database sequence starting from:'</span>, query_result)</span>
+<span id="cb21-78"><a href="#cb21-78" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
+<span id="cb21-79"><a href="#cb21-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i,q <span class="kw">in</span> <span class="bu">enumerate</span>(query_result):</span>
+<span id="cb21-80"><a href="#cb21-80" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="st">')</span><span class="ch">\t</span><span class="st">'</span>, <span class="op">*</span>[BOLD<span class="op">+</span>r<span class="op">+</span>END_BOLD <span class="cf">if</span> r <span class="op">==</span> q <span class="cf">else</span> r <span class="cf">for</span> r <span class="kw">in</span> recons])</span>
+<span id="cb21-81"><a href="#cb21-81" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>()</span>
+<span id="cb21-82"><a href="#cb21-82" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'-'</span><span class="op">*</span><span class="dv">40</span>)</span>
+<span id="cb21-83"><a href="#cb21-83" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> query_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="75bd22fc-1c19-400e-9f0b-59ab560d75db" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T15:50:10.297308Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T15:50:10.296883Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T15:50:10.321700Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T15:50:10.319875Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T15:50:10.297279Z&quot;}" data-execution_count="221">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">'NA'</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> preprocess_database(<span class="st">"BANANA$"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>query_bwt(query, df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Found character: A 
+   first last first_sub last_sub  L2F
+1     A    N        A1       N1    5
+2     A    N        A2       N2    6
+3     A    B        A3       B1    4
+----------------------------------------
+Found character: N 
+   first last first_sub last_sub  L2F
+5     N    A        N1       A2    2
+6     N    A        N2       A3    3
+----------------------------------------
+Query "NA" found in database sequence starting from: ['N1' 'N2']
+
+1 )  $1 B1 A3 N2 A2 N1 A1
+
+2 )  $1 B1 A3 N2 A2 N1 A1
+
+----------------------------------------</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="221">
+<pre><code>array(['N1', 'N2'], dtype=object)</code></pre>
+</div>
+</div>
+<div id="c2cc17d4-c825-4031-871b-8676eb782650" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T15:50:41.054704Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T15:50:41.054176Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T15:50:41.082976Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T15:50:41.082073Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T15:50:41.054674Z&quot;}" data-execution_count="222">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">'NAN'</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> preprocess_database(<span class="st">"BANANA$"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>query_bwt(query, df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Found character: N 
+   first last first_sub last_sub  L2F
+5     N    A        N1       A2    2
+6     N    A        N2       A3    3
+----------------------------------------
+Found character: A 
+   first last first_sub last_sub  L2F
+2     A    N        A2       N2    6
+3     A    B        A3       B1    4
+----------------------------------------
+Found character: N 
+   first last first_sub last_sub  L2F
+6     N    A        N2       A3    3
+----------------------------------------
+Query "NAN" found in database sequence starting from: ['N2']
+
+1 )  $1 B1 A3 N2 A2 N1 A1
+
+----------------------------------------</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="222">
+<pre><code>array(['N2'], dtype=object)</code></pre>
+</div>
+</div>
+<div id="2afae39b-c075-43c4-95a6-a934bf08c742" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T15:54:14.542775Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T15:54:14.542356Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T15:54:14.558627Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T15:54:14.557853Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T15:54:14.542745Z&quot;}" data-execution_count="229">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">'NANN'</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> preprocess_database(<span class="st">"BANANA$"</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>query_bwt(query, df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Found character: N 
+   first last first_sub last_sub  L2F
+5     N    A        N1       A2    2
+6     N    A        N2       A3    3
+----------------------------------------
+Query "NANN" not found in database.</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="229">
+<pre><code>[]</code></pre>
+</div>
+</div>
+<p>References &amp; Credits: 1. <a href="https://www.youtube.com/watch?v=Lc-ACiJIrnM&amp;list=PLM_KIlU0WoXmkV4QB1Dg8PtJaHTdWHwRS&amp;index=74&amp;pp=iAQB">Advance Data Structures: Burrows-Wheeler Transform (BWT)</a><br> 1. <a href="https://www.youtube.com/watch?v=ni_w-rdItG8&amp;pp=ygURaG93IHRvIGludmVydCBid3Q%3D">Advance Data Structures: Inverting the BWT</a><br> 1. <a href="https://www.youtube.com/watch?v=uKreghMwLLE&amp;list=PLM_KIlU0WoXmkV4QB1Dg8PtJaHTdWHwRS&amp;index=76&amp;pp=iAQB">Advance Data Structures: Pattern Matching Using the BWT</a><br> 1. <a href="https://stackoverflow.com/a/17303428">StackOverflow: How to print bold text in python</a><br></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/SarahHannes\.github\.io\/sarahhannes\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
