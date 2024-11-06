@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/blog/suffix_array.html",
       "/blog/bwt_in_python.html",
       "/blog/diff_pam_blosum.html",
       "/blog/smithwaterman_py.html",
