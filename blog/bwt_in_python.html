@@ -203,12 +203,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <blockquote class="blockquote">
-<p>Burrows-Wheeler Transform is a method used for pattern matching problem. We can use it to find all instances of substrings in the database that matches our query sequence. Here is how to implement it in python.</p>
+<p>Burrows-Wheeler Transform is a method used for pattern matching problem. We can use it to find all instances of substrings in the database that matches our query sequence.</p>
 </blockquote>
-<div id="ca606f16-efa1-42a9-8b5a-baaa28535277" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:39:27.627665Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:39:27.627255Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:39:27.632020Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:39:27.630566Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:39:27.627638Z&quot;}" data-execution_count="33">
+<p>I recently learnt about Burrows-Wheeler Transform from the <a href="https://www.youtube.com/playlist?list=PLM_KIlU0WoXmkV4QB1Dg8PtJaHTdWHwRS">Advanced Data Structure</a> playlist by Niema Moshiri. In this notebook, I tried to implement it using python.</p>
+<div id="ca606f16-efa1-42a9-8b5a-baaa28535277" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:39:27.627665Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:39:27.627255Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:39:27.632020Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:39:27.630566Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:39:27.627638Z&quot;}">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="2ff4f87b-ba77-43b1-a5e7-89a835bf7967" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:21:21.162655Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:21:21.161986Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:21:21.177707Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:21:21.175961Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:21:21.162592Z&quot;}" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> <span class="st">'BANANA$'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -291,8 +291,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="inverting-the-burrow-wheeler-transform-bwt" class="level1">
 <h1>Inverting the Burrow-Wheeler Transform (BWT)</h1>
 <p>Burrow-Wheeler transform is reversable. Here’s how to construct the original string from BWT:</p>
-<section id="step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column">Step 1: List out BWT as last column and sorted list of the original database as first column</h3>
+<section id="step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column">Step 1: List out BWT as last column and sorted list of the original database as first column</h2>
 <div id="511f0445-d423-4282-9020-399a5f213f13" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T12:03:08.032044Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T12:03:08.031629Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T12:03:08.043696Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T12:03:08.042618Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T12:03:08.032015Z&quot;}" data-execution_count="111">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'first'</span>: <span class="bu">sorted</span>(db), <span class="st">'last'</span>: BWT})</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -351,8 +351,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="step-2-add-the-number-of-times-weve-seen-the-character-at-that-point-as-subscript" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-add-the-number-of-times-weve-seen-the-character-at-that-point-as-subscript">Step 2: Add the number of times we’ve seen the character at that point as subscript</h3>
+<section id="step-2-add-the-number-of-times-weve-seen-the-character-at-that-point-as-subscript" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-add-the-number-of-times-weve-seen-the-character-at-that-point-as-subscript">Step 2: Add the number of times we’ve seen the character at that point as subscript</h2>
 <div id="0611a8de-a0bf-4fe3-a586-86a497a61ca6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:44:51.712808Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:44:51.712290Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:44:51.719826Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:44:51.718677Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:44:51.712780Z&quot;}" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">### adding subscript for first column (sorted original database)</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -462,8 +462,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="step-3-add-last-to-first-mapping" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-add-last-to-first-mapping">Step 3: Add last-to-first mapping</h3>
+<section id="step-3-add-last-to-first-mapping" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-add-last-to-first-mapping">Step 3: Add last-to-first mapping</h2>
 <div id="75a8b630-d108-4798-b601-0704e9014a11" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:58:01.363251Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:58:01.362814Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:58:01.373579Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:58:01.372331Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:58:01.363221Z&quot;}" data-execution_count="92">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>MAPPING <span class="op">=</span> {k:v <span class="cf">for</span> k,v <span class="kw">in</span> <span class="bu">zip</span>(df[<span class="st">'first_sub'</span>].values, <span class="bu">range</span>(<span class="bu">len</span>(df)))}</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>MAPPING</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -561,7 +561,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>image.png</figcaption>
 </figure>
 </div>
-<p>To illustrate: 1. Start with null termination <code>$1</code>. 1. Find null termination <code>$1</code> in <code>last_sub</code> (row 4). The next character follows it is the corresponding character in <code>first_sub</code> column (red arrow). Now the reconstructed string is <code>$1 B1</code>. 1. Find the last added character in the <code>last_sub</code>. Add its corresponding <code>first_sub</code> to the reconstructed string (blue arrow). Now the reconstructed string is <code>$1 B1 A3</code>. 1. Continue building the reconstructed string until we reached the character <code>last_sub</code> of first row. Why first row? because we started the reconstructed string with <code>$1</code> – which is also the <code>first_sub</code> character in our preprocessed data’s first row.</p>
+<p>To illustrate: 1. Start with null termination <code>$1</code>.<br> 1. Find null termination <code>$1</code> in <code>last_sub</code> (row 4). The next character follows it is the corresponding character in <code>first_sub</code> column (red arrow). Now the reconstructed string is <code>$1 B1</code>.<br> 1. Find the last added character in the <code>last_sub</code>. Add its corresponding <code>first_sub</code> to the reconstructed string (blue arrow). Now the reconstructed string is <code>$1 B1 A3</code>.<br> 1. Continue building the reconstructed string until we reached the character <code>last_sub</code> of first row. Why first row? because we started the reconstructed string with <code>$1</code> – which is also the <code>first_sub</code> character in our preprocessed data’s first row.<br></p>
 <div id="cc5982e1-a2ad-45d0-94a3-49ad5157a39e" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T15:16:13.006342Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T15:16:13.005945Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T15:16:13.019296Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T15:16:13.018229Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T15:16:13.006314Z&quot;}" data-execution_count="167">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>reconstruct <span class="op">=</span> [df.loc[<span class="dv">0</span>,<span class="st">'first_sub'</span>]]</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -619,10 +619,7 @@ Query "AN" found in database sequence starting from: ['A2' 'A3']
 ----------------------------------------</code></pre>
 </div>
 </div>
-<p>The <code>query_result</code> does indeed match. - $1 B1 <strong>A3 N2</strong> A2 N1 A1</p>
-<ul>
-<li>$1 B1 A3 N2 <strong>A2 N1</strong> A1</li>
-</ul>
+<p>The <code>query_result</code> does indeed match. <br> <br>- $1 B1 <strong>A3 N2</strong> A2 N1 A1 <br>- $1 B1 A3 N2 <strong>A2 N1</strong> A1</p>
 <p>Let’s make this into a function and try another example.</p>
 <div id="6e024a69-faf3-4fc9-ab8d-9ec19cc42c20" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T15:54:12.466819Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T15:54:12.466402Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T15:54:12.488573Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T15:54:12.487374Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T15:54:12.466791Z&quot;}" data-execution_count="228">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reconstruct_db(df:pd.DataFrame) <span class="op">-&gt;</span> <span class="bu">list</span>:</span>
@@ -785,7 +782,7 @@ Query "NANN" not found in database.</code></pre>
 <pre><code>[]</code></pre>
 </div>
 </div>
-<p>References &amp; Credits: 1. <a href="https://www.youtube.com/watch?v=Lc-ACiJIrnM&amp;list=PLM_KIlU0WoXmkV4QB1Dg8PtJaHTdWHwRS&amp;index=74&amp;pp=iAQB">Advance Data Structures: Burrows-Wheeler Transform (BWT)</a><br> 1. <a href="https://www.youtube.com/watch?v=ni_w-rdItG8&amp;pp=ygURaG93IHRvIGludmVydCBid3Q%3D">Advance Data Structures: Inverting the BWT</a><br> 1. <a href="https://www.youtube.com/watch?v=uKreghMwLLE&amp;list=PLM_KIlU0WoXmkV4QB1Dg8PtJaHTdWHwRS&amp;index=76&amp;pp=iAQB">Advance Data Structures: Pattern Matching Using the BWT</a><br> 1. <a href="https://stackoverflow.com/a/17303428">StackOverflow: How to print bold text in python</a><br></p>
+<p>References &amp; Credits:<br> 1. <a href="https://www.youtube.com/watch?v=Lc-ACiJIrnM&amp;list=PLM_KIlU0WoXmkV4QB1Dg8PtJaHTdWHwRS&amp;index=74&amp;pp=iAQB">Advance Data Structures: Burrows-Wheeler Transform (BWT)</a><br> 1. <a href="https://www.youtube.com/watch?v=ni_w-rdItG8&amp;pp=ygURaG93IHRvIGludmVydCBid3Q%3D">Advance Data Structures: Inverting the BWT</a><br> 1. <a href="https://www.youtube.com/watch?v=uKreghMwLLE&amp;list=PLM_KIlU0WoXmkV4QB1Dg8PtJaHTdWHwRS&amp;index=76&amp;pp=iAQB">Advance Data Structures: Pattern Matching Using the BWT</a><br> 1. <a href="https://stackoverflow.com/a/17303428">StackOverflow: How to print bold text in python</a><br></p>
 
 
 </section>
