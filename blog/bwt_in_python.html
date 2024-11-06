@@ -158,8 +158,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#extracting-burrow-wheeler-transform-bwt" id="toc-extracting-burrow-wheeler-transform-bwt" class="nav-link active" data-scroll-target="#extracting-burrow-wheeler-transform-bwt">Extracting Burrow-Wheeler Transform (BWT)</a></li>
-  <li><a href="#inverting-the-burrow-wheeler-transform-bwt" id="toc-inverting-the-burrow-wheeler-transform-bwt" class="nav-link" data-scroll-target="#inverting-the-burrow-wheeler-transform-bwt">Inverting the Burrow-Wheeler Transform (BWT)</a>
+  <li><a href="#extracting-burrows-wheeler-transform-bwt" id="toc-extracting-burrows-wheeler-transform-bwt" class="nav-link active" data-scroll-target="#extracting-burrows-wheeler-transform-bwt">Extracting Burrows-Wheeler Transform (BWT)</a></li>
+  <li><a href="#inverting-the-burrows-wheeler-transform-bwt" id="toc-inverting-the-burrows-wheeler-transform-bwt" class="nav-link" data-scroll-target="#inverting-the-burrows-wheeler-transform-bwt">Inverting the Burrows-Wheeler Transform (BWT)</a>
   <ul class="collapse">
   <li><a href="#step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column" id="toc-step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column" class="nav-link" data-scroll-target="#step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column">Step 1: List out BWT as last column and sorted list of the original database as first column</a></li>
   <li><a href="#step-2-add-the-number-of-times-weve-seen-the-character-at-that-point-as-subscript" id="toc-step-2-add-the-number-of-times-weve-seen-the-character-at-that-point-as-subscript" class="nav-link" data-scroll-target="#step-2-add-the-number-of-times-weve-seen-the-character-at-that-point-as-subscript">Step 2: Add the number of times we’ve seen the character at that point as subscript</a></li>
@@ -213,8 +213,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="2ff4f87b-ba77-43b1-a5e7-89a835bf7967" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:21:21.162655Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:21:21.161986Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:21:21.177707Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:21:21.175961Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:21:21.162592Z&quot;}" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> <span class="st">'BANANA$'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="extracting-burrow-wheeler-transform-bwt" class="level1">
-<h1>Extracting Burrow-Wheeler Transform (BWT)</h1>
+<section id="extracting-burrows-wheeler-transform-bwt" class="level1">
+<h1>Extracting Burrows-Wheeler Transform (BWT)</h1>
 <div id="ef03af55-181b-4cca-ae42-c044cbbbf605" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:31:22.713895Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:31:22.713439Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:31:22.718621Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:31:22.717827Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:31:22.713864Z&quot;}" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rotations <span class="op">=</span> []</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>rotations.append(db)</span>
@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The Burrow - Wheeler Transform (BWT) is the last characters from the list of sorted rotations.</p>
+<p>The Burrows - Wheeler Transform (BWT) is the last characters from the list of sorted rotations.</p>
 <div id="87b8a408-7709-4c10-b9a7-878d33a47ca6" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T11:32:55.230626Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T11:32:55.229963Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T11:32:55.238559Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T11:32:55.237319Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T11:32:55.230595Z&quot;}" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>BWT <span class="op">=</span> [s[<span class="op">-</span><span class="dv">1</span>] <span class="cf">for</span> s <span class="kw">in</span> <span class="bu">sorted</span>(rotations)]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>BWT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -288,9 +288,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="inverting-the-burrow-wheeler-transform-bwt" class="level1">
-<h1>Inverting the Burrow-Wheeler Transform (BWT)</h1>
-<p>Burrow-Wheeler transform is reversable. Here’s how to construct the original string from BWT:</p>
+<section id="inverting-the-burrows-wheeler-transform-bwt" class="level1">
+<h1>Inverting the Burrows-Wheeler Transform (BWT)</h1>
+<p>Burrows-Wheeler transform is reversable. Here’s how to construct the original string from BWT:</p>
 <section id="step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-list-out-bwt-as-last-column-and-sorted-list-of-the-original-database-as-first-column">Step 1: List out BWT as last column and sorted list of the original database as first column</h2>
 <div id="511f0445-d423-4282-9020-399a5f213f13" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T12:03:08.032044Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T12:03:08.031629Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T12:03:08.043696Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T12:03:08.042618Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T12:03:08.032015Z&quot;}" data-execution_count="111">
@@ -561,7 +561,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>image.png</figcaption>
 </figure>
 </div>
-<p>To illustrate: 1. Start with null termination <code>$1</code>.<br> 1. Find null termination <code>$1</code> in <code>last_sub</code> (row 4). The next character follows it is the corresponding character in <code>first_sub</code> column (red arrow). Now the reconstructed string is <code>$1 B1</code>.<br> 1. Find the last added character in the <code>last_sub</code>. Add its corresponding <code>first_sub</code> to the reconstructed string (blue arrow). Now the reconstructed string is <code>$1 B1 A3</code>.<br> 1. Continue building the reconstructed string until we reached the character <code>last_sub</code> of first row. Why first row? because we started the reconstructed string with <code>$1</code> – which is also the <code>first_sub</code> character in our preprocessed data’s first row.<br></p>
+<p>To illustrate:<br> 1. Start with null termination <code>$1</code>.<br> 2. Find null termination <code>$1</code> in <code>last_sub</code> (row 4). The next character follows it is the corresponding character in <code>first_sub</code> column (red arrow). Now the reconstructed string is <code>$1 B1</code>.<br> 3. Find the last added character in the <code>last_sub</code>. Add its corresponding <code>first_sub</code> to the reconstructed string (blue arrow). Now the reconstructed string is <code>$1 B1 A3</code>.<br> 4. Continue building the reconstructed string until we reached the character <code>last_sub</code> of first row. Why first row? because we started the reconstructed string with <code>$1</code> – which is also the <code>first_sub</code> character in our preprocessed data’s first row.<br></p>
 <div id="cc5982e1-a2ad-45d0-94a3-49ad5157a39e" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2024-11-05T15:16:13.006342Z&quot;,&quot;iopub.status.busy&quot;:&quot;2024-11-05T15:16:13.005945Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-11-05T15:16:13.019296Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-11-05T15:16:13.018229Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-11-05T15:16:13.006314Z&quot;}" data-execution_count="167">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>reconstruct <span class="op">=</span> [df.loc[<span class="dv">0</span>,<span class="st">'first_sub'</span>]]</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
