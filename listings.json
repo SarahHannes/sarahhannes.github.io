@@ -2,6 +2,11 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/blog/npm_cheatsheet.html",
+      "/blog/frontend_crash_course_part3.html",
+      "/blog/frontend_crash_course_part4.html",
+      "/blog/frontend_crash_course_part1.html",
+      "/blog/frontend_crash_course_part2.html",
       "/blog/suffix_array.html",
       "/blog/bwt_in_python.html",
       "/blog/diff_pam_blosum.html",

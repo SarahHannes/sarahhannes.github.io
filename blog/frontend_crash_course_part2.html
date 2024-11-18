@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-11-15">
+
+<title>Front-end Web Dev Crash Course Part 2/4 – Sarah Hannes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Sarah Hannes</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../til.html"> 
+<span class="menu-text">Today I learn</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#lesson-9" id="toc-lesson-9" class="nav-link active" data-scroll-target="#lesson-9">Lesson 9</a>
+  <ul class="collapse">
+  <li><a href="#objects-vs-primitive" id="toc-objects-vs-primitive" class="nav-link" data-scroll-target="#objects-vs-primitive">Objects vs Primitive</a></li>
+  </ul></li>
+  <li><a href="#lesson-10" id="toc-lesson-10" class="nav-link" data-scroll-target="#lesson-10">Lesson 10</a></li>
+  <li><a href="#lesson-11" id="toc-lesson-11" class="nav-link" data-scroll-target="#lesson-11">Lesson 11</a>
+  <ul class="collapse">
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul></li>
+  <li><a href="#lesson-12" id="toc-lesson-12" class="nav-link" data-scroll-target="#lesson-12">Lesson 12</a></li>
+  <li><a href="#lesson-13" id="toc-lesson-13" class="nav-link" data-scroll-target="#lesson-13">Lesson 13</a></li>
+  <li><a href="#lesson-14" id="toc-lesson-14" class="nav-link" data-scroll-target="#lesson-14">Lesson 14</a></li>
+  <li><a href="#lesson-15" id="toc-lesson-15" class="nav-link" data-scroll-target="#lesson-15">Lesson 15</a>
+  <ul class="collapse">
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  <li><a href="#lesson-16" id="toc-lesson-16" class="nav-link" data-scroll-target="#lesson-16">Lesson 16</a></li>
+  <li><a href="#lesson-17" id="toc-lesson-17" class="nav-link" data-scroll-target="#lesson-17">Lesson 17</a>
+  <ul class="collapse">
+  <li><a href="#html-tags" id="toc-html-tags" class="nav-link" data-scroll-target="#html-tags">HTML tags</a></li>
+  <li><a href="#html-attributes" id="toc-html-attributes" class="nav-link" data-scroll-target="#html-attributes">HTML attributes</a></li>
+  </ul></li>
+  <li><a href="#lesson-18" id="toc-lesson-18" class="nav-link" data-scroll-target="#lesson-18">Lesson 18</a>
+  <ul class="collapse">
+  <li><a href="#about-working-in-codepen" id="toc-about-working-in-codepen" class="nav-link" data-scroll-target="#about-working-in-codepen">About working in Codepen</a></li>
+  <li><a href="#document-object-model-dom" id="toc-document-object-model-dom" class="nav-link" data-scroll-target="#document-object-model-dom">Document Object Model (DOM)</a></li>
+  <li><a href="#window" id="toc-window" class="nav-link" data-scroll-target="#window">Window</a></li>
+  <li><a href="#html-element" id="toc-html-element" class="nav-link" data-scroll-target="#html-element">HTML Element</a></li>
+  <li><a href="#add-interactivity" id="toc-add-interactivity" class="nav-link" data-scroll-target="#add-interactivity">Add interactivity</a></li>
+  <li><a href="#navigating-through-html-document" id="toc-navigating-through-html-document" class="nav-link" data-scroll-target="#navigating-through-html-document">Navigating through HTML document</a></li>
+  <li><a href="#quick-recap" id="toc-quick-recap" class="nav-link" data-scroll-target="#quick-recap">Quick recap</a></li>
+  <li><a href="#reference-1" id="toc-reference-1" class="nav-link" data-scroll-target="#reference-1">Reference</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Front-end Web Dev Crash Course Part 2/4</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">javascript</div>
+    <div class="quarto-category">html</div>
+    <div class="quarto-category">css</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 15, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="lesson-9" class="level1">
+<h1>Lesson 9</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=24353">Video timestamp: JavaScript primitives</a></p>
+<section id="objects-vs-primitive" class="level2">
+<h2 class="anchored" data-anchor-id="objects-vs-primitive">Objects vs Primitive</h2>
+<ul>
+<li><p>Primitive is a simplest form of something. What is Javascript primitive?</p>
+<ul>
+<li>String</li>
+<li>Number</li>
+<li>Boolean</li>
+<li>Undefined</li>
+<li>Null</li>
+<li>BigInt</li>
+<li>Symbols</li>
+</ul></li>
+<li><p>Primitive data types does not have any methods or functions you can call on it. But when use built-in functions on it, Javascript wraped the primitive and changed it into an object behind the scene. ``` // “some string” here is a primitive data type, but when we call .toUpperCase() Javascript convert the primitive to a String() object console.log(“some string”.toUpperCase()) // [Output] SOME STRING</p>
+<p>```</p></li>
+<li><p>Object != primitive. But as we’ve seen above, primitive is converted into an object directly behind the scene by Javascript (and it is not something we need to worry about, since Javascript does it for us when needed). Eg: ``<code>const string1 = new String('Hello, world!'); // an object, note we use the</code>new` constructor here. and note, it is not recommended to write this way as code may break. const string2 = ‘Hello, world!’ // a primitive, note this is the correct way to create a string.</p>
+<p>// triple equality check for both data types and value console.log(string1 === string2); // false</p>
+<p>// double equality check for value console.log(string1 == string2); // true ```</p></li>
+<li><p>What does the <code>new</code> operator do?</p>
+<ul>
+<li>It first creates a blank object, then link the blank object to the parent</li>
+</ul>
+<pre><code>// creating a new instance of Date() object
+const myDate = new Date();</code></pre></li>
+</ul>
+</section>
+</section>
+<section id="lesson-10" class="level1">
+<h1>Lesson 10</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=24845">Video timestamp: JavaScript Dates</a></p>
+<ul>
+<li><p>Javascript dates ``` const now = new Date();</p>
+<p>console.log(now) // [Output] Tue Nov 12 2024 07:20:21 GMT+0800 (Malaysia Time)</p>
+<p>// what is actually stored is: the number of miliseconds that have elapsed since midnight on January 1, 1970, UTC. console.log(now.valueOf()) // [Output] 1731367221678 ```</p></li>
+<li><p>How to create date?</p>
+<ul>
+<li><p>Input as arguments <code>new Date(2020, 10, 2, 7, 10);       // Date Mon Nov 02 2020 07:10:00 GMT+0800 (Malaysia Time)</code></p>
+<ul>
+<li>Date(year, month, day, hour, minute, second, milisecond)</li>
+<li>Note that the minth is 0-indexed. So when we write month=10 (the second argument), we get Nov, instead of Oct.</li>
+</ul></li>
+<li><p>Input as string ``` new Date(‘Jan 20, 2020’); // Date Mon Jan 20 2020 00:00:00 GMT+0800 (Malaysia Time)</p>
+<p>new Date(‘January 22 2020’); // Date Wed Jan 22 2020 00:00:00 GMT+0800 (Malaysia Time)</p>
+<p>new Date(‘Jan-23-2020’); // Date Thu Jan 23 2020 00:00:00 GMT+0800 (Malaysia Time)</p>
+<p>new Date(‘Jan 24 2020 02:20:10’) // Date Fri Jan 24 2020 02:20:10 GMT+0800 (Malaysia Time) ```</p></li>
+<li><p>Input as number (miliseconds) <code>new Date(102031203);       // Date Fri Jan 02 1970 11:50:31 GMT+0730 (Malaysia Time)</code></p></li>
+<li><p>Input as ISO 8601 <img src="frontend_crash_course_part2_files/figure-html/cell-4-1-image.png" class="img-fluid" alt="image.png"> <code>new Date('2020-01-20T00:00Z');       // Date Mon Jan 20 2020 08:00:00 GMT+0800 (Malaysia Time)</code></p></li>
+<li><p>Input including timezone specification ``` new Date(‘Jan 25 2020 02:20:10 -10:00’); // Date Sat Jan 25 2020 20:20:10 GMT+0800 (Malaysia Time)</p>
+<p>new Date(‘Jan 26 2020 02:20:10 -1000’); // Date Sun Jan 26 2020 20:20:10 GMT+0800 (Malaysia Time)</p>
+<p>new Date(‘Jan 27 2020 02:20:10 (EDT)’); // Date Mon Jan 27 2020 02:20:10 GMT+0800 (Malaysia Time) ```</p></li>
+<li><p>NOW (user’s local timezone) ``` new Date(Date.now()) // Date Tue Nov 12 2024 07:41:54 GMT+0800 (Malaysia Time)</p>
+<p>Date.now() // 1731368656048</p>
+<p>const myDate = new Date() myDate // Date Tue Nov 12 2024 07:45:46 GMT+0800 (Malaysia Time) ```</p></li>
+</ul></li>
+<li><p>Some operations on on date: ``` const myDate = new Date() console.log(myDate.toString()) // [Output] Tue Nov 12 2024 07:47:38 GMT+0800 (Malaysia Time)</p>
+<p>console.log(myDate.toISOString()) // [Output] 2024-11-11T23:47:38.348Z</p>
+<p>// get day of the month console.log(myDate.getDate()); // [Output] 12</p>
+<p>// month is 0-indexed, so november is 10. console.log(myDate.getMonth()); // [Output] 10</p>
+<p>console.log(myDate.getFullYear()); // [Output] 2024 ```</p></li>
+</ul>
+</section>
+<section id="lesson-11" class="level1">
+<h1>Lesson 11</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=25341">Video timestamp: Regular Expressions</a></p>
+<ul>
+<li>Regular expression can be broken down into 2 pieces:
+<ul>
+<li><p>Identifiers: special characters, characters, phrases that we’re trying to match. These are what we’re trying to pattern match within the string. Eg below is regex of single character and complex pattern example. ``` // —- Single character regex pattern —- const regex = new RegExp(‘g’);</p>
+<p>const string1 = ‘my favorite food is steak’; const string2 = ‘my favorite thing to do is code’;</p>
+<p>regex.test(string1) // false regex.test(string2) // true</p>
+<p>// another way to write regular expression /g/.test(string1) // false /g/.test(string2) // true</p>
+<p>// —- Complex regex pattern —- const emailValidationRegex = new RegExp(‘^.+@.+..+$’); const userInput = ‘invalidemail@g’; const inValid = emailValidationRegex.test(userInput); inValid // false</p>
+<p>```</p></li>
+<li><p>Quantifiers:</p>
+<ul>
+<li><p>Any match 0 or more time: <code>*</code> <code>// here we're saying: want to match any lowercase character 0 or more time       /[a-z]*/.exec(string)       // [Output] Array ["my"] // matching only "my" because there is a whitespace afterwards</code></p></li>
+<li><p>Any match 1 or more after the preceeding character: <code>+</code> <code>/[a-z]+/.exec(string)       // [Output] Array ["my"]</code></p></li>
+<li><p>Either 0 or 1 match of the previously defined charater: <code>?</code> <code>/[a-z]?/.exec(string1)       // [Output] Array [ "m" ]</code></p></li>
+<li><p>Matching specific quantity: <code>{number to match}</code>. Note we can specify range of character we want to match eg to match 1-4 characters: <code>{1,4}</code>. ``` // want to find 6 characters matching to the pattern we defined /[a-z ]{6}/.exec(string1) // [Output] Array [ “my fav” ]</p>
+<p>// want to find 2 to 6 characters matching to the pattern we defined /[a-z ]{1,4}/.exec(string1) // [Output] Array [ “my f” ] ```</p></li>
+</ul></li>
+</ul></li>
+<li>Some special character in regular expression
+<ul>
+<li>Character group: <code>[]</code> eg <code>[A-Z] [a-z] [0-9] [A-Za-z0-9]</code>. Note the last example here is combining multiple groups to match all uppercase alphabet, all lowercase alphabet and all digits.
+<ul>
+<li>Whatever we define in that character group is going to apply to the regular expression.</li>
+</ul>
+<pre><code>const string1 = 'my favorite food is steak';
+const string2 = 'my favorite thing to do is code';
+const string3 = 'I AM HERE!'
+
+/[A-Z]/.test(string1) // false
+/[A-Z]/.test(string2) // false
+/[A-Z]/.test(string3) // true</code></pre></li>
+<li>Any character: <code>.</code></li>
+<li>All digits: <code>\d</code>. This is equivalent to <code>[0-9]</code></li>
+<li>Whitespace: <code>\s</code></li>
+<li>Any alphanumeric character: <code>\w</code></li>
+<li>Beginning of the string: <code>^</code></li>
+<li>End of the string: <code>$</code></li>
+<li>Groups: <code>()</code> eg <code>/(code|steak)/.test(string1) // true because there is either 'code' or 'steak' in string1</code></li>
+</ul></li>
+<li>Regular expression flag
+<ul>
+<li>Global search (searching for pattern even if it occurs multiple times): <code>/pattern we want to search/g</code> <code>/[a-z]+/g.exec(string1)       // [Output] Array [ "hello" ]</code></li>
+<li>You can check out many other flags in the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions#regex_flags">MDN</a> documentation.</li>
+</ul></li>
+</ul>
+<section id="reference" class="level3">
+<h3 class="anchored" data-anchor-id="reference">Reference</h3>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions#regex_flags">MDN/Regex flags</a></li>
+</ul>
+</section>
+</section>
+<section id="lesson-12" class="level1">
+<h1>Lesson 12</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=26702">Video timestamp: JavaScript String methods</a></p>
+<ul>
+<li><p>Replace all occurances of something: <code>ReplaceAll()</code></p>
+<ul>
+<li><p>Eg 1: Replace raw letters ‘Dog’ with ‘Cat’. This is case sensitive, so notice the lowercase ‘dog’ in the original sentence is not replaced. ``` const myString = ‘My Dog jumped on the bed. My dog is a bad Dog.’</p>
+<p>const newString = myString.replaceAll(‘Dog’, ‘Cat’); console.log(newString) // [Output] My Cat jumped on the bed. My dog is a bad Cat. ```</p></li>
+<li><p>Eg 2: Replace using regex.</p>
+<ul>
+<li><code>[Dd]</code>: want to match both uppercase and lowercase d</li>
+<li><code>{1}</code>: want to match the previous group exactly 1 time</li>
+<li><code>og</code>: character to match</li>
+<li><code>g</code>: global flag at the end</li>
+</ul>
+<pre><code>const correctStr = myString.replaceAll(/[Dd]{1}og/g, 'cat');
+console.log(correctStr)
+// [Output] My cat jumped on the bed. My cat is a bad cat.</code></pre></li>
+</ul></li>
+<li><p>Get part of the string between the provided start (inclusive) and end (exclusive) indices: <code>substring()</code> ``` const myString = ‘some string’; console.log(myString.substring(5,7)); // [Output] st</p>
+<p>console.log(myString.substring(5)); // [Output] string ```</p></li>
+<li><p>Remove whitespace from both ends of the string: <code>trim()</code></p></li>
+<li><p>Match pattern in string: <code>match()</code></p>
+<ul>
+<li>This is similar to using .exec() method with regular expression. We can use any.</li>
+<li>Both examples below returned the same result (matching to the last character before the 0 digit).</li>
+</ul>
+<pre><code>const regex = /[a-z]+/
+const str = 'klsjoewpd012-391-20alsd'
+
+console.log(regex.exec(str))
+// [Output] Array [ "klsjoewpd" ]
+
+console.log(str.match(regex))
+// [Output] Array [ "klsjoewpd" ]</code></pre></li>
+</ul>
+</section>
+<section id="lesson-13" class="level1">
+<h1>Lesson 13</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=27647">Video timestamp: JavaScript Array methods</a></p>
+<ul>
+<li><p>General array arrangemet:</p>
+<ul>
+<li><p>Add element to end of array: <code>push()</code></p></li>
+<li><p>Remove the last element from an array: <code>pop()</code></p></li>
+<li><p>Remove the first element from an array: <code>shift()</code></p></li>
+<li><p>Add element to the beginning of an array: <code>unshift()</code> ``` const arr = [1, 2, 3, 5, 6] arr.pop() arr.pop() arr.push(4,5,6) console.log(arr) // [Output] Array(6) [ 1, 2, 3, 4, 5, 6 ]</p>
+<p>arr.unshift(0) console.log(arr) // [Output] Array(7) [ 0, 1, 2, 3, 4, 5, 6 ] ```</p></li>
+</ul></li>
+<li><p>Get shallow copy of a portion of an array: <code>slice()</code>. Shallow copy is does not copy the entire array if the array is nested, it only takes the first layer. ```</p>
+<p>arrCopy = arr.slice(); console.log(arrCopy) // [Output] Array(7) [ 0, 1, 2, 3, 4, 5, 6 ]</p>
+<p>anotherCopy = arr.slice(3); console.log(anotherCopy) // [Output] Array(4) [ 3, 4, 5, 6 ] ```</p></li>
+<li><p>Remove / replace (in place) the content in the middle of an array: <code>splice()</code> ``` const arr = [1, 2, 3, ‘opps’, 4, 5, 6]</p>
+<p>arr.splice(3, 1, 3.5) arr // [Output] Array(7) [ 1, 2, 3, 3.5, 4, 5, 6 ] ```</p></li>
+<li><p>Get indexes method:</p>
+<ul>
+<li>Get the index of first matching element in the array (or -1 if no match):<code>findIndex()</code> or <code>indexOf()</code>. <code>findIndex()</code> is more powerful.</li>
+</ul>
+<pre><code>// ---- Example 1: simple array search ----
+const arr = [1, 2, 3, 'opps', 4,  5, 6]
+console.log(arr.indexOf('opps'))
+// [Output] 3
+
+const moreComplexArr = [
+                        {firstname: 'Bob',
+                        lastname: 'Smith'},
+
+                        {firstname: 'Alice',
+                        lastname: 'Smith'},
+
+                        {firstname: 'Jon',
+                        lastname: 'Smith'},
+
+                        {firstname: 'Jon',
+                        lastname: 'Doe'}
+                        ]
+
+console.log(moreComplexArr.indexOf({firstname: 'Bob'}))
+// [Output] -1 // not found
+
+console.log(moreComplexArr.findIndex((arrItem) =&gt; {
+    return arrItem.lastname !== 'Smith';
+}))
+// [Output] 3</code></pre></li>
+<li><p>Loop through the array and perform transformation according to the callback function provided to each array element: <code>map()</code> ``` const blogPostsFromDatabase = [ {title: ‘How to use the map() function’, category: ‘uncategorized’},</p>
+<pre><code>              {title: 'What is JavaScript?',
+              category: 'uncategorized'},
+
+              {title: 'Why are you crazy enough to learn to code?',
+              category: 'uncategorized'},
+              ];</code></pre>
+<p>blogPostsFromDatabase.map(arrItem =&gt; { arrItem.category = ‘Web Development’; return arrItem })</p>
+<p>blogPostsFromDatabase /* [Output] Array(3) [ {…}, {…}, {…} ] 0: Object { title: “How to use the map() function”, category: “Web Development” } 1: Object { title: “What is JavaScript?”, category: “Web Development” } 2: Object { title: “Why are you crazy enough to learn to code?”, category: “Web Development” }*/ ```</p></li>
+<li><p>A simpler way to loop through array: <code>forEach()</code> ``` const arr = [‘aaa’, ‘bbb’, ‘ccc’] arr.forEach((arrItem) =&gt; { console.log(arrItem) }) /* [Output] aaa bbb ccc*/</p>
+<p>arr.forEach((arrItem, index) =&gt; { console.log(index, arrItem) }) /* [Output] 0 aaa 1 bbb 2 ccc*/</p>
+<p>// Another way to do this is using for loop for(let i = 0; i &lt; arr.length; i++){ console.log(i, arr[i]); } /* [Output] 0 aaa 1 bbb 2 ccc*/ ```</p></li>
+<li><p>Find if an element is exist in an array: <code>includes()</code>. We could achieve the same result using for loop, forEach etc, but <code>includes()</code> is by far the simplest way. ``` const myColors = [‘blue’, ‘red’, ‘purple’, ‘orange’, ‘green’];</p>
+<p>// Using for loop let orangeExist = false; for (let i = 0; i &lt; myColors.length; i++){ if (myColors[i] === ‘orange’){ orangeExist = true; }} console.log(orangeExist) // true</p>
+<p>// using forEach orangeExist = false; myColors.forEach((arrItem) =&gt; { if (arrItem === ‘orange’){ orangeExist = true; }}) console.log(orangeExist) // true</p>
+<p>// using includes myColors.includes(‘orange’); // true ```</p></li>
+<li><p>Filters from array based on provided callback function: <code>filter()</code> ``` const allOrders = [ {productName: ‘Tea pot’, isDigital: false, isCancelled: false, isOpen: false},</p>
+<pre><code>              {productName: 'Blue Gildan Mens Hoodie',
+              isDigital: false,
+              isCancelled: true,
+              isOpen: false},
+
+              {productName: 'Code Complete Kindle Book',
+              isDigital: true,
+              isCancelled: true,
+              isOpen: false},
+
+              {productName: 'Atomic Habits Kindle Book',
+              isDigital: true,
+              isCancelled: false,
+              isOpen: false},
+              ];</code></pre>
+<p>const digitalOrders = allOrders.filter((arrItem) =&gt; { return arrItem.isDigital })</p>
+<p>digitalOrders /* [Output] Array [ {…}, {…} ] 0: Object { productName: “Code Complete Kindle Book”, isDigital: true, isCancelled: true, … } 1: Object { productName: “Atomic Habits Kindle Book”, isDigital: true, isCancelled: false, … } */ ```</p></li>
+<li><p>Do accumulation operation on an array (eg sum, average etc): <code>reduce()</code> ``` const arr = [10, 20, 30, 25, 14];</p>
+<p>// for loop let sum = 0; for (let i = 0; i &lt; arr.length; i++){ sum += arr[i]; } console.log(sum); // [Output] 99</p>
+<p>// reduce method function reducerCallback(sum, arrItem) { return sum += arrItem; } const result = arr.reduce(reducerCallback, 0) console.log(result) // [Output] 99</p>
+<p>// more simplified way to write reduce method console.log(arr.reduce((sum, arrItem) =&gt; sum += arrItem, 0)) // [Output] 99</p>
+<p>// example on how to calc average using reduce method console.log(arr.reduce((sum, arrItem) =&gt; sum += arrItem, 0) / arr.length) // [Output] 19.8 ```</p></li>
+</ul>
+</section>
+<section id="lesson-14" class="level1">
+<h1>Lesson 14</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=29802">Video timestamp: Math utilities with JavaScript</a></p>
+<ul>
+<li>Math methods are static methods, not instance methods like String, Date, Array methods (where we have to construct an instance of that object and call the methods on the instance we created). Math methods are like functions. <code>console.log(Math.PI) // 3.141592653589793     console.log(Math.E) // 2.718281828459045     console.log(Math.abs(-60)) // 60     console.log(Math.ceil(Math.PI)) // 4     console.log(Math.floor(Math.PI)) // 3     console.log(Math.round(Math.PI)) // 3     console.log(Math.min(2,3,4,5)) // 2     console.log(Math.max(2,3,4,5)) // 5     console.log(Math.random()) // return random decimal between 0-1</code></li>
+<li>To get random index from an array:
+<ul>
+<li><code>Math.random()</code> return random decimal between 0-1.</li>
+<li>When we multiply with <code>arr.length</code>, we will get random decimal between <code>0-arr.length</code>.</li>
+<li>To get whole number, we use <code>Math.floor</code>.</li>
+<li>We can then use this whole number to retrieve random element from an array.</li>
+</ul>
+<pre><code>// Example of how we would get random index for an array
+const arr = ['some', 'values', 'blah', 'meh']
+const randomIndex = Math.floor(Math.random() * arr.length)
+
+console.log(arr[randomIndex])
+// [Output] meh</code></pre></li>
+</ul>
+</section>
+<section id="lesson-15" class="level1">
+<h1>Lesson 15</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=30192">Video timestamp: Error types and other JavaScript concepts</a></p>
+<ul>
+<li><p>Some mostly used base class errors (parent error type): <code>ReferenceError, SyntaxError, TypeError</code>.</p></li>
+<li><p>Error handling: <code>try {do something} catch (error) { run this if error}</code> ``` try { const num = 20; num.toUpperCase() } catch (err) { console.log(err instanceof TypeError); console.log(err.message); }</p>
+<p>/* [Output] true num.toUpperCase is not a function */</p>
+<p>```</p></li>
+</ul>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#error_types">MDN/Error types</a>: Base class error types</li>
+</ul>
+</section>
+</section>
+<section id="lesson-16" class="level1">
+<h1>Lesson 16</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=31156">Video timestamp: 10 Beginner / Intermediate JavaScript practice problems</a></p>
+</section>
+<section id="lesson-17" class="level1">
+<h1>Lesson 17</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=36154">Video timestamp:HTML Crash Course</a></p>
+<section id="html-tags" class="level2">
+<h2 class="anchored" data-anchor-id="html-tags">HTML tags</h2>
+<ul>
+<li>If a website is a house:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="frontend_crash_course_part2_files/figure-html/cell-19-5-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>What is HTML?</p>
+<ul>
+<li>Stands for HyperText Markup Language.</li>
+<li>Something that allows you to structure the components that you’re going to put on a webpage.</li>
+<li>Each website has 1 HTML document within it. This HTML document has general structure. <img src="frontend_crash_course_part2_files/figure-html/cell-19-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
+<li>Everything within <code>&lt;html&gt;&lt;/html&gt;</code> tag defined the whole document.</li>
+<li>Within the html tags, you’d have <code>&lt;head&gt;&lt;/head&gt;</code> tag, that has <code>&lt;title&gt;&lt;/title&gt;</code> tag – this define the name you see on the browser tab.</li>
+<li>The bulk of your website is defined within <code>&lt;body&gt;&lt;/body&gt;</code> tag.</li>
+<li>Below is a standard boilerplate that has HTML, CSS and Javascript.
+<ul>
+<li><code>&lt;link&gt;&lt;/link&gt;</code> tag references the CSS stylesheet.</li>
+<li><code>&lt;script&gt;&lt;/script&gt;</code> tag references the javascript script that is connected to this HTML that gives it function. <img src="frontend_crash_course_part2_files/figure-html/cell-19-2-image-3.png" class="img-fluid" alt="image-3.png"></li>
+</ul></li>
+<li>Basic anatomy of a HTML element. <img src="frontend_crash_course_part2_files/figure-html/cell-19-3-image-4.png" class="img-fluid" alt="image-4.png">
+<ul>
+<li>The <code>class</code> attribute of a HTML element is how we identify the HTML tag from CSS. But this doesn’t mean all HTML attributes relate to CSS.</li>
+</ul></li>
+</ul></li>
+<li><p>HTML element vs HTML tag:</p>
+<ul>
+<li>HTML element: A complete unit (ie tag + attributes + event listeners etc). Can also think of it as the general structure of that HTML. Eg. <code>&lt;p id="p1" class="some-class"&gt;Content Here&lt;/p&gt;</code></li>
+<li>HTML tag: Think of it as the function – what the element is supposed to be doing. Eg. <code>&lt;p&gt;&lt;/p&gt;</code></li>
+</ul></li>
+<li><p>Types of HTML tags:</p>
+<ul>
+<li>Normal HTML tags: tag with opening and closing <code>&lt;p&gt;&lt;/p&gt;       &lt;h1&gt;&lt;/h1&gt;       &lt;div&gt;&lt;/div&gt; --&gt; generic container element       &lt;span&gt;&lt;/span&gt; --&gt; use this to style. Can be nested within other tags eg `&lt;p&gt;&lt;/p&gt;`       &lt;strong&gt;&lt;/strong&gt; --&gt; make something bold       &lt;em&gt;&lt;/em&gt; --&gt; make something italic       &lt;a&gt;&lt;/a&gt; --&gt; to add hyperlink to HTML. Must contain `href` attribute       &lt;button&gt;&lt;/button&gt; --&gt; add clickable button       &lt;ul&gt;&lt;/ul&gt; --&gt; unordered list (bullet points)       &lt;li&gt;&lt;/li&gt; --&gt; nested inside &lt;ul&gt;&lt;/ul&gt;. Represent an element in a list       &lt;ol&gt;&lt;/ol&gt; --&gt; ordered list (numbered list)       &lt;table&gt;&lt;/table&gt; --&gt; table as a container</code>
+<ul>
+<li>We can nest other HTML tags within these normal tags. Especially for tags that are meant to be used as container-like (eg the <code>&lt;div&gt;&lt;/div&gt;</code> tag.)</li>
+<li>But for some tags (eg the paragraph tag), it does not make sense to nest other tags within them.</li>
+</ul></li>
+<li>Self-closing HTML tags: <code>&lt;img /&gt; --&gt; use this to attach image to the HTML       &lt;input /&gt; --&gt; use this to create interactive controls to accept user input       &lt;meta /&gt; --&gt; this goes in the head of the HTML document       &lt;link /&gt; --&gt; this is how we link the style sheet with HTML</code>
+<ul>
+<li>Can not nest other HTML tags within these self-closing tags.</li>
+</ul></li>
+</ul></li>
+<li><p>HTML is not case sensitive. <code>&lt;p&gt;&lt;/p&gt;</code> == <code>&lt;P&gt;&lt;/P&gt;</code> both works fine.</p></li>
+<li><p>HTML does not care about line breaks.</p></li>
+<li><p>In new HTML 5 standards, it is recommended to only do styling from CSS and not within HTML.</p></li>
+<li><p>How to connect HTML button to event listener: ``` // in HTML <button onclick="alertMe()">Submit</button></p>
+<p>// in JavaScript function alertMe(){ alert(‘Button is clicked’) } ``` <img src="frontend_crash_course_part2_files/figure-html/cell-19-4-image-5.png" class="img-fluid" alt="image-5.png"></p></li>
+</ul>
+</section>
+<section id="html-attributes" class="level2">
+<h2 class="anchored" data-anchor-id="html-attributes">HTML attributes</h2>
+<ul>
+<li>Global attribute vs Element specific attribute:
+<ul>
+<li>Global attribute: attributes that’s available to any HTML element</li>
+<li>Element specific attribute: Only applicable to certain elements</li>
+<li>In the example below:
+<ul>
+<li><code>src</code> and <code>width</code> are element specific attributes. Think of these as methods that are only applicable to certain objects. Eg, toUpperCase() is only applicable to string object and won’t do anything on number object.</li>
+<li><code>class</code> attribute is global attribute</li>
+</ul>
+<pre><code>&lt;img src="https://...." class="some-style" width="200"&gt;</code></pre></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="lesson-18" class="level1">
+<h1>Lesson 18</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=39771">Video timestamp:Document Object Model (DOM)</a></p>
+<section id="about-working-in-codepen" class="level2">
+<h2 class="anchored" data-anchor-id="about-working-in-codepen">About working in Codepen</h2>
+<ul>
+<li>If we are working in codepen and wanted to test out Javascript code before adding into the JS section of the codepen, we could use the console to do this. Here’s how:
+<ol type="1">
+<li>Right click anywhere on the page → Inspect</li>
+<li>In the dropdown, select <code>CodePen (Index.html)</code> environment, this will make sure we are refering to the right context.</li>
+<li>Now we can use <code>document.queryselector()</code> to get tags from our Codepen HTML section.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="frontend_crash_course_part2_files/figure-html/cell-22-2-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div></li>
+<li>The codepen environment has already do the necessary linking of Javascript and CSS to the HTML script, so we don’t need to do it manually.</li>
+<li>Codepen has already wrapped the HTML document within <code>&lt;html&gt;&lt;/html&gt;</code> tag, so we don’t have to do this. Whatever we inserted in the HTML panel within the codepen is inserted within <code>&lt;body&gt;&lt;/body&gt;</code> tag.
+<ul>
+<li>How do we know this? In the console, we retrieved the entire HTML document and notice that there are html and head tags which we did not define in the codepen HTML panel. <img src="frontend_crash_course_part2_files/figure-html/cell-22-1-image-3.png" class="img-fluid" alt="image-3.png"></li>
+</ul></li>
+</ul>
+</section>
+<section id="document-object-model-dom" class="level2">
+<h2 class="anchored" data-anchor-id="document-object-model-dom">Document Object Model (DOM)</h2>
+<ul>
+<li>Think of it as a bridge between HTML and Javascript.</li>
+<li>DOM is the root of any front-end framework we’ll work with.</li>
+<li>What is DOM?
+<ul>
+<li>not a programming language</li>
+<li>not natively part of Javascript</li>
+<li>only exist within the browser (all browsers have slightly different implementation of the DOM)</li>
+<li>can think of it as an API for an HTML document</li>
+<li>allow us to manipulate HTML without knowing how is HTML being manipulated by the browser</li>
+</ul></li>
+<li>HTML alone is like paper map, but when we add the DOM API + HTML then we can make it like a google map, where we introduce a lot of interactivity into it.</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> is the most general base class for which all element objects in a document inherit.</li>
+<li>Relationship between HTML and DOM:
+<ul>
+<li>At the highest level, DOM has 2 built-in objects that we’ll probably use more than any other objects that you’ll look at.</li>
+<li>At the very top level, you have the <code>window</code> object.
+<ul>
+<li>We can think this as literally the individual browser tab we’re working with.</li>
+<li>We can program using this one object and do all sorts of things within a browser (eg scrolling, resizing browser window, refreshing the page) – we can do these using Javascript by connecting it to DOM via the top level <code>window</code> object.</li>
+</ul></li>
+<li>DOM is an API to connnect to our browser in our HTML document. <img src="frontend_crash_course_part2_files/figure-html/cell-23-5-image.png" class="img-fluid" alt="image.png"></li>
+</ul></li>
+<li><code>document</code> is a representation of the entire HTML document we’ve written. To access this we use <code>window.document</code>. <img src="frontend_crash_course_part2_files/figure-html/cell-23-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
+<li>Think of the HTML document as a tree <img src="frontend_crash_course_part2_files/figure-html/cell-23-2-image-3.png" class="img-fluid" alt="image-3.png">
+<ul>
+<li><p>In the document object model, we call all of the elements as nodes within the DOM tree.</p></li>
+<li><p>Each element is defined as a total unit which is made of several different type of nodes:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="frontend_crash_course_part2_files/figure-html/cell-23-3-image-4.png" class="img-fluid figure-img"></p>
+<figcaption>image-4.png</figcaption>
+</figure>
+</div>
+<ul>
+<li>the simplest level: element node Eg. <code>&lt;p&gt;</code></li>
+<li>the attributes: attribute node Eg. <code>class="some-class"</code></li>
+<li>the content: content node Eg. <code>Content</code></li>
+</ul></li>
+<li><p>We can create the above element entirely in Javascript and insert it into the HTML document using DOM API as shown below. <img src="frontend_crash_course_part2_files/figure-html/cell-23-4-image-5.png" class="img-fluid" alt="image-5.png"></p>
+<ul>
+<li>However, this inserted element is temporary. We normally use it for user experience – when user does some changes on the website, we want to immediately show the changes, and this can be done using Javascript through the DOM API to modify elements that are existing within the HTML.</li>
+<li>We later can save the changes to the database and reload it with new data later – which might take a while, so we use Javascript + DOM for faster response.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="window" class="level2">
+<h2 class="anchored" data-anchor-id="window">Window</h2>
+<ul>
+<li>We can use the top level <code>window</code> object to control over the browser. Examples on how we can manipulate the top level object <code>Window</code> via the DOM API ():
+<ul>
+<li>To throw a popup alert: In Inpect → Console tool, we can make the browser show a popup using <code>window.alert(message)</code> or we could just directly write <code>alert(message)</code> – we don’t even need to reference to <code>window</code> because it is the global object.</li>
+</ul>
+<img src="frontend_crash_course_part2_files/figure-html/cell-24-1-image-2.png" class="img-fluid" alt="image-2.png"> <img src="frontend_crash_course_part2_files/figure-html/cell-24-2-image-3.png" class="img-fluid" alt="image-3.png">
+<ul>
+<li>To open a new tab: <code>window.open(url to open)</code></li>
+<li>To scroll down a page: <code>window.scrollBy({           top: window.innerHeight*100, // window.innerHeight is only the height in the current view, not the entire length of the browser tab (the total webpage height is window.outerHeight)           left: 0,           behavior: 'smooth'       });</code></li>
+<li>To reload a page: <code>window.location.reload();</code></li>
+</ul></li>
+<li>Some global properties are (can be refered by <code>window.{property}</code> or just <code>{property}</code> eg <code>window.innerHeight</code> or <code>innerHeight</code>):
+<ul>
+<li>Height / width of current view: <code>innerHeight</code>, <code>innerWidth</code></li>
+<li>Total height / width of the webpage (full scrollable length): <code>outerHeight</code>, <code>outerWidth</code>.</li>
+<li>Allows you to store data temporarily in the browser: <code>localStorage</code>.
+<ul>
+<li>You can check the temporarily saved data in Application tab of the Developer Inspect tool. <img src="frontend_crash_course_part2_files/figure-html/cell-24-3-image-4.png" class="img-fluid" alt="image-4.png"></li>
+<li>You can temporarily save data using the Console tool. Eg. <code>localStorage.setItem(key, value)</code>. <img src="frontend_crash_course_part2_files/figure-html/cell-24-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
+</ul></li>
+<li>Get information about the website the current tab is on: <code>location</code> <img src="frontend_crash_course_part2_files/figure-html/cell-24-5-image-6.png" class="img-fluid" alt="image-6.png"></li>
+<li>Information on how much we’ve scrolled (left-right) and (up-down) respectively: <code>scrollX</code>, <code>scrollY</code></li>
+</ul></li>
+<li>Setting up event listener on the entire window
+<ul>
+<li>We set up a function that will be triggered everything user scroll the webpage.</li>
+<li>Notice there are 44 printed “hi” on the Console. <img src="frontend_crash_course_part2_files/figure-html/cell-24-6-image-7.png" class="img-fluid" alt="image-7.png"></li>
+</ul></li>
+</ul>
+</section>
+<section id="html-element" class="level2">
+<h2 class="anchored" data-anchor-id="html-element">HTML Element</h2>
+<ul>
+<li>Global attribute: Attributes that we can set for every HTML element
+<ul>
+<li><code>id</code>: Eg. <code>&lt;button id="btn-1"&gt;&lt;/button&gt;</code></li>
+<li><code>class</code>: Eg <code>&lt;button class="my-btn"&gt;&lt;/button&gt;</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="add-interactivity" class="level2">
+<h2 class="anchored" data-anchor-id="add-interactivity">Add interactivity</h2>
+<ul>
+<li>To add interactivity on HTML page, we need to do 3 steps:
+<ol type="1">
+<li>Identify the element we want to add user interactivity on (eg a button element).</li>
+<li>Register event listener on the element (eg a click event).</li>
+<li>Create a function that will insert/ made changes to the HTML document every time user interacted with the element.</li>
+</ol></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="frontend_crash_course_part2_files/figure-html/cell-26-6-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<ul>
+<li>(Step 1) There are multiple ways we could do to identify the element. Say the element we want to identify is the <code>&lt;button&gt;&lt;/button&gt;</code> element.
+<ul>
+<li>Use tag selector: <code>document.querySelector('button')</code>. We refer to the tag directly by the tag <code>button</code>.
+<ul>
+<li>This will look through the whole HTML file and find the first occurance of the <code>&lt;button&gt;</code> tag.</li>
+<li>If it doesn’t find it, it will return null.</li>
+</ul></li>
+<li>Use class selector: <code>document.querySelector('.my-btn')</code>. We refer to the class using <code>.</code>.</li>
+<li>Use id selector: <code>document.querySelector('#btn-1')</code>. We refer the id using <code>#</code>.
+<ul>
+<li>or we could also use <code>document.getElementById('btn-1')</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById">getElementById documentation</a>).</li>
+<li>Selecting element using id is the most specific way to do it, because we can not have multiple elements with the same id – if we do this, it will cause conflict.</li>
+<li>We want to always try to be as specific as we can when identifying element within the DOM.</li>
+</ul></li>
+<li>Notice that all querySelector we did below gave the same element. <img src="frontend_crash_course_part2_files/figure-html/cell-26-2-image-3.png" class="img-fluid" alt="image-3.png"></li>
+<li>Additional ways to do the same thing:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="frontend_crash_course_part2_files/figure-html/cell-26-3-image-4.png" class="img-fluid figure-img"></p>
+<figcaption>image-4.png</figcaption>
+</figure>
+</div>
+<ul>
+<li>Refer to this when trying to select element by tag/id/class. <img src="frontend_crash_course_part2_files/figure-html/cell-26-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
+</ul></li>
+<li>(Step 2) Register click event. There are 3 ways to do this:
+<ul>
+<li><p>In Javascript section: ``` // button we want to add click event to const btn = document.querySelector(‘#btn-1’);</p>
+<p>// the function we want to execute when user click on the button (right now it is empty) function addParagrah() { }</p>
+<p>// method 1 btn.addEventListener(‘click’, addParagraph)</p>
+<p>// method 2 btn.onclick = addParagraph; // syntax {name of element}.{event handler property - see doc!} ```</p>
+<ul>
+<li>Check out the <a href="https://developer.mozilla.org/en-US/docs/Web/Events">Event documentation </a> to see what events we can add.</li>
+</ul></li>
+<li><p>In HTML section: <code>// add onclick attribute and set it to refer to the function we want to call       &lt;button id="btn-1" class="my-btn" onclick="addParagrah()"&gt;CLICK ME&lt;/button&gt;</code></p></li>
+<li><p>We can test if the implementation is working by printing some text on the console. <img src="frontend_crash_course_part2_files/figure-html/cell-26-4-image-5.png" class="img-fluid" alt="image-5.png"></p></li>
+</ul></li>
+<li>(Step 3) Create a function that will be called upon user interaction. Here, our function is <code>addParagraph()</code> in the Javascript section. Below is the final implementation, notice that new paragraph is added to the end of the document everytime we click the button. <img src="frontend_crash_course_part2_files/figure-html/cell-26-5-image-6.png" class="img-fluid" alt="image-6.png"></li>
+</ul>
+</section>
+<section id="navigating-through-html-document" class="level2">
+<h2 class="anchored" data-anchor-id="navigating-through-html-document">Navigating through HTML document</h2>
+<ul>
+<li>Say we want to know what type of a variable we’re working with. What we can do is to save the element in a variable using Javascript then check its type using <code>.nodeType</code>. We can then check the node type in the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType">MDN documentation</a> (the simplest way to do this is to search “NodeType” on the search bar). Once we know what the node type we’re dealing with, we can then lookup its properties and attributes etc. Eg here, we get value of 1 from <code>list.nodeType</code>, and from the documentation, we know this is an element node. <img src="frontend_crash_course_part2_files/figure-html/cell-27-4-image.png" class="img-fluid" alt="image.png"></li>
+<li>Make changes using Javascript <img src="frontend_crash_course_part2_files/figure-html/cell-27-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
+<li>Add new element using Javascript <img src="frontend_crash_course_part2_files/figure-html/cell-27-2-image-3.png" class="img-fluid" alt="image-3.png"></li>
+<li>Add new element using Javascript when we want to insert in between tags that has no specific id/class.
+<ul>
+<li>From Node interface documentation, we know we can use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node#:~:text=hasChildNodes()-,insertBefore(),-isDefaultNamespace()"><code>.insertBefore()</code></a> method to add a new element before an existing element.</li>
+<li>From the documentation, the syntax guide for this method is <code>parent element.insertBefore(newNode to insert, referenceNode we want to insert before)</code>.</li>
+<li>Say, we wanted to insert a new paragraph in between the 2 paragraphs tags that has no class/id that we could identify it by. The diagram below show how we can solve this step-by-step. <img src="frontend_crash_course_part2_files/figure-html/cell-27-3-image-4.png" class="img-fluid" alt="image-4.png"></li>
+</ul></li>
+<li>Everything in the DOM is inherited from <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node">Node</a> interface (think of object oriented program concept).
+<ul>
+<li>Which means everything below it (Element, HTMLElement etc) have access to its parent’s (Node) attributes, properties, methods etc on top of their own attributes, properties, methods etc.</li>
+</ul></li>
+</ul>
+</section>
+<section id="quick-recap" class="level2">
+<h2 class="anchored" data-anchor-id="quick-recap">Quick recap</h2>
+<ul>
+<li>We can think of HTML in 2 different parts:
+<ul>
+<li>Static HTML: This is the HTML we see below. No matter what we do, this will not change.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="frontend_crash_course_part2_files/figure-html/cell-28-2-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<ul>
+<li>Dynamic HTML: This is what we see when we start working with the DOM to add/modify/remove etc elements with the existing static HTML.</li>
+</ul></li>
+<li>Key takeaway:
+<ul>
+<li><p>We can model a HTML document in a predictable way.</p></li>
+<li><p>We can write specification called the document object model and allow Javascript to connect in with that API to actually modify the static HTML.</p></li>
+<li><p>In the new HTML 5 spec, we should use HTML tag for both structure and intent. Eg instead of sectioning different part of a webpage in just <code>&lt;div&gt;&lt;/div&gt;</code> element, there are new tags available that we should use to better structure our webpage. Eg <code>&lt;nav&gt;&lt;/nav&gt;</code>, <code>&lt;section&gt;&lt;/section&gt;</code>, <code>&lt;main&gt;&lt;/main&gt;</code>, <code>&lt;article&gt;&lt;/article&gt;</code>, <code>&lt;footer&gt;&lt;/footer&gt;</code>. This is called semantic HTML.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="frontend_crash_course_part2_files/figure-html/cell-28-1-image-2.png" class="img-fluid figure-img"></p>
+<figcaption>image-2.png</figcaption>
+</figure>
+</div></li>
+</ul></li>
+</ul>
+</section>
+<section id="reference-1" class="level2">
+<h2 class="anchored" data-anchor-id="reference-1">Reference</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">MDN/Document Object Model (DOM)</a>: DOM documentation</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Events">MDN/Events</a>: List of events we could to elements on the web.</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node">MDN/Node</a>: List of properties and methods of Node interface object</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType">MDN/nodeType</a>: List of node types and its corresponding values</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/SarahHannes\.github\.io\/sarahhannes\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

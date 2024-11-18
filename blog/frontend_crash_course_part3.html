@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-11-15">
+
+<title>Front-end Web Dev Crash Course Part 3/4 – Sarah Hannes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Sarah Hannes</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../til.html"> 
+<span class="menu-text">Today I learn</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#lesson-19" id="toc-lesson-19" class="nav-link active" data-scroll-target="#lesson-19">Lesson 19</a></li>
+  <li><a href="#lesson-20" id="toc-lesson-20" class="nav-link" data-scroll-target="#lesson-20">Lesson 20</a>
+  <ul class="collapse">
+  <li><a href="#combinators" id="toc-combinators" class="nav-link" data-scroll-target="#combinators">Combinators</a></li>
+  <li><a href="#two-factors-for-determining-css-precedence" id="toc-two-factors-for-determining-css-precedence" class="nav-link" data-scroll-target="#two-factors-for-determining-css-precedence">Two factors for determining CSS precedence</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul></li>
+  <li><a href="#lesson-21" id="toc-lesson-21" class="nav-link" data-scroll-target="#lesson-21">Lesson 21</a>
+  <ul class="collapse">
+  <li><a href="#css-properties" id="toc-css-properties" class="nav-link" data-scroll-target="#css-properties">CSS properties</a></li>
+  </ul></li>
+  <li><a href="#lesson-22" id="toc-lesson-22" class="nav-link" data-scroll-target="#lesson-22">Lesson 22</a>
+  <ul class="collapse">
+  <li><a href="#most-common-css-properties" id="toc-most-common-css-properties" class="nav-link" data-scroll-target="#most-common-css-properties">Most common CSS properties</a></li>
+  <li><a href="#css-measurement-units" id="toc-css-measurement-units" class="nav-link" data-scroll-target="#css-measurement-units">CSS Measurement Units</a>
+  <ul class="collapse">
+  <li><a href="#font-measurement-units" id="toc-font-measurement-units" class="nav-link" data-scroll-target="#font-measurement-units">Font measurement units</a></li>
+  </ul></li>
+  <li><a href="#custom-fonts" id="toc-custom-fonts" class="nav-link" data-scroll-target="#custom-fonts">Custom fonts</a></li>
+  <li><a href="#set-background-image" id="toc-set-background-image" class="nav-link" data-scroll-target="#set-background-image">Set background image</a></li>
+  <li><a href="#shorthand" id="toc-shorthand" class="nav-link" data-scroll-target="#shorthand">Shorthand</a></li>
+  <li><a href="#step-method-to-write-css-and-html" id="toc-step-method-to-write-css-and-html" class="nav-link" data-scroll-target="#step-method-to-write-css-and-html">4-Step method to write CSS and HTML</a></li>
+  <li><a href="#user-story" id="toc-user-story" class="nav-link" data-scroll-target="#user-story">User story</a></li>
+  <li><a href="#reference-1" id="toc-reference-1" class="nav-link" data-scroll-target="#reference-1">Reference</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Front-end Web Dev Crash Course Part 3/4</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">javascript</div>
+    <div class="quarto-category">html</div>
+    <div class="quarto-category">css</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 15, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="lesson-19" class="level1">
+<h1>Lesson 19</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=44636">Video timestamp: HTML + JavaScript “Meme Generator” challenge</a></p>
+<p><a href="https://codepen.io/SarahHannes/pen/MWNLXjY">My Codepen solution</a></p>
+</section>
+<section id="lesson-20" class="level1">
+<h1>Lesson 20</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=47537">Video timestamp: CSS Crash Course</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="frontend_crash_course_part3_files/figure-html/cell-4-1-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<ul>
+<li>All we’re trying to do in CSS is to target a specific HTML element and apply some style/layour to it.
+<ul>
+<li>get specific element using CSS Selector <code>.some-class</code></li>
+<li>set value to a specific CSS property of that specific element <code>color: #211E1E</code> <img src="frontend_crash_course_part3_files/figure-html/cell-5-1-image.png" class="img-fluid" alt="image.png"></li>
+</ul></li>
+<li>Relationship between HTML, CSS and Javascript (simple example)
+<ul>
+<li><p>The most specific CSS selector take precedence (selector by Id) when multiple style is applied</p></li>
+<li><p>HTML: <code>&lt;p id='abc' class='para-elem'&gt;Some text&lt;/p&gt;</code></p></li>
+<li><p>CSS: ``` /* target by tag */ p { color: red; }</p>
+<p>/* target by class */ .para-elem { color: blue; }</p>
+<p>/* target by id */ #abc { color: pink; } ```</p></li>
+<li><p>Javascript: ``` // target by tag (will find the first HTML element with the same tag) document.querySelector(‘p’)</p>
+<p>// target by class (will find the first HTML element with this specific class) document.querySelector(‘.some-class’)</p>
+<p>// target by id (will find the specific element with this id) document.querySelector(‘#some-id’) ```</p></li>
+</ul></li>
+<li>Methods to select HTML elements for styling by: tags, class, id, combinators.</li>
+</ul>
+<section id="combinators" class="level2">
+<h2 class="anchored" data-anchor-id="combinators">Combinators</h2>
+<ul>
+<li><p>Descendents selector: Target every descendents of pre-selector.</p>
+<ul>
+<li>Syntax: <code>pre-selector descendent-selector</code> (ie I want to target any actual selector that exist as a descendent of pre-selector)</li>
+<li>the parent’s selector (here as <code>.main-container</code>) is called pre-selector</li>
+<li>the actual element we want to style selector (here as <code>li</code>) is called the actual selector <img src="frontend_crash_course_part3_files/figure-html/cell-6-10-image.png" class="img-fluid" alt="image.png"></li>
+</ul></li>
+<li><p>Children selector: Target only the direct children of a pre-selector.</p>
+<ul>
+<li>Syntax: <code>pre-selector &gt; children-selector</code> <img src="frontend_crash_course_part3_files/figure-html/cell-6-2-image-2.png" class="img-fluid" alt="image-2.png"></li>
+</ul></li>
+<li><p>Adjacent Sibling selector: Select only the first sibling that directly follow a specific element.</p>
+<ul>
+<li>Syntax: <code>pre-selector + sibling-selector</code></li>
+<li>Cons: if we change the structure of our HTML, this rule will break. Eg if we wraped the <code>&lt;ul&gt;</code> in a <code>&lt;div&gt;</code>, then it will break because <code>&lt;p&gt;</code> will no longer be the direct sibling of <code>&lt;ul&gt;</code>. <img src="frontend_crash_course_part3_files/figure-html/cell-6-3-image-3.png" class="img-fluid" alt="image-3.png"></li>
+<li>A better alternative is to give the elements a class, then directly style the class like below. Now the CSS rule will not break even if we change the structure. <img src="frontend_crash_course_part3_files/figure-html/cell-6-5-image-5.png" class="img-fluid" alt="image-5.png"></li>
+</ul></li>
+<li><p>Direct Sibling selector: Select all direct siblings that directly follow a specific element.</p>
+<ul>
+<li>Syntax: <code>pre-selector ~ siblings-selector</code> <img src="frontend_crash_course_part3_files/figure-html/cell-6-4-image-4.png" class="img-fluid" alt="image-4.png"></li>
+</ul></li>
+<li><p>Select specific tag &amp; class: Select only elements that are of specific tag that belongs to specific class.</p>
+<ul>
+<li>Syntax: <code>tag-selector[class="class-selector"]</code></li>
+<li>Use this when we have many tags belonging to the same class, but we only want to select a specific tag. Notice the <code>&lt;div&gt;</code> also belong to the same class, but is not selected. <img src="frontend_crash_course_part3_files/figure-html/cell-6-6-image-6.png" class="img-fluid" alt="image-6.png"></li>
+</ul></li>
+<li><p>When we want to have unique styles for different class but also have some styles that are shared across. Eg let’s say we want the 2 boxes to have the same width, height but everything else unique to each class:</p>
+<ul>
+<li>Method 1: Styling for each class
+<ul>
+<li>Notice we have repetitive <code>width</code> and <code>height</code> specified for each of the class style. <img src="frontend_crash_course_part3_files/figure-html/cell-6-7-image-7.png" class="img-fluid" alt="image-7.png"></li>
+</ul></li>
+<li>Method 2: Shared styling
+<ul>
+<li>Notice we’ve removed repetitive <code>width</code> and <code>height</code> and move them to shared styling.</li>
+<li>Syntax: <code>selector1 , selector2</code> (ie I want to target <code>selector1</code> AND <code>selector2</code>) Here selector can be of tag, class, id or whatever. <img src="frontend_crash_course_part3_files/figure-html/cell-6-8-image-8.png" class="img-fluid" alt="image-8.png"></li>
+</ul></li>
+<li>Method 3: Give multiple classes to a single element
+<ul>
+<li>In HTML, give the element another class using syntax <code>&lt;tag class="class-1 class-2 class-n"&gt;</code></li>
+<li>Then we could directly refer to the specific class we want to style in CSS <img src="frontend_crash_course_part3_files/figure-html/cell-6-9-image-9.png" class="img-fluid" alt="image-9.png"></li>
+</ul></li>
+</ul></li>
+<li><p>Pseudo-selector: Different styling based on the element current state</p>
+<ul>
+<li>Add styling for mouse hovering on button element. <img src="frontend_crash_course_part3_files/figure-html/cell-6-1-image-10.png" class="img-fluid" alt="image-10.png"></li>
+</ul></li>
+</ul>
+</section>
+<section id="two-factors-for-determining-css-precedence" class="level2">
+<h2 class="anchored" data-anchor-id="two-factors-for-determining-css-precedence">Two factors for determining CSS precedence</h2>
+<ol type="1">
+<li><p>Location of the CSS rule in the file</p>
+<ul>
+<li>If there are multiple style applied to the same element, the bottom most style will be applied. Unless there are selectors that is higher up, but has more specificity.</li>
+<li>CSS is read from top to bottom. <img src="frontend_crash_course_part3_files/figure-html/cell-7-6-image.png" class="img-fluid" alt="image.png"></li>
+</ul></li>
+<li><p>Specificity of the CSS rule</p>
+<ul>
+<li><code>id (most important) &gt; class &gt; tag (least important)</code> take precedence when applying CSS rule.</li>
+</ul>
+<p><img src="frontend_crash_course_part3_files/figure-html/cell-7-2-image-3.png" class="img-fluid" alt="image-3.png"> <img src="frontend_crash_course_part3_files/figure-html/cell-7-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
+<ul>
+<li>More selector = higher precedence (therefore combinators (higher precedence) &gt; id &gt; class &gt; tag)
+<ul>
+<li>How to know? count number of ID, class, tags <img src="frontend_crash_course_part3_files/figure-html/cell-7-5-image-6.png" class="img-fluid" alt="image-6.png"></li>
+</ul></li>
+</ul></li>
+</ol>
+<ul>
+<li>Some gotchas:
+<ul>
+<li>HTML inline styles take precedence even if we select elements using id <img src="frontend_crash_course_part3_files/figure-html/cell-7-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
+<li>However, we can override the inline style by adding <code>!important</code>. This will apply even if we use tag selector (which is the least importance compared to class and id)
+<ul>
+<li>In reality, we almost never want to use inline styles and <code>!important</code> selectors. <img src="frontend_crash_course_part3_files/figure-html/cell-7-3-image-4.png" class="img-fluid" alt="image-4.png"></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ul>
+<li><a href="https://www.frontendmentor.io/">FrontEnd Mentor</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">MDN/Reference Index</a>: List of all CSS properties that we can use for styling</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements">MDN/Pseudo-class</a>: Allow us to style an element differently based on different states</li>
+</ul>
+</section>
+</section>
+<section id="lesson-21" class="level1">
+<h1>Lesson 21</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=51109">Video timestamp: The CSS Box Model</a></p>
+<p>## Box Model - What is box model? - The margin -&gt; border -&gt; spacing/padding surrounding content. - Tells us how much space a HTML element represents within the webpage. - The property that plays into that are: width, height, padding, border. - Margin does not define the space taken up by that individual element. It adds space around elements, eg if you have 2 elements and they’re squished together, you can use margin to space them out a little bit. <img src="frontend_crash_course_part3_files/figure-html/cell-10-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
+<section id="css-properties" class="level2">
+<h2 class="anchored" data-anchor-id="css-properties">CSS properties</h2>
+<ul>
+<li><p><code>display</code>:</p>
+<ul>
+<li>By default, most HTML element will have a display property of ‘block’. <code>display: block;</code>
+<ul>
+<li><code>block</code> will make the HTML element occupy 100% of its container space (width), on a new line. <img src="frontend_crash_course_part3_files/figure-html/cell-11-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
+<li>If we did not specify the <code>height</code>, it will take up the total height of the content within it.</li>
+<li><code>block</code> element respect its width and height properties – ie if we explicitly set width properties, it will no longer occupy 100% of the page width. The same applies to height. <img src="frontend_crash_course_part3_files/figure-html/cell-11-2-image-3.png" class="img-fluid" alt="image-3.png"></li>
+</ul></li>
+<li>But some HTML element have different default, eg <code>&lt;span&gt;</code> element has default <code>display: inline;</code>
+<ul>
+<li><code>inline</code> will make the HTML element share the same line as the element before it. They don’t break to a new line by default.</li>
+<li>They don’t occupy the whole of the space, but only occupy the size of the content within them. <img src="frontend_crash_course_part3_files/figure-html/cell-11-6-image.png" class="img-fluid" alt="image.png"></li>
+<li><code>inline</code> element does not respect width, height even when it is explicitly specified. <img src="frontend_crash_course_part3_files/figure-html/cell-11-3-image-4.png" class="img-fluid" alt="image-4.png"></li>
+</ul></li>
+<li><code>inline-block</code> is combination of both <code>inline</code> and <code>block</code>.
+<ul>
+<li>Has all properties of <code>inline</code> but now it respects the width and height properties.</li>
+</ul></li>
+</ul></li>
+<li><p><code>box-sizing</code>:</p>
+<ul>
+<li>Default value is <code>content-box</code>.
+<ul>
+<li>If the property is <code>content-box</code>, the way to calculate how much total size a particular element is taking up is as shown in the image below. <img src="frontend_crash_course_part3_files/figure-html/cell-11-5-image-7.png" class="img-fluid" alt="image-7.png"></li>
+<li>If we add padding to <code>box-sizing: content-box</code>, it will add space to the element. This might make the element break out of its parent element if it is nested.</li>
+</ul></li>
+<li>If we change this property to <code>border-box</code>, it will change how (width, height, padding, border and margin) properties relates to each other.
+<ul>
+<li>We can specify the total height and width we want the entire element to occupy without having to calculate each of the individual component (width, height, padding, border) takes up. <img src="frontend_crash_course_part3_files/figure-html/cell-11-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
+<li>If we add padding to <code>box-sizing: content-box</code>, it will not add space to the element, but will adjust the content to (make it smaller), so that the <code>total height + padding = specified height</code> and <code>total width + padding = specified width</code>.</li>
+</ul></li>
+</ul></li>
+<li><p>CSS reset: To reset all element in the whole document. ``` /* here we’re changing the box-sizing on the root element</p>
+
+<p>to border-box */ html { box-sizing: border-box; }</p>
+<p>/* (<em>) asterics here is a wildcard (targetting all elements in this entire document) and set box-sizing to inherit whatever the property set for the root element. </em>/ <em>, </em>:before, *:after { box-sizing: inherit; } ```</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="frontend_crash_course_part3_files/figure-html/cell-12-1-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="lesson-22" class="level1">
+<h1>Lesson 22</h1>
+<p><a href="https://youtu.be/zJSY8tbf_ys?t=52606">Video timestamp: Most common CSS properties</a></p>
+<section id="most-common-css-properties" class="level2">
+<h2 class="anchored" data-anchor-id="most-common-css-properties">Most common CSS properties</h2>
+<ul>
+<li><code>position</code> property: one of <code>[static (default), absolute, relative, fixed, sticky (newer - might not be supported in some browser)]</code>
+<ul>
+<li><code>position: fixed</code>: Fixed element visibly takes up “space” but not from the prespective of other elements on the page.
+<ul>
+<li>Takes the element out of the flow of the document and fixed its position on the page relative to the viewport (edges of the browser’s window).</li>
+<li>Need to explicitly specify the width and height of the element. <img src="frontend_crash_course_part3_files/figure-html/cell-14-5-image.png" class="img-fluid" alt="image.png"></li>
+</ul></li>
+<li><code>position: relative</code>: When we set an element to be absolute or relative, it enables a new property called z-index (make the page 3D instead of 2D - now element can overlap one another) <img src="frontend_crash_course_part3_files/figure-html/cell-14-2-image-3.png" class="img-fluid" alt="image-3.png"> <img src="frontend_crash_course_part3_files/figure-html/cell-14-1-image-2.png" class="img-fluid" alt="image-2.png">
+<ul>
+<li>To make the navbar sit on top of the element with <code>position: relative</code>, we have to specify <code>z-index: 0;</code> for the <code>&lt;nav&gt;</code> styling.</li>
+<li>We can move the element around relative to itself when we set <code>position: relative</code>. ie if we set <code>top: 20px</code> it will move the element down from its current position by 20px. This is also applicable to <code>bottom, left, right</code> properties.</li>
+<li>Might be useful when we have stuborn HTML element that we need to move around but can’t quite do it with normal CSS properties.</li>
+</ul></li>
+<li><code>position: absolute</code>: Pull the element out of flow of the document but we’re positioning them relative to other element (which has either relative or absolute position) that is directly on top of it (its parent). If there is no other element on top of it that has either relative or absolution positioning, it will make this element relatively positioned according to the root <code>&lt;html&gt;</code> element.
+<ul>
+<li><code>top, bottom, left, right</code> offsets of this element will be based on the position of its next highest element that has relative or absolute positioning. (and not offsets based on the viewport) <img src="frontend_crash_course_part3_files/figure-html/cell-14-3-image-4.png" class="img-fluid" alt="image-4.png"> <img src="frontend_crash_course_part3_files/figure-html/cell-14-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="css-measurement-units" class="level2">
+<h2 class="anchored" data-anchor-id="css-measurement-units">CSS Measurement Units</h2>
+<ul>
+<li>pixels</li>
+<li>percentages
+<ul>
+<li>The prefered way to set width, height as we move away from desktop to mobile (responsive design).</li>
+<li>So that as we resize the window, the element will not get cut off from the viewport, and always stays x% relative the webpage. <img src="frontend_crash_course_part3_files/figure-html/cell-15-1-image.png" class="img-fluid" alt="image.png"></li>
+</ul></li>
+</ul>
+<section id="font-measurement-units" class="level3">
+<h3 class="anchored" data-anchor-id="font-measurement-units">Font measurement units</h3>
+<ul>
+<li>How to define font sizes:
+<ul>
+<li>It gets difficult to define font sizes for each text element one at a time, so we generally target the root element <code>&lt;html&gt;</code> and have everything else be relative to the root font size.</li>
+<li>Default font-size is generally 16px.</li>
+<li>rem and em units allow us to define font-size (root or parent) one time and have everything else be relative to that.
+<ul>
+<li>Eg if we have a webapp and user starts complaining that the font-size is too small, then we can just change the font-size one time at the root level, then everything else will be relative to that font-size.</li>
+</ul></li>
+</ul></li>
+<li>rem: relative to the root <code>&lt;html&gt;</code> element
+<ul>
+<li>1rem = 100% of the size of the text in the root element</li>
+<li>1.2rem = 120% of the size of the text in the root element (eg if the root font size is 16px then 120% * 16px = 19.2px)</li>
+</ul></li>
+<li>em: relative to its parent element
+<ul>
+<li>same calculation as rem unit.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="custom-fonts" class="level2">
+<h2 class="anchored" data-anchor-id="custom-fonts">Custom fonts</h2>
+<ul>
+<li>To add custom fonts (in local environment):
+<ol type="1">
+<li>Go to Google font and pick a font we like</li>
+<li>Copy paste the provided <code>&lt;link&gt;</code> snippet into <code>&lt;head&gt;</code> section of our html file.</li>
+<li>Copy paste the <code>font-family</code> property into our css file.</li>
+<li>Link the CSS file to HTML file. <img src="frontend_crash_course_part3_files/figure-html/cell-16-5-image.png" class="img-fluid" alt="image.png"> <img src="frontend_crash_course_part3_files/figure-html/cell-16-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
+</ol></li>
+<li>To add custom fonts (in codepen environment):
+<ol type="1">
+<li>Go to Google font and pick a font we like</li>
+<li>Copy the provided <code>&lt;link&gt;</code> snippet and paste it to Settings -&gt; “Stuffs for
+
+”</li>
+<li>Copy the provided <code>font-family</code> property and paste it to CSS section. <img src="frontend_crash_course_part3_files/figure-html/cell-16-2-image-3.png" class="img-fluid" alt="image-3.png"></li>
+</ol></li>
+<li>4 font properties that are highly relevant to know:
+<ul>
+<li><code>font-family</code>: define what all text in your webpage will inherit. Often we define it once for <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code> tag and this is going to apply to every font in the webpage.
+<ul>
+<li>We can give 2 values for <code>font-family</code> (it’s not a must to give it 2 values). If we give it 2 values eg <code>font-family: Georgia, serif</code>, then the first argument will be the default font-family of our webpage, and the second argument will be the fallback font.</li>
+<li>If the font-family name is 2 words, we need to put them in brackets eg “Gill Sans”.</li>
+</ul></li>
+<li><code>font-weight</code>: specify the thickness of the font.
+<ul>
+<li>We can only give the width we imported. Eg in the example below, we can set anything in between 400-700. <img src="frontend_crash_course_part3_files/figure-html/cell-16-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
+</ul></li>
+<li><code>line-height</code>: spacing in between lines of text.</li>
+<li><code>color</code>: Specify text color. Check out <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Color_values">documentation</a> for a list of available colors.
+<ul>
+<li>Can be defined as hex, rgb, rgba</li>
+<li>rgba = the first 3 numbers are the values for red, green and blue. The last value define the opacity. 100% opacity = 1. In the example below, we set it to 30% opacity. <img src="frontend_crash_course_part3_files/figure-html/cell-16-3-image-4.png" class="img-fluid" alt="image-4.png"></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="set-background-image" class="level2">
+<h2 class="anchored" data-anchor-id="set-background-image">Set background image</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="frontend_crash_course_part3_files/figure-html/cell-17-1-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+</section>
+<section id="shorthand" class="level2">
+<h2 class="anchored" data-anchor-id="shorthand">Shorthand</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="frontend_crash_course_part3_files/figure-html/cell-18-1-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+</section>
+<section id="step-method-to-write-css-and-html" class="level2">
+<h2 class="anchored" data-anchor-id="step-method-to-write-css-and-html">4-Step method to write CSS and HTML</h2>
+<p><img src="frontend_crash_course_part3_files/figure-html/cell-19-1-image.png" class="img-fluid" alt="image.png"> 1. Figure out what you want to put on the page – design / wireframing 2. How do you want to arrange elements on the page with HTML – the HTML document 3. How to use CSS to achieve the layout – the layout 4. How to style the elements – styling: ie color, margin, padding, etc</p>
+</section>
+<section id="user-story" class="level2">
+<h2 class="anchored" data-anchor-id="user-story">User story</h2>
+<ul>
+<li>Something that we will write down in the requirements gathering phase of building webpage.</li>
+<li>Should list out all the things a user should be able to do if this is implemented correctly.</li>
+</ul>
+</section>
+<section id="reference-1" class="level2">
+<h2 class="anchored" data-anchor-id="reference-1">Reference</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-family">MDN/Font Family</a>: List of available font family</li>
+<li><a href="https://fonts.google.com/">Google Fonts</a>: Free custom fonts we can use</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Color_values">MDN/Color</a>: List of available colors</li>
+<li><a href="https://color.adobe.com/">Abode Color</a>: Where we can explore color themes and complementary colors.</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-position">MDN/Background Position</a>: background-position documentation</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/SarahHannes\.github\.io\/sarahhannes\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
