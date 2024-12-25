@@ -158,6 +158,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<blockquote class="blockquote">
+<p>This is part 3/3 notes of a <a href="https://www.youtube.com/watch?v=LDB4uaJ87e0">Youtube react crash course</a>.</p>
+</blockquote>
 <section id="data-fetching" class="level2">
 <h2 class="anchored" data-anchor-id="data-fetching">Data Fetching</h2>
 <ul>
@@ -166,20 +169,20 @@ ul.task-list li input[type="checkbox"] {
 <li><p>There are also other third party libraries we can use to fetch data, eg <a href="https://www.npmjs.com/package/react-query">React query</a> and <a href="https://swr.vercel.app/">SWR</a>. It is easier to fetch data using these third party libraries, but the method we did in this tutorial (using useState and useEffect is the most basic way to fetch data from client side component).</p></li>
 <li><p>There are so many different ways to do the same exact things in React, so just choose what works for you.</p></li>
 <li><p>We can also use data loader from react-router to fetch data. Using data loader, we create a function in a component file then export the function from the file and use the function in other areas (basically as our global state for whatever the job is and pass it into other components).</p></li>
-<li><p>This is how to get data using useEffects hook: <img src="react_crash_course_part3_files/figure-html/cell-1-2-image.png" class="img-fluid" alt="image.png"></p></li>
-<li><p>Another way to get data is to use react-router’s data loaders, we can do this without having to use useEffects. We can also export the data from this component so we can use it in other components as well. Below is another way to achieve the same thing using useDataLoader hook. <img src="react_crash_course_part3_files/figure-html/cell-1-1-image-2.png" class="img-fluid" alt="image-2.png"></p></li>
+<li><p>This is how to get data using useEffects hook: <img src="react_crash_course_part3_files/figure-html/cell-2-2-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>Another way to get data is to use react-router’s data loaders, we can do this without having to use useEffects. We can also export the data from this component so we can use it in other components as well. Below is another way to achieve the same thing using useDataLoader hook. <img src="react_crash_course_part3_files/figure-html/cell-2-1-image-2.png" class="img-fluid" alt="image-2.png"></p></li>
 <li><p>There are many ways we can work with forms, but the core way is to add useState for each piece of form element that takes in user input. There are many ways to do this:</p>
 <ul>
 <li>We could have just a single object in your state and have all the fields of your form in that object.</li>
 <li>or you could have state for each fields in your form.</li>
 </ul></li>
-<li><p>Below is an example of how you could add state to each of the form fields and access the user-inputed values from your form. <img src="react_crash_course_part3_files/figure-html/cell-2-1-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>Below is an example of how you could add state to each of the form fields and access the user-inputed values from your form. <img src="react_crash_course_part3_files/figure-html/cell-3-1-image.png" class="img-fluid" alt="image.png"></p></li>
 <li><p>When you add a piece of state to an input, you need to add onChange, because when you change the input, the state has to update and it has to call the function to change its state. The onChange attribute takes a function. The function has an event parameter (usually we would use the variable <code>e</code>). And this event parameter has <code>e.target.value</code> which stores the inputed data. The syntax for onChange is: <code>onChange={(e) =&gt; setFuntion(e.target.value)}</code>. Where setFunction is the function we defined to update the value for our useState().</p></li>
-<li><p>To have javascript automatically navigate to other pages, eg after sending form, we want to redirect to the /jobs page: <img src="react_crash_course_part3_files/figure-html/cell-3-1-image.png" class="img-fluid" alt="image.png"></p></li>
-<li><p>Sending function as arg and calling the function in another component. <img src="react_crash_course_part3_files/figure-html/cell-4-4-image.png" class="img-fluid" alt="image.png"></p></li>
-<li><p>Example on how to create a post request in javascript <img src="react_crash_course_part3_files/figure-html/cell-4-1-image-2.png" class="img-fluid" alt="image-2.png"></p></li>
-<li><p>Example on how to send api delete request in javascript <img src="react_crash_course_part3_files/figure-html/cell-4-2-image-3.png" class="img-fluid" alt="image-3.png"></p></li>
-<li><p>To start the production server, run in terminal <code>npm run build</code>. This will create another folder called <code>dist</code> in the project repo - this stores your production builds. And to run the production server, we run <code>npm run preview</code>. This is possible because of we have stated the commands in the package.json. <img src="react_crash_course_part3_files/figure-html/cell-4-3-image-4.png" class="img-fluid" alt="image-4.png"></p></li>
+<li><p>To have javascript automatically navigate to other pages, eg after sending form, we want to redirect to the /jobs page: <img src="react_crash_course_part3_files/figure-html/cell-4-1-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>Sending function as arg and calling the function in another component. <img src="react_crash_course_part3_files/figure-html/cell-5-4-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>Example on how to create a post request in javascript <img src="react_crash_course_part3_files/figure-html/cell-5-1-image-2.png" class="img-fluid" alt="image-2.png"></p></li>
+<li><p>Example on how to send api delete request in javascript <img src="react_crash_course_part3_files/figure-html/cell-5-2-image-3.png" class="img-fluid" alt="image-3.png"></p></li>
+<li><p>To start the production server, run in terminal <code>npm run build</code>. This will create another folder called <code>dist</code> in the project repo - this stores your production builds. And to run the production server, we run <code>npm run preview</code>. This is possible because of we have stated the commands in the package.json. <img src="react_crash_course_part3_files/figure-html/cell-5-3-image-4.png" class="img-fluid" alt="image-4.png"></p></li>
 </ul>
 </section>
 <section id="references-credits" class="level1">

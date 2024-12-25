@@ -182,6 +182,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<blockquote class="blockquote">
+<p>This is part 3/4 notes of a <a href="https://www.youtube.com/watch?v=zJSY8tbf_ys">Youtube Front-end web development crash course</a>.</p>
+</blockquote>
 <section id="lesson-19" class="level1">
 <h1>Lesson 19</h1>
 <p><a href="https://youtu.be/zJSY8tbf_ys?t=44636">Video timestamp: HTML + JavaScript “Meme Generator” challenge</a></p>
@@ -192,7 +195,7 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="https://youtu.be/zJSY8tbf_ys?t=47537">Video timestamp: CSS Crash Course</a></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part3_files/figure-html/cell-4-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part3_files/figure-html/cell-5-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
@@ -200,7 +203,7 @@ ul.task-list li input[type="checkbox"] {
 <li>All we’re trying to do in CSS is to target a specific HTML element and apply some style/layour to it.
 <ul>
 <li>get specific element using CSS Selector <code>.some-class</code></li>
-<li>set value to a specific CSS property of that specific element <code>color: #211E1E</code> <img src="frontend_crash_course_part3_files/figure-html/cell-5-1-image.png" class="img-fluid" alt="image.png"></li>
+<li>set value to a specific CSS property of that specific element <code>color: #211E1E</code> <img src="frontend_crash_course_part3_files/figure-html/cell-6-1-image.png" class="img-fluid" alt="image.png"></li>
 </ul></li>
 <li>Relationship between HTML, CSS and Javascript (simple example)
 <ul>
@@ -222,47 +225,47 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Syntax: <code>pre-selector descendent-selector</code> (ie I want to target any actual selector that exist as a descendent of pre-selector)</li>
 <li>the parent’s selector (here as <code>.main-container</code>) is called pre-selector</li>
-<li>the actual element we want to style selector (here as <code>li</code>) is called the actual selector <img src="frontend_crash_course_part3_files/figure-html/cell-6-10-image.png" class="img-fluid" alt="image.png"></li>
+<li>the actual element we want to style selector (here as <code>li</code>) is called the actual selector <img src="frontend_crash_course_part3_files/figure-html/cell-7-10-image.png" class="img-fluid" alt="image.png"></li>
 </ul></li>
 <li><p>Children selector: Target only the direct children of a pre-selector.</p>
 <ul>
-<li>Syntax: <code>pre-selector &gt; children-selector</code> <img src="frontend_crash_course_part3_files/figure-html/cell-6-2-image-2.png" class="img-fluid" alt="image-2.png"></li>
+<li>Syntax: <code>pre-selector &gt; children-selector</code> <img src="frontend_crash_course_part3_files/figure-html/cell-7-2-image-2.png" class="img-fluid" alt="image-2.png"></li>
 </ul></li>
 <li><p>Adjacent Sibling selector: Select only the first sibling that directly follow a specific element.</p>
 <ul>
 <li>Syntax: <code>pre-selector + sibling-selector</code></li>
-<li>Cons: if we change the structure of our HTML, this rule will break. Eg if we wraped the <code>&lt;ul&gt;</code> in a <code>&lt;div&gt;</code>, then it will break because <code>&lt;p&gt;</code> will no longer be the direct sibling of <code>&lt;ul&gt;</code>. <img src="frontend_crash_course_part3_files/figure-html/cell-6-3-image-3.png" class="img-fluid" alt="image-3.png"></li>
-<li>A better alternative is to give the elements a class, then directly style the class like below. Now the CSS rule will not break even if we change the structure. <img src="frontend_crash_course_part3_files/figure-html/cell-6-5-image-5.png" class="img-fluid" alt="image-5.png"></li>
+<li>Cons: if we change the structure of our HTML, this rule will break. Eg if we wraped the <code>&lt;ul&gt;</code> in a <code>&lt;div&gt;</code>, then it will break because <code>&lt;p&gt;</code> will no longer be the direct sibling of <code>&lt;ul&gt;</code>. <img src="frontend_crash_course_part3_files/figure-html/cell-7-3-image-3.png" class="img-fluid" alt="image-3.png"></li>
+<li>A better alternative is to give the elements a class, then directly style the class like below. Now the CSS rule will not break even if we change the structure. <img src="frontend_crash_course_part3_files/figure-html/cell-7-5-image-5.png" class="img-fluid" alt="image-5.png"></li>
 </ul></li>
 <li><p>Direct Sibling selector: Select all direct siblings that directly follow a specific element.</p>
 <ul>
-<li>Syntax: <code>pre-selector ~ siblings-selector</code> <img src="frontend_crash_course_part3_files/figure-html/cell-6-4-image-4.png" class="img-fluid" alt="image-4.png"></li>
+<li>Syntax: <code>pre-selector ~ siblings-selector</code> <img src="frontend_crash_course_part3_files/figure-html/cell-7-4-image-4.png" class="img-fluid" alt="image-4.png"></li>
 </ul></li>
 <li><p>Select specific tag &amp; class: Select only elements that are of specific tag that belongs to specific class.</p>
 <ul>
 <li>Syntax: <code>tag-selector[class="class-selector"]</code></li>
-<li>Use this when we have many tags belonging to the same class, but we only want to select a specific tag. Notice the <code>&lt;div&gt;</code> also belong to the same class, but is not selected. <img src="frontend_crash_course_part3_files/figure-html/cell-6-6-image-6.png" class="img-fluid" alt="image-6.png"></li>
+<li>Use this when we have many tags belonging to the same class, but we only want to select a specific tag. Notice the <code>&lt;div&gt;</code> also belong to the same class, but is not selected. <img src="frontend_crash_course_part3_files/figure-html/cell-7-6-image-6.png" class="img-fluid" alt="image-6.png"></li>
 </ul></li>
 <li><p>When we want to have unique styles for different class but also have some styles that are shared across. Eg let’s say we want the 2 boxes to have the same width, height but everything else unique to each class:</p>
 <ul>
 <li>Method 1: Styling for each class
 <ul>
-<li>Notice we have repetitive <code>width</code> and <code>height</code> specified for each of the class style. <img src="frontend_crash_course_part3_files/figure-html/cell-6-7-image-7.png" class="img-fluid" alt="image-7.png"></li>
+<li>Notice we have repetitive <code>width</code> and <code>height</code> specified for each of the class style. <img src="frontend_crash_course_part3_files/figure-html/cell-7-7-image-7.png" class="img-fluid" alt="image-7.png"></li>
 </ul></li>
 <li>Method 2: Shared styling
 <ul>
 <li>Notice we’ve removed repetitive <code>width</code> and <code>height</code> and move them to shared styling.</li>
-<li>Syntax: <code>selector1 , selector2</code> (ie I want to target <code>selector1</code> AND <code>selector2</code>) Here selector can be of tag, class, id or whatever. <img src="frontend_crash_course_part3_files/figure-html/cell-6-8-image-8.png" class="img-fluid" alt="image-8.png"></li>
+<li>Syntax: <code>selector1 , selector2</code> (ie I want to target <code>selector1</code> AND <code>selector2</code>) Here selector can be of tag, class, id or whatever. <img src="frontend_crash_course_part3_files/figure-html/cell-7-8-image-8.png" class="img-fluid" alt="image-8.png"></li>
 </ul></li>
 <li>Method 3: Give multiple classes to a single element
 <ul>
 <li>In HTML, give the element another class using syntax <code>&lt;tag class="class-1 class-2 class-n"&gt;</code></li>
-<li>Then we could directly refer to the specific class we want to style in CSS <img src="frontend_crash_course_part3_files/figure-html/cell-6-9-image-9.png" class="img-fluid" alt="image-9.png"></li>
+<li>Then we could directly refer to the specific class we want to style in CSS <img src="frontend_crash_course_part3_files/figure-html/cell-7-9-image-9.png" class="img-fluid" alt="image-9.png"></li>
 </ul></li>
 </ul></li>
 <li><p>Pseudo-selector: Different styling based on the element current state</p>
 <ul>
-<li>Add styling for mouse hovering on button element. <img src="frontend_crash_course_part3_files/figure-html/cell-6-1-image-10.png" class="img-fluid" alt="image-10.png"></li>
+<li>Add styling for mouse hovering on button element. <img src="frontend_crash_course_part3_files/figure-html/cell-7-1-image-10.png" class="img-fluid" alt="image-10.png"></li>
 </ul></li>
 </ul>
 </section>
@@ -272,27 +275,27 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Location of the CSS rule in the file</p>
 <ul>
 <li>If there are multiple style applied to the same element, the bottom most style will be applied. Unless there are selectors that is higher up, but has more specificity.</li>
-<li>CSS is read from top to bottom. <img src="frontend_crash_course_part3_files/figure-html/cell-7-6-image.png" class="img-fluid" alt="image.png"></li>
+<li>CSS is read from top to bottom. <img src="frontend_crash_course_part3_files/figure-html/cell-8-6-image.png" class="img-fluid" alt="image.png"></li>
 </ul></li>
 <li><p>Specificity of the CSS rule</p>
 <ul>
 <li><code>id (most important) &gt; class &gt; tag (least important)</code> take precedence when applying CSS rule.</li>
 </ul>
-<p><img src="frontend_crash_course_part3_files/figure-html/cell-7-2-image-3.png" class="img-fluid" alt="image-3.png"> <img src="frontend_crash_course_part3_files/figure-html/cell-7-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
+<p><img src="frontend_crash_course_part3_files/figure-html/cell-8-2-image-3.png" class="img-fluid" alt="image-3.png"> <img src="frontend_crash_course_part3_files/figure-html/cell-8-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
 <ul>
 <li>More selector = higher precedence (therefore combinators (higher precedence) &gt; id &gt; class &gt; tag)
 <ul>
-<li>How to know? count number of ID, class, tags <img src="frontend_crash_course_part3_files/figure-html/cell-7-5-image-6.png" class="img-fluid" alt="image-6.png"></li>
+<li>How to know? count number of ID, class, tags <img src="frontend_crash_course_part3_files/figure-html/cell-8-5-image-6.png" class="img-fluid" alt="image-6.png"></li>
 </ul></li>
 </ul></li>
 </ol>
 <ul>
 <li>Some gotchas:
 <ul>
-<li>HTML inline styles take precedence even if we select elements using id <img src="frontend_crash_course_part3_files/figure-html/cell-7-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
+<li>HTML inline styles take precedence even if we select elements using id <img src="frontend_crash_course_part3_files/figure-html/cell-8-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
 <li>However, we can override the inline style by adding <code>!important</code>. This will apply even if we use tag selector (which is the least importance compared to class and id)
 <ul>
-<li>In reality, we almost never want to use inline styles and <code>!important</code> selectors. <img src="frontend_crash_course_part3_files/figure-html/cell-7-3-image-4.png" class="img-fluid" alt="image-4.png"></li>
+<li>In reality, we almost never want to use inline styles and <code>!important</code> selectors. <img src="frontend_crash_course_part3_files/figure-html/cell-8-3-image-4.png" class="img-fluid" alt="image-4.png"></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -309,7 +312,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="lesson-21" class="level1">
 <h1>Lesson 21</h1>
 <p><a href="https://youtu.be/zJSY8tbf_ys?t=51109">Video timestamp: The CSS Box Model</a></p>
-<p>## Box Model - What is box model? - The margin -&gt; border -&gt; spacing/padding surrounding content. - Tells us how much space a HTML element represents within the webpage. - The property that plays into that are: width, height, padding, border. - Margin does not define the space taken up by that individual element. It adds space around elements, eg if you have 2 elements and they’re squished together, you can use margin to space them out a little bit. <img src="frontend_crash_course_part3_files/figure-html/cell-10-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
+<p>## Box Model - What is box model? - The margin -&gt; border -&gt; spacing/padding surrounding content. - Tells us how much space a HTML element represents within the webpage. - The property that plays into that are: width, height, padding, border. - Margin does not define the space taken up by that individual element. It adds space around elements, eg if you have 2 elements and they’re squished together, you can use margin to space them out a little bit. <img src="frontend_crash_course_part3_files/figure-html/cell-11-1-image-2.png" class="img-fluid" alt="image-2.png"></p>
 <section id="css-properties" class="level2">
 <h2 class="anchored" data-anchor-id="css-properties">CSS properties</h2>
 <ul>
@@ -317,15 +320,15 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>By default, most HTML element will have a display property of ‘block’. <code>display: block;</code>
 <ul>
-<li><code>block</code> will make the HTML element occupy 100% of its container space (width), on a new line. <img src="frontend_crash_course_part3_files/figure-html/cell-11-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
+<li><code>block</code> will make the HTML element occupy 100% of its container space (width), on a new line. <img src="frontend_crash_course_part3_files/figure-html/cell-12-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
 <li>If we did not specify the <code>height</code>, it will take up the total height of the content within it.</li>
-<li><code>block</code> element respect its width and height properties – ie if we explicitly set width properties, it will no longer occupy 100% of the page width. The same applies to height. <img src="frontend_crash_course_part3_files/figure-html/cell-11-2-image-3.png" class="img-fluid" alt="image-3.png"></li>
+<li><code>block</code> element respect its width and height properties – ie if we explicitly set width properties, it will no longer occupy 100% of the page width. The same applies to height. <img src="frontend_crash_course_part3_files/figure-html/cell-12-2-image-3.png" class="img-fluid" alt="image-3.png"></li>
 </ul></li>
 <li>But some HTML element have different default, eg <code>&lt;span&gt;</code> element has default <code>display: inline;</code>
 <ul>
 <li><code>inline</code> will make the HTML element share the same line as the element before it. They don’t break to a new line by default.</li>
-<li>They don’t occupy the whole of the space, but only occupy the size of the content within them. <img src="frontend_crash_course_part3_files/figure-html/cell-11-6-image.png" class="img-fluid" alt="image.png"></li>
-<li><code>inline</code> element does not respect width, height even when it is explicitly specified. <img src="frontend_crash_course_part3_files/figure-html/cell-11-3-image-4.png" class="img-fluid" alt="image-4.png"></li>
+<li>They don’t occupy the whole of the space, but only occupy the size of the content within them. <img src="frontend_crash_course_part3_files/figure-html/cell-12-6-image.png" class="img-fluid" alt="image.png"></li>
+<li><code>inline</code> element does not respect width, height even when it is explicitly specified. <img src="frontend_crash_course_part3_files/figure-html/cell-12-3-image-4.png" class="img-fluid" alt="image-4.png"></li>
 </ul></li>
 <li><code>inline-block</code> is combination of both <code>inline</code> and <code>block</code>.
 <ul>
@@ -336,12 +339,12 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Default value is <code>content-box</code>.
 <ul>
-<li>If the property is <code>content-box</code>, the way to calculate how much total size a particular element is taking up is as shown in the image below. <img src="frontend_crash_course_part3_files/figure-html/cell-11-5-image-7.png" class="img-fluid" alt="image-7.png"></li>
+<li>If the property is <code>content-box</code>, the way to calculate how much total size a particular element is taking up is as shown in the image below. <img src="frontend_crash_course_part3_files/figure-html/cell-12-5-image-7.png" class="img-fluid" alt="image-7.png"></li>
 <li>If we add padding to <code>box-sizing: content-box</code>, it will add space to the element. This might make the element break out of its parent element if it is nested.</li>
 </ul></li>
 <li>If we change this property to <code>border-box</code>, it will change how (width, height, padding, border and margin) properties relates to each other.
 <ul>
-<li>We can specify the total height and width we want the entire element to occupy without having to calculate each of the individual component (width, height, padding, border) takes up. <img src="frontend_crash_course_part3_files/figure-html/cell-11-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
+<li>We can specify the total height and width we want the entire element to occupy without having to calculate each of the individual component (width, height, padding, border) takes up. <img src="frontend_crash_course_part3_files/figure-html/cell-12-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
 <li>If we add padding to <code>box-sizing: content-box</code>, it will not add space to the element, but will adjust the content to (make it smaller), so that the <code>total height + padding = specified height</code> and <code>total width + padding = specified width</code>.</li>
 </ul></li>
 </ul></li>
@@ -352,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part3_files/figure-html/cell-12-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part3_files/figure-html/cell-13-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
@@ -369,9 +372,9 @@ ul.task-list li input[type="checkbox"] {
 <li><code>position: fixed</code>: Fixed element visibly takes up “space” but not from the prespective of other elements on the page.
 <ul>
 <li>Takes the element out of the flow of the document and fixed its position on the page relative to the viewport (edges of the browser’s window).</li>
-<li>Need to explicitly specify the width and height of the element. <img src="frontend_crash_course_part3_files/figure-html/cell-14-5-image.png" class="img-fluid" alt="image.png"></li>
+<li>Need to explicitly specify the width and height of the element. <img src="frontend_crash_course_part3_files/figure-html/cell-15-5-image.png" class="img-fluid" alt="image.png"></li>
 </ul></li>
-<li><code>position: relative</code>: When we set an element to be absolute or relative, it enables a new property called z-index (make the page 3D instead of 2D - now element can overlap one another) <img src="frontend_crash_course_part3_files/figure-html/cell-14-2-image-3.png" class="img-fluid" alt="image-3.png"> <img src="frontend_crash_course_part3_files/figure-html/cell-14-1-image-2.png" class="img-fluid" alt="image-2.png">
+<li><code>position: relative</code>: When we set an element to be absolute or relative, it enables a new property called z-index (make the page 3D instead of 2D - now element can overlap one another) <img src="frontend_crash_course_part3_files/figure-html/cell-15-2-image-3.png" class="img-fluid" alt="image-3.png"> <img src="frontend_crash_course_part3_files/figure-html/cell-15-1-image-2.png" class="img-fluid" alt="image-2.png">
 <ul>
 <li>To make the navbar sit on top of the element with <code>position: relative</code>, we have to specify <code>z-index: 0;</code> for the <code>&lt;nav&gt;</code> styling.</li>
 <li>We can move the element around relative to itself when we set <code>position: relative</code>. ie if we set <code>top: 20px</code> it will move the element down from its current position by 20px. This is also applicable to <code>bottom, left, right</code> properties.</li>
@@ -379,7 +382,7 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 <li><code>position: absolute</code>: Pull the element out of flow of the document but we’re positioning them relative to other element (which has either relative or absolute position) that is directly on top of it (its parent). If there is no other element on top of it that has either relative or absolution positioning, it will make this element relatively positioned according to the root <code>&lt;html&gt;</code> element.
 <ul>
-<li><code>top, bottom, left, right</code> offsets of this element will be based on the position of its next highest element that has relative or absolute positioning. (and not offsets based on the viewport) <img src="frontend_crash_course_part3_files/figure-html/cell-14-3-image-4.png" class="img-fluid" alt="image-4.png"> <img src="frontend_crash_course_part3_files/figure-html/cell-14-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
+<li><code>top, bottom, left, right</code> offsets of this element will be based on the position of its next highest element that has relative or absolute positioning. (and not offsets based on the viewport) <img src="frontend_crash_course_part3_files/figure-html/cell-15-3-image-4.png" class="img-fluid" alt="image-4.png"> <img src="frontend_crash_course_part3_files/figure-html/cell-15-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -391,7 +394,7 @@ ul.task-list li input[type="checkbox"] {
 <li>percentages
 <ul>
 <li>The prefered way to set width, height as we move away from desktop to mobile (responsive design).</li>
-<li>So that as we resize the window, the element will not get cut off from the viewport, and always stays x% relative the webpage. <img src="frontend_crash_course_part3_files/figure-html/cell-15-1-image.png" class="img-fluid" alt="image.png"></li>
+<li>So that as we resize the window, the element will not get cut off from the viewport, and always stays x% relative the webpage. <img src="frontend_crash_course_part3_files/figure-html/cell-16-1-image.png" class="img-fluid" alt="image.png"></li>
 </ul></li>
 </ul>
 <section id="font-measurement-units" class="level3">
@@ -426,7 +429,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Go to Google font and pick a font we like</li>
 <li>Copy paste the provided <code>&lt;link&gt;</code> snippet into <code>&lt;head&gt;</code> section of our html file.</li>
 <li>Copy paste the <code>font-family</code> property into our css file.</li>
-<li>Link the CSS file to HTML file. <img src="frontend_crash_course_part3_files/figure-html/cell-16-5-image.png" class="img-fluid" alt="image.png"> <img src="frontend_crash_course_part3_files/figure-html/cell-16-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
+<li>Link the CSS file to HTML file. <img src="frontend_crash_course_part3_files/figure-html/cell-17-5-image.png" class="img-fluid" alt="image.png"> <img src="frontend_crash_course_part3_files/figure-html/cell-17-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
 </ol></li>
 <li>To add custom fonts (in codepen environment):
 <ol type="1">
@@ -434,7 +437,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Copy the provided <code>&lt;link&gt;</code> snippet and paste it to Settings -&gt; “Stuffs for
 
 ”</li>
-<li>Copy the provided <code>font-family</code> property and paste it to CSS section. <img src="frontend_crash_course_part3_files/figure-html/cell-16-2-image-3.png" class="img-fluid" alt="image-3.png"></li>
+<li>Copy the provided <code>font-family</code> property and paste it to CSS section. <img src="frontend_crash_course_part3_files/figure-html/cell-17-2-image-3.png" class="img-fluid" alt="image-3.png"></li>
 </ol></li>
 <li>4 font properties that are highly relevant to know:
 <ul>
@@ -445,13 +448,13 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 <li><code>font-weight</code>: specify the thickness of the font.
 <ul>
-<li>We can only give the width we imported. Eg in the example below, we can set anything in between 400-700. <img src="frontend_crash_course_part3_files/figure-html/cell-16-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
+<li>We can only give the width we imported. Eg in the example below, we can set anything in between 400-700. <img src="frontend_crash_course_part3_files/figure-html/cell-17-4-image-5.png" class="img-fluid" alt="image-5.png"></li>
 </ul></li>
 <li><code>line-height</code>: spacing in between lines of text.</li>
 <li><code>color</code>: Specify text color. Check out <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Color_values">documentation</a> for a list of available colors.
 <ul>
 <li>Can be defined as hex, rgb, rgba</li>
-<li>rgba = the first 3 numbers are the values for red, green and blue. The last value define the opacity. 100% opacity = 1. In the example below, we set it to 30% opacity. <img src="frontend_crash_course_part3_files/figure-html/cell-16-3-image-4.png" class="img-fluid" alt="image-4.png"></li>
+<li>rgba = the first 3 numbers are the values for red, green and blue. The last value define the opacity. 100% opacity = 1. In the example below, we set it to 30% opacity. <img src="frontend_crash_course_part3_files/figure-html/cell-17-3-image-4.png" class="img-fluid" alt="image-4.png"></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -460,7 +463,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="set-background-image">Set background image</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part3_files/figure-html/cell-17-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part3_files/figure-html/cell-18-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
@@ -469,14 +472,14 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="shorthand">Shorthand</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part3_files/figure-html/cell-18-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part3_files/figure-html/cell-19-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 </section>
 <section id="step-method-to-write-css-and-html" class="level2">
 <h2 class="anchored" data-anchor-id="step-method-to-write-css-and-html">4-Step method to write CSS and HTML</h2>
-<p><img src="frontend_crash_course_part3_files/figure-html/cell-19-1-image.png" class="img-fluid" alt="image.png"> 1. Figure out what you want to put on the page – design / wireframing 2. How do you want to arrange elements on the page with HTML – the HTML document 3. How to use CSS to achieve the layout – the layout 4. How to style the elements – styling: ie color, margin, padding, etc</p>
+<p><img src="frontend_crash_course_part3_files/figure-html/cell-20-1-image.png" class="img-fluid" alt="image.png"> 1. Figure out what you want to put on the page – design / wireframing 2. How do you want to arrange elements on the page with HTML – the HTML document 3. How to use CSS to achieve the layout – the layout 4. How to style the elements – styling: ie color, margin, padding, etc</p>
 </section>
 <section id="user-story" class="level2">
 <h2 class="anchored" data-anchor-id="user-story">User story</h2>

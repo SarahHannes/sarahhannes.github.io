@@ -160,71 +160,74 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<blockquote class="blockquote">
+<p>This is part 2/3 notes of a <a href="https://www.youtube.com/watch?v=LDB4uaJ87e0">Youtube react crash course</a>.</p>
+</blockquote>
 <section id="lesson-3" class="level1">
 <h1>Lesson 3</h1>
 <ul>
-<li><p>To start the frontend server, we run <code>npm run dev</code>. This works because we have <code>dev</code> under <code>script</code>. <img src="react_crash_course_part2_files/figure-html/cell-2-1-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>To start the frontend server, we run <code>npm run dev</code>. This works because we have <code>dev</code> under <code>script</code>. <img src="react_crash_course_part2_files/figure-html/cell-3-1-image.png" class="img-fluid" alt="image.png"></p></li>
 <li><p>The structure for single page application is the similar for all frameworks – the single page is index.html.</p></li>
 <li><p>In index.html, we have a div element of id=“root”, this is the main part where our application will be placed in. (See below image - left)</p></li>
 <li><p>In the div, we are including the src/main.jsx file as a module. This is the application’s entrypoint.</p>
 <ul>
-<li>In below image (right), we can see that we are selecting the HTML element by id, and we call render. In the below example, we are rendering <code>&lt;/App&gt;</code> component. This comes from App.jsx. <img src="react_crash_course_part2_files/figure-html/cell-3-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
-<li>We can render anything we want, eg if we change this to H1. <img src="react_crash_course_part2_files/figure-html/cell-3-7-image.png" class="img-fluid" alt="image.png"></li>
+<li>In below image (right), we can see that we are selecting the HTML element by id, and we call render. In the below example, we are rendering <code>&lt;/App&gt;</code> component. This comes from App.jsx. <img src="react_crash_course_part2_files/figure-html/cell-4-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
+<li>We can render anything we want, eg if we change this to H1. <img src="react_crash_course_part2_files/figure-html/cell-4-7-image.png" class="img-fluid" alt="image.png"></li>
 </ul></li>
 <li><p>Notice that we are importing the stylesheet on line 3 in right image <code>import './index.css'</code></p></li>
 <li><p>The <code>&lt;StrictMode&gt;</code> is a wrapper component that will check for potential problem in your app. Eg deprecated method, unsafe lifecycle methods, legacy api usage etc.</p></li>
 <li><p>The react+vite boilerplate contains 2 css (App.css and index.css).</p></li>
 <li><p>The App.jsx is the main component and basically this is all the stuff that gets rendered.</p></li>
-<li><p>Every react component will return JSX. JSX is a html-like syntax. <img src="react_crash_course_part2_files/figure-html/cell-3-2-image-3.png" class="img-fluid" alt="image-3.png"></p></li>
+<li><p>Every react component will return JSX. JSX is a html-like syntax. <img src="react_crash_course_part2_files/figure-html/cell-4-2-image-3.png" class="img-fluid" alt="image-3.png"></p></li>
 <li><p>You can only return a single html-like element. If you want to return multiple html elements, you can just wrap them up inside a div, and return the parent div, or just use a fragment if you don’t want an actual div (essentially just wrap all of your html elements inside an empty tag <code>&lt;&gt;&lt;/&gt;</code>)</p></li>
-<li><p>We can use javascript above the return statement. <img src="react_crash_course_part2_files/figure-html/cell-3-3-image-4.png" class="img-fluid" alt="image-4.png"></p></li>
-<li><p>We can also make reference to javascript expressions and do loops (essentially do anything using javascript - except if statement – because it has to be a 1 line expression). Anytime we want to refer to something dynamic (from javascript), we need to use curly braces. <img src="react_crash_course_part2_files/figure-html/cell-3-4-image-5.png" class="img-fluid" alt="image-5.png"></p>
+<li><p>We can use javascript above the return statement. <img src="react_crash_course_part2_files/figure-html/cell-4-3-image-4.png" class="img-fluid" alt="image-4.png"></p></li>
+<li><p>We can also make reference to javascript expressions and do loops (essentially do anything using javascript - except if statement – because it has to be a 1 line expression). Anytime we want to refer to something dynamic (from javascript), we need to use curly braces. <img src="react_crash_course_part2_files/figure-html/cell-4-4-image-5.png" class="img-fluid" alt="image-5.png"></p>
 <ul>
-<li>The above code will actually give a warning in console tool (to open the dev tool: right click anywhere –&gt; inspect –&gt; console tab): <img src="react_crash_course_part2_files/figure-html/cell-3-5-image-6.png" class="img-fluid" alt="image-6.png"> This is because anytime we use list items, we need to give each item a unique id. <img src="react_crash_course_part2_files/figure-html/cell-3-6-image-8.png" class="img-fluid" alt="image-8.png"></li>
+<li>The above code will actually give a warning in console tool (to open the dev tool: right click anywhere –&gt; inspect –&gt; console tab): <img src="react_crash_course_part2_files/figure-html/cell-4-5-image-6.png" class="img-fluid" alt="image-6.png"> This is because anytime we use list items, we need to give each item a unique id. <img src="react_crash_course_part2_files/figure-html/cell-4-6-image-8.png" class="img-fluid" alt="image-8.png"></li>
 </ul></li>
 <li><p>We can only use javascript 1 liner inside the html returned element, so what we can do is using tertary conditional if we want to use if conditional ie {condition statement ? if true : if false}</p></li>
 <li><p>jsx is what HTML would be if it had logic.</p></li>
-<li><p>We can also include inline styles in jsx file. <img src="react_crash_course_part2_files/figure-html/cell-4-1-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>We can also include inline styles in jsx file. <img src="react_crash_course_part2_files/figure-html/cell-5-1-image.png" class="img-fluid" alt="image.png"></p></li>
 <li><p>You can store your components inside ./src/components.</p></li>
-<li><p>A component can have a .js or .jsx extension for javascript; and .ts or .tsx for typescript. <img src="react_crash_course_part2_files/figure-html/cell-5-4-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>A component can have a .js or .jsx extension for javascript; and .ts or .tsx for typescript. <img src="react_crash_course_part2_files/figure-html/cell-6-4-image.png" class="img-fluid" alt="image.png"></p></li>
 <li><p>To use the new component in your app.js, you need to import it. In app.js, on the top of the file, we import with <code>import Navbar from './components/Navbar'</code></p></li>
-<li><p>To use the imported components, we use <code>&lt;Navbar /&gt;</code>. <img src="react_crash_course_part2_files/figure-html/cell-5-1-image-2.png" class="img-fluid" alt="image-2.png"></p></li>
-<li><p>If we checked the components tab in dev tools, we can see the new component we’ve added. (To add the components tab in the dev tools: add this chrome extension https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=ja) <img src="react_crash_course_part2_files/figure-html/cell-5-2-image-3.png" class="img-fluid" alt="image-3.png"></p></li>
+<li><p>To use the imported components, we use <code>&lt;Navbar /&gt;</code>. <img src="react_crash_course_part2_files/figure-html/cell-6-1-image-2.png" class="img-fluid" alt="image-2.png"></p></li>
+<li><p>If we checked the components tab in dev tools, we can see the new component we’ve added. (To add the components tab in the dev tools: add this chrome extension https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=ja) <img src="react_crash_course_part2_files/figure-html/cell-6-2-image-3.png" class="img-fluid" alt="image-3.png"></p></li>
 <li><p>The convention is to name Javascript components with first letter capitalized and all html elements with all lowercase letters.</p></li>
-<li><p>To import image from /assets/images folder and use it in our components: <img src="react_crash_course_part2_files/figure-html/cell-5-3-image-4.png" class="img-fluid" alt="image-4.png"></p></li>
-<li><p>We can pass props to a components. These are like attributes. <img src="react_crash_course_part2_files/figure-html/cell-6-4-image.png" class="img-fluid" alt="image.png"></p></li>
-<li><p>Also another way to write is to destructure props –&gt; {attribute1, attibuteN} <img src="react_crash_course_part2_files/figure-html/cell-6-1-image-2.png" class="img-fluid" alt="image-2.png"></p></li>
-<li><p>Example of props with default values. <img src="react_crash_course_part2_files/figure-html/cell-6-2-image-3.png" class="img-fluid" alt="image-3.png"></p></li>
-<li><p>How to use component as wrapper. So in this example, we can see how we can use props not only to change the content but also the styling. <img src="react_crash_course_part2_files/figure-html/cell-6-3-image-4.png" class="img-fluid" alt="image-4.png"></p></li>
-<li><p>Looping through array in javascript and outputing jsx component <img src="react_crash_course_part2_files/figure-html/cell-7-1-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>To import image from /assets/images folder and use it in our components: <img src="react_crash_course_part2_files/figure-html/cell-6-3-image-4.png" class="img-fluid" alt="image-4.png"></p></li>
+<li><p>We can pass props to a components. These are like attributes. <img src="react_crash_course_part2_files/figure-html/cell-7-4-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>Also another way to write is to destructure props –&gt; {attribute1, attibuteN} <img src="react_crash_course_part2_files/figure-html/cell-7-1-image-2.png" class="img-fluid" alt="image-2.png"></p></li>
+<li><p>Example of props with default values. <img src="react_crash_course_part2_files/figure-html/cell-7-2-image-3.png" class="img-fluid" alt="image-3.png"></p></li>
+<li><p>How to use component as wrapper. So in this example, we can see how we can use props not only to change the content but also the styling. <img src="react_crash_course_part2_files/figure-html/cell-7-3-image-4.png" class="img-fluid" alt="image-4.png"></p></li>
+<li><p>Looping through array in javascript and outputing jsx component <img src="react_crash_course_part2_files/figure-html/cell-8-1-image.png" class="img-fluid" alt="image.png"></p></li>
 </ul>
 <section id="states" class="level3">
 <h3 class="anchored" data-anchor-id="states">States</h3>
 <ul>
 <li><p>Component states: relates to a single component</p></li>
 <li><p>Global states: relates to the entire app, can pass down to components</p></li>
-<li><p>Here is an example of component state: <img src="react_crash_course_part2_files/figure-html/cell-8-1-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>Here is an example of component state: <img src="react_crash_course_part2_files/figure-html/cell-9-1-image.png" class="img-fluid" alt="image.png"></p></li>
 <li><p>To install additional packages for working with icons and font-awesome: <code>npm i react-icons</code></p></li>
 <li><p>To use the installed font, we need to import it. To import it, we write on top of the component .jsx file where we want to use it: <code>import {} from 'react-icons/fa'</code>. This example shows how we can import font-awesome from react-icons. We import any font-awesome components we want. After imported, these icons act like a component.</p></li>
 <li><p>Using React on its own, we can not add separate pages. This is the differences between library and framework (React is a library).</p></li>
 <li><p>A workaround to add separate pages when using React is to use React Router. This is the official router for React, but it is a separate package, so we need to install it. To install it, use <code>npm i react-router-dom</code>.</p></li>
-<li><p>This is how to create seperate pages using <code>react-router-dom</code>. <img src="react_crash_course_part2_files/figure-html/cell-9-1-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>This is how to create seperate pages using <code>react-router-dom</code>. <img src="react_crash_course_part2_files/figure-html/cell-10-1-image.png" class="img-fluid" alt="image.png"></p></li>
 <li><p>Each of the pages you want to add to your webpage is a component, just like each of your UI is a component. It is a good idea to save them in separate folder and not together with your UI component. You may see people save them in /src/screens, /src/pages.</p></li>
 <li><p>Anything we imported is a component.</p></li>
-<li><p>Here is how to use route to create ‘connection’ to separate pages. <img src="react_crash_course_part2_files/figure-html/cell-10-1-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>Here is how to use route to create ‘connection’ to separate pages. <img src="react_crash_course_part2_files/figure-html/cell-11-1-image.png" class="img-fluid" alt="image.png"></p></li>
 <li><p>Note that here we set up layout using the main <code>&lt;Route path='/' element={ &lt;MainLayout/&gt; }&gt;...&lt;/Route&gt;</code></p>
 <ul>
 <li>This will always show on all the components nested inside the main <code>&lt;Route&gt;</code>.</li>
 </ul></li>
 <li><p>Instead of using <code>&lt;a href=""&gt;&lt;/a&gt;</code>, use <code>&lt;Link to=""&gt;&lt;/Link&gt;</code>. Because it loads faster. We have to import Link first from using <code>import { Link } from 'react-router-dom'</code>.</p></li>
-<li><p>If we want the link to the pages be highlighted when user clicked on the page, we can use NavLink in place of Link. They work the same. We then need to create a function to set different class to active element and inactive element (so the active ones will be highlighted) <img src="react_crash_course_part2_files/figure-html/cell-11-1-image-2.png" class="img-fluid" alt="image-2.png"></p></li>
-<li><p>Adding route to invalid url with wildcard * <img src="react_crash_course_part2_files/figure-html/cell-11-2-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>If we want the link to the pages be highlighted when user clicked on the page, we can use NavLink in place of Link. They work the same. We then need to create a function to set different class to active element and inactive element (so the active ones will be highlighted) <img src="react_crash_course_part2_files/figure-html/cell-12-1-image-2.png" class="img-fluid" alt="image-2.png"></p></li>
+<li><p>Adding route to invalid url with wildcard * <img src="react_crash_course_part2_files/figure-html/cell-12-2-image.png" class="img-fluid" alt="image.png"></p></li>
 <li><p>To test out getting data from backend into your frontend, you could use <code>json-server</code> libray from npm (https://www.npmjs.com/package/json-server). This library lets you create mock api. You can send Get, Post, Put, Patch and Delete requests. It can use any resource you want from .json file. It runs on a separate server than your frontend react app, and it fetches data from the json file you provided. To install <code>json-server</code> as a dev dependencies: <code>npm i -D json-server</code></p></li>
-<li><p>To point the json-server to a json file we use the command <code>json-server --watch src/file-to-point-to.json --port 8000</code>. Here we specify the port we want the server to use. <img src="react_crash_course_part2_files/figure-html/cell-12-1-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>To point the json-server to a json file we use the command <code>json-server --watch src/file-to-point-to.json --port 8000</code>. Here we specify the port we want the server to use. <img src="react_crash_course_part2_files/figure-html/cell-13-1-image.png" class="img-fluid" alt="image.png"></p></li>
 <li><p>In the example below, we specify the command to start the json-server under “scripts” in package.json. So we can directly run the json-server using the command <code>npm run server</code> directly in the terminal in the root directory.</p></li>
-<li><p>Once we have the json-server running, we can get specific output from the json-server by refering to the id. This output is the same just as if we’ve build a REST API and getting through /get request. We can also do a post request to add data to the actual json file. <img src="react_crash_course_part2_files/figure-html/cell-13-1-image.png" class="img-fluid" alt="image.png"></p></li>
-<li><p>This is how we would do to directly get data from json <img src="react_crash_course_part2_files/figure-html/cell-14-1-image.png" class="img-fluid" alt="image.png"></p></li>
-<li><p>We can fetch data via api and save it in variable using useState and useEffect. <img src="react_crash_course_part2_files/figure-html/cell-15-1-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>Once we have the json-server running, we can get specific output from the json-server by refering to the id. This output is the same just as if we’ve build a REST API and getting through /get request. We can also do a post request to add data to the actual json file. <img src="react_crash_course_part2_files/figure-html/cell-14-1-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>This is how we would do to directly get data from json <img src="react_crash_course_part2_files/figure-html/cell-15-1-image.png" class="img-fluid" alt="image.png"></p></li>
+<li><p>We can fetch data via api and save it in variable using useState and useEffect. <img src="react_crash_course_part2_files/figure-html/cell-16-1-image.png" class="img-fluid" alt="image.png"></p></li>
 <li><p><code>useEffect</code> takes a function and a dependency array. The syntax is: <code>useEffect( () =&gt; {}, [] )</code>. We define the function in the <code>() =&gt; {}</code> portion and the dependency array as the second argument – in the <code>[]</code> portion.</p></li>
 <li><p>With the json-server, we can also limit the returned response from the get request by adding <code>?_limit=3</code> (eg to limit to only 3 returned output) after the http link. Eg below is the working code for useEffect()</p></li>
 </ul>
@@ -245,8 +248,8 @@ fetchJobs(); // run the function we defined above
 }, []);</code></pre>
 <ul>
 <li>To show spinner even page is loading, we could download the react spinner library using command <code>npm i react-spinners</code></li>
-<li>To only show 3 output data for the homepage, otherwise show all data <img src="react_crash_course_part2_files/figure-html/cell-16-2-image.png" class="img-fluid" alt="image.png"></li>
-<li>How to set proxy: <img src="react_crash_course_part2_files/figure-html/cell-16-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
+<li>To only show 3 output data for the homepage, otherwise show all data <img src="react_crash_course_part2_files/figure-html/cell-17-2-image.png" class="img-fluid" alt="image.png"></li>
+<li>How to set proxy: <img src="react_crash_course_part2_files/figure-html/cell-17-1-image-2.png" class="img-fluid" alt="image-2.png"></li>
 </ul>
 
 

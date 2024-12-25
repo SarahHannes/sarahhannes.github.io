@@ -243,6 +243,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<blockquote class="blockquote">
+<p>This is part 1/4 notes of a <a href="https://www.youtube.com/watch?v=zJSY8tbf_ys">Youtube Front-end web development crash course</a>.</p>
+</blockquote>
 <section id="lesson-1" class="level1">
 <h1>Lesson 1</h1>
 <section id="change-webpage-element-using-inspector-tool" class="level2">
@@ -255,14 +258,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part1_files/figure-html/cell-4-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part1_files/figure-html/cell-5-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 <p>Here we inserted a picture of a pizza (right click the picture we want to insert → Copy Image Link) in place of the “Google” logo. We also adjusted the width and height.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part1_files/figure-html/cell-6-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part1_files/figure-html/cell-7-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
@@ -282,11 +285,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part1_files/figure-html/cell-10-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part1_files/figure-html/cell-11-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
-<div id="cell-11" class="cell" data-vscode="{&quot;languageId&quot;:&quot;javascript&quot;}">
+<div id="cell-12" class="cell" data-vscode="{&quot;languageId&quot;:&quot;javascript&quot;}">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> pick html element <span class="cf">with</span> <span class="op">&lt;</span>img<span class="op">&gt;</span> tag <span class="kw">and</span> save it <span class="kw">in</span> ourImage variable</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>const ourImage <span class="op">=</span> document.querySelector(<span class="st">'img'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -301,11 +304,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part1_files/figure-html/cell-12-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part1_files/figure-html/cell-13-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
-<div id="cell-13" class="cell" data-vscode="{&quot;languageId&quot;:&quot;javascript&quot;}">
+<div id="cell-14" class="cell" data-vscode="{&quot;languageId&quot;:&quot;javascript&quot;}">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> creating a function to change the google logo</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>function changeImage(url){</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    document.querySelector(<span class="st">'img'</span>).setAttribute(<span class="st">'srcset'</span>, url)</span>
@@ -316,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part1_files/figure-html/cell-14-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part1_files/figure-html/cell-15-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
@@ -327,18 +330,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We could do this manually on the <code>Inspector</code> tool by (1) select the <code>&lt;body&gt;</code> container (top rectangle). (2) change the <code>background: #fff</code> to whatever color we want (bottom arrow).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part1_files/figure-html/cell-17-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part1_files/figure-html/cell-18-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 <p>To trigger the background change every time a user click, we have to write the code below in the <code>Console</code> tab and run. Now, every time a user clicks on the webpage, the <code>htmlBody.onClick</code> event listener will run the <code>randomClickFunction</code> we defined and print out some messages to the console log.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part1_files/figure-html/cell-19-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part1_files/figure-html/cell-20-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
-<div id="cell-20" class="cell" data-vscode="{&quot;languageId&quot;:&quot;javascript&quot;}">
+<div id="cell-21" class="cell" data-vscode="{&quot;languageId&quot;:&quot;javascript&quot;}">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> save Body container</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>const htmlBody <span class="op">=</span> document.querySelector(<span class="st">'body'</span>)<span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -371,8 +374,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="lesson-2" class="level1">
 <h1>Lesson 2</h1>
 <p><a href="https://youtu.be/zJSY8tbf_ys?t=1694">Video timestamp</a></p>
-<p>QnA Takeaways: - Javascript is just a programming language made for the web. - Javascript can run in a web browser unlike any other language (up until recently). Recently, WebAssembly 1.0 released in 4 web browsers that does let you write other different languages directly in the web browser. But even with WebAssembly there are a lot of complicated steps to get it all set up. - What can we create with Javascript: - Web applications: using front-end frameworks like Angular, React (most popular ones at the moment) - Backend servers: using nestjs - Desktop applications for various OS: using electrons - Mobile apps: using React Native, NativeScript - Do AI, ML, Data Science projects: Tensorflow.js - What is Javascript framework (or any framework)? - A framework is something on top of a language - ie an abstraction on top of Javascript - that lets the developer to do something more efficiently in less time. - Eg Facebook is created largely using a framework called React. But it could have been built without a framework - in plain Javascript, HTML, CSS. But they wanted to automate the repetitive tasks, so this is how React is created. - Is Javascript is similar to Java? - No, Javascript is meant to be a companion to Java (so they have a little similarity) but they could not be more different than how ‘Car’ and ‘Carpet’ is no at all similar except they both have ‘car’ in them. - Is CSS and HTML required to work with Javascript? - It depends on where you are running that Javascript. - We use HTML and CSS mainly to allow interaction for our users, then Javascript in the front end will take in input data from the user interaction, then it will fire up some process in the backend, ie sending the information to nodejs version of Javascript and do something. - Eg when user key in email and password at a login page, the front-end Javascript will take in the input data and send it through the login process script, this script will convert the password to a hashed password and lookup the email to compare the inputted hashed password to the hashed password we stord in our database. Then once we’ve verified the user’s login, we send a response to the front-end to redirect the user to a different page. - What is the difference between ECMAScript (ES6 is the latest specification of ECMAScript) vs JavaScript? - ECMAScript is like ISO for Javascript and Javascript is actually an implementation of this standard implementation. So this organization takes care of standardizing usage of Javascript across the world. This is important for developers to know because of browsers compatibility among other things. - Where does Javascript runs? - In a runtime – a runtime is an environment where a code is run. There are 2 runtimes in Javascript: nodejs runtime and the browser runtime. - If the Javascript code is running in the backend in node.js, then it uses the <a hreg="https://v8.dev/">v8 engine</a>. - If the Javascript code is running in the frontend within Google Chrome, then it is also uses V8 engine. This V8 engine is the one that does all the compilation (take your Javascript code and convert it into something a computer can read). - If the Javascript code is running in the frontend within Firefox, <a href="https://spidermonkey.dev/">spider monkey</a> - which is the original engine for Javacript that was built within the Netscape browser way back in the day - is used to compile Javascript. - Check out “Browser Wars” podcast to listen to interesting takes like these. - We need to be aware of where we run our Javascript code because: - It will run differently (eg as we’ve seen above different browsers use different compilation methods). - There are certain things that you can not run within the node.js runtime. Eg here we get <code>Uncaught ReferenceError: document is not defined error</code>. This is because in the node.js runtime, document object model does not exist. <img src="frontend_crash_course_part1_files/figure-html/cell-22-1-image.png" class="img-fluid" alt="image.png"></p>
-<p>Example of a HTML webpage that incorportate CSS and Javascript. <img src="frontend_crash_course_part1_files/figure-html/cell-23-1-image.png" class="img-fluid" alt="image.png"></p>
+<p>QnA Takeaways: - Javascript is just a programming language made for the web. - Javascript can run in a web browser unlike any other language (up until recently). Recently, WebAssembly 1.0 released in 4 web browsers that does let you write other different languages directly in the web browser. But even with WebAssembly there are a lot of complicated steps to get it all set up. - What can we create with Javascript: - Web applications: using front-end frameworks like Angular, React (most popular ones at the moment) - Backend servers: using nestjs - Desktop applications for various OS: using electrons - Mobile apps: using React Native, NativeScript - Do AI, ML, Data Science projects: Tensorflow.js - What is Javascript framework (or any framework)? - A framework is something on top of a language - ie an abstraction on top of Javascript - that lets the developer to do something more efficiently in less time. - Eg Facebook is created largely using a framework called React. But it could have been built without a framework - in plain Javascript, HTML, CSS. But they wanted to automate the repetitive tasks, so this is how React is created. - Is Javascript is similar to Java? - No, Javascript is meant to be a companion to Java (so they have a little similarity) but they could not be more different than how ‘Car’ and ‘Carpet’ is no at all similar except they both have ‘car’ in them. - Is CSS and HTML required to work with Javascript? - It depends on where you are running that Javascript. - We use HTML and CSS mainly to allow interaction for our users, then Javascript in the front end will take in input data from the user interaction, then it will fire up some process in the backend, ie sending the information to nodejs version of Javascript and do something. - Eg when user key in email and password at a login page, the front-end Javascript will take in the input data and send it through the login process script, this script will convert the password to a hashed password and lookup the email to compare the inputted hashed password to the hashed password we stord in our database. Then once we’ve verified the user’s login, we send a response to the front-end to redirect the user to a different page. - What is the difference between ECMAScript (ES6 is the latest specification of ECMAScript) vs JavaScript? - ECMAScript is like ISO for Javascript and Javascript is actually an implementation of this standard implementation. So this organization takes care of standardizing usage of Javascript across the world. This is important for developers to know because of browsers compatibility among other things. - Where does Javascript runs? - In a runtime – a runtime is an environment where a code is run. There are 2 runtimes in Javascript: nodejs runtime and the browser runtime. - If the Javascript code is running in the backend in node.js, then it uses the <a hreg="https://v8.dev/">v8 engine</a>. - If the Javascript code is running in the frontend within Google Chrome, then it is also uses V8 engine. This V8 engine is the one that does all the compilation (take your Javascript code and convert it into something a computer can read). - If the Javascript code is running in the frontend within Firefox, <a href="https://spidermonkey.dev/">spider monkey</a> - which is the original engine for Javacript that was built within the Netscape browser way back in the day - is used to compile Javascript. - Check out “Browser Wars” podcast to listen to interesting takes like these. - We need to be aware of where we run our Javascript code because: - It will run differently (eg as we’ve seen above different browsers use different compilation methods). - There are certain things that you can not run within the node.js runtime. Eg here we get <code>Uncaught ReferenceError: document is not defined error</code>. This is because in the node.js runtime, document object model does not exist. <img src="frontend_crash_course_part1_files/figure-html/cell-23-1-image.png" class="img-fluid" alt="image.png"></p>
+<p>Example of a HTML webpage that incorportate CSS and Javascript. <img src="frontend_crash_course_part1_files/figure-html/cell-24-1-image.png" class="img-fluid" alt="image.png"></p>
 <ul>
 <li>CSS part is only to style the visual of the button at static <code>button</code>, and during hover <code>button:hover</code></li>
 <li>Javascript part add a click event listener <code>Document.querySelector('button').onclick</code> that:
@@ -406,7 +409,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><p>Boolean values are all lowercase <code>true</code> or <code>false</code>.</p></li>
 </ul>
-<div id="cell-27" class="cell" data-vscode="{&quot;languageId&quot;:&quot;javascript&quot;}">
+<div id="cell-28" class="cell" data-vscode="{&quot;languageId&quot;:&quot;javascript&quot;}">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> quick examples of declaring various data types</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>const yourFirstVariable <span class="op">=</span> <span class="st">'learning to code gives you superpower'</span><span class="op">;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>const yourSecondVariable <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
@@ -584,13 +587,13 @@ if (num){
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part1_files/figure-html/cell-37-5-image.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part1_files/figure-html/cell-38-5-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 <ul>
 <li><p>Challenge 2:</p>
-<p><img src="frontend_crash_course_part1_files/figure-html/cell-37-4-image-5.png" class="img-fluid" alt="image-5.png"> ``<code>//</code>some<code>and</code>Number` here is not a single word, so it throws error. Name of variable need to be 1 word. const some Number = 20;</p>
+<p><img src="frontend_crash_course_part1_files/figure-html/cell-38-4-image-5.png" class="img-fluid" alt="image-5.png"> ``<code>//</code>some<code>and</code>Number` here is not a single word, so it throws error. Name of variable need to be 1 word. const some Number = 20;</p>
 <p>// It seems like we are trying to reassign to a constant variable here, which we can not do someNumber = 50 ```</p>
 <ul>
 <li>Answer:</li>
@@ -603,7 +606,7 @@ someNumber = 50;</code></pre></li>
 <li><p>Challenge 3:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part1_files/figure-html/cell-37-3-image-4.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part1_files/figure-html/cell-38-3-image-4.png" class="img-fluid figure-img"></p>
 <figcaption>image-4.png</figcaption>
 </figure>
 </div>
@@ -613,14 +616,14 @@ someNumber = 50;</code></pre></li>
 <li><p>Challenge 4:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part1_files/figure-html/cell-37-1-image-2.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part1_files/figure-html/cell-38-1-image-2.png" class="img-fluid figure-img"></p>
 <figcaption>image-2.png</figcaption>
 </figure>
 </div></li>
 <li><p>Challenge 5:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="frontend_crash_course_part1_files/figure-html/cell-37-2-image-3.png" class="img-fluid figure-img"></p>
+<p><img src="frontend_crash_course_part1_files/figure-html/cell-38-2-image-3.png" class="img-fluid figure-img"></p>
 <figcaption>image-3.png</figcaption>
 </figure>
 </div></li>
@@ -698,7 +701,7 @@ if (20 === 20){
 <h2 class="anchored" data-anchor-id="exercies">Exercies</h2>
 <ul>
 <li>Challenge 1: we can not reassign values to a <code>const</code> variable.</li>
-<li>Challenge 2: Yes, both code evaluated to <code>false</code>. <img src="frontend_crash_course_part1_files/figure-html/cell-41-1-image.png" class="img-fluid" alt="image.png"></li>
+<li>Challenge 2: Yes, both code evaluated to <code>false</code>. <img src="frontend_crash_course_part1_files/figure-html/cell-42-1-image.png" class="img-fluid" alt="image.png"></li>
 <li>Challenge 3: expression5 evaluated to <code>false</code>.</li>
 </ul>
 <pre><code>const expression5 = !(((100 % 50) &lt; (100 / 50)) &amp;&amp; (300 + 5 === 305))</code></pre>
