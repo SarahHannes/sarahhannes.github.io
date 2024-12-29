@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2024-12-28">
 
-<title>Notes on Javascript Functions – Sarah Hannes</title>
+<title>Notes on Javascript Nested Functions – Sarah Hannes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -155,9 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#nested-functions" id="toc-nested-functions" class="nav-link active" data-scroll-target="#nested-functions">Nested functions</a>
-  <ul class="collapse">
-  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example 1</a>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link active" data-scroll-target="#example-1">Example 1</a>
   <ul class="collapse">
   <li><a href="#line-by-line-explanation-notes" id="toc-line-by-line-explanation-notes" class="nav-link" data-scroll-target="#line-by-line-explanation-notes">Line by line explanation &amp; notes</a></li>
   </ul></li>
@@ -176,7 +174,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#line-by-line-explanation-notes-3" id="toc-line-by-line-explanation-notes-3" class="nav-link" data-scroll-target="#line-by-line-explanation-notes-3">Line by line explanation &amp; notes</a></li>
   </ul></li>
   <li><a href="#example-7-object-with-methods" id="toc-example-7-object-with-methods" class="nav-link" data-scroll-target="#example-7-object-with-methods">Example 7: Object with methods</a></li>
-  <li><a href="#example-8" id="toc-example-8" class="nav-link" data-scroll-target="#example-8">Example 8</a></li>
+  <li><a href="#example-8" id="toc-example-8" class="nav-link" data-scroll-target="#example-8">Example 8</a>
+  <ul class="collapse">
+  <li><a href="#postfix-vs-prefix" id="toc-postfix-vs-prefix" class="nav-link" data-scroll-target="#postfix-vs-prefix">Postfix vs Prefix</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -187,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Notes on Javascript Functions</h1>
+<h1 class="title">Notes on Javascript Nested Functions</h1>
   <div class="quarto-categories">
     <div class="quarto-category">javascript</div>
   </div>
@@ -213,11 +213,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="nested-functions" class="level1">
-<h1>Nested functions</h1>
-<section id="example-1" class="level2">
-<h2 class="anchored" data-anchor-id="example-1">Example 1</h2>
-<div id="cell-3" class="cell" data-execution_count="39">
+<section id="example-1" class="level1">
+<h1>Example 1</h1>
+<div id="cell-2" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>function outside(x) {</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    function inside(y) {</span>
@@ -236,8 +234,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 8</code></pre>
 </div>
 </div>
-<section id="line-by-line-explanation-notes" class="level3">
-<h3 class="anchored" data-anchor-id="line-by-line-explanation-notes">Line by line explanation &amp; notes</h3>
+<section id="line-by-line-explanation-notes" class="level2">
+<h2 class="anchored" data-anchor-id="line-by-line-explanation-notes">Line by line explanation &amp; notes</h2>
 <ul>
 <li><code>const myfunction = outside(3)</code> &gt; Here we define <code>myfunction</code> variable with <code>outside(3)</code>, doing so created a new scope with <code>x = 3</code>. This <code>x</code> is preserved in this scope, ie <code>x</code> inside <code>myfunction</code> scope will always be 3, because we initialized it as <code>myfunction = outside(3)</code>.</li>
 </ul>
@@ -250,9 +248,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="example-2" class="level2">
-<h2 class="anchored" data-anchor-id="example-2">Example 2</h2>
-<div id="cell-6" class="cell" data-execution_count="40">
+<section id="example-2" class="level1">
+<h1>Example 2</h1>
+<div id="cell-5" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>function outside() {</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  const x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
@@ -267,8 +265,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>20</code></pre>
 </div>
 </div>
-<section id="line-by-line-explanation-notes-1" class="level3">
-<h3 class="anchored" data-anchor-id="line-by-line-explanation-notes-1">Line by line explanation &amp; notes</h3>
+<section id="line-by-line-explanation-notes-1" class="level2">
+<h2 class="anchored" data-anchor-id="line-by-line-explanation-notes-1">Line by line explanation &amp; notes</h2>
 <ul>
 <li><p><code>outside()(10)</code> &gt; <code>outside()</code> created a new scope. <code>(10)</code> is where we call <code>inside(10)</code> inside the <code>outside()</code> scope. Therefore <code>x=10</code> in the <code>inside()</code> function.</p></li>
 <li><p>In nested function, the innermost function takes more precedence than the outside function. &gt; When we call <code>outside()(10)</code>, we initialized <code>x=10</code> within <code>inside()</code> function. Since <code>inside()</code> scope is of higher precedence than <code>outside()</code>, <code>const x = 5</code> we defined in <code>outside()</code> function scope is overrode.</p></li>
@@ -276,9 +274,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="example-3" class="level2">
-<h2 class="anchored" data-anchor-id="example-3">Example 3</h2>
-<div id="cell-9" class="cell" data-execution_count="41">
+<section id="example-3" class="level1">
+<h1>Example 3</h1>
+<div id="cell-8" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>const getCode <span class="op">=</span> (</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -298,8 +296,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>some-api-code--some-other-code-added-in-inner-function</code></pre>
 </div>
 </div>
-<section id="line-by-line-explanation-notes-2" class="level3">
-<h3 class="anchored" data-anchor-id="line-by-line-explanation-notes-2">Line by line explanation &amp; notes</h3>
+<section id="line-by-line-explanation-notes-2" class="level2">
+<h2 class="anchored" data-anchor-id="line-by-line-explanation-notes-2">Line by line explanation &amp; notes</h2>
 <ul>
 <li>On line 5, we define outer function here.</li>
 </ul>
@@ -318,9 +316,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="example-4" class="level2">
-<h2 class="anchored" data-anchor-id="example-4">Example 4</h2>
-<div id="cell-12" class="cell" data-execution_count="25">
+<section id="example-4" class="level1">
+<h1>Example 4</h1>
+<div id="cell-11" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>const getCode <span class="op">=</span> (</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -341,9 +339,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="example-5" class="level2">
-<h2 class="anchored" data-anchor-id="example-5">Example 5</h2>
-<div id="cell-14" class="cell" data-execution_count="42">
+<section id="example-5" class="level1">
+<h1>Example 5</h1>
+<div id="cell-13" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>const getCode <span class="op">=</span> function () {</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    const apiCode <span class="op">=</span> <span class="st">"some-api-code"</span><span class="op">;</span> </span>
@@ -375,9 +373,9 @@ some-api-code--some-other-code-added-in-inner-function</code></pre>
 <li>If we don’t directly invoke the outer function at end of outer function definition, we would have to explicitly call the outer function. See example above.</li>
 </ul>
 </section>
-<section id="example-6-multiple-arguments" class="level2">
-<h2 class="anchored" data-anchor-id="example-6-multiple-arguments">Example 6: Multiple Arguments</h2>
-<div id="cell-17" class="cell">
+<section id="example-6-multiple-arguments" class="level1">
+<h1>Example 6: Multiple Arguments</h1>
+<div id="cell-16" class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>function myConcat(separator) {</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  let result <span class="op">=</span> <span class="st">""</span><span class="op">;</span> <span class="op">//</span> initialize <span class="bu">list</span></span>
@@ -393,17 +391,17 @@ some-api-code--some-other-code-added-in-inner-function</code></pre>
 <pre><code>sage. basil. oregano. pepper. parsley. </code></pre>
 </div>
 </div>
-<section id="line-by-line-explanation-notes-3" class="level3">
-<h3 class="anchored" data-anchor-id="line-by-line-explanation-notes-3">Line by line explanation &amp; notes</h3>
+<section id="line-by-line-explanation-notes-3" class="level2">
+<h2 class="anchored" data-anchor-id="line-by-line-explanation-notes-3">Line by line explanation &amp; notes</h2>
 <ul>
 <li>Within the function, arguments are maintained like an array and can be accessed like so <code>arguments[i];</code>. Where <code>i</code> is the index of the arguments, starting at 0.</li>
 <li>This means, you can pass any number of arguments when you call the function. Eg above <code>myConcat(". ", "sage", "basil", "oregano", "pepper", "parsley");</code>. Note that in the function definition we only specify 1 parameter <code>myConcat(separator)</code>. This is different than python where we need to have to pass the same number of arguments as we defined in the function definition.</li>
 </ul>
 </section>
 </section>
-<section id="example-7-object-with-methods" class="level2">
-<h2 class="anchored" data-anchor-id="example-7-object-with-methods">Example 7: Object with methods</h2>
-<div id="cell-20" class="cell" data-execution_count="54">
+<section id="example-7-object-with-methods" class="level1">
+<h1>Example 7: Object with methods</h1>
+<div id="cell-19" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>const myCalc <span class="op">=</span> function(val1) {</span>
@@ -460,7 +458,7 @@ Example 2 --------------
     }
 
 }</code></pre>
-<div id="cell-22" class="cell" data-execution_count="55">
+<div id="cell-21" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>const myCalc <span class="op">=</span> function(val1) {</span>
@@ -515,9 +513,9 @@ Example 2 --------------
 <p>Notice that we directly define the named functions, then <code>return {inner_func1, inner_funct2}</code>. This is different than the previous example where we directly define the inner functions in the return statement <code>return {inner_func1: ... , inner_func2: ... }</code></p>
 </blockquote>
 </section>
-<section id="example-8" class="level2">
-<h2 class="anchored" data-anchor-id="example-8">Example 8</h2>
-<div id="cell-25" class="cell" data-execution_count="58">
+<section id="example-8" class="level1">
+<h1>Example 8</h1>
+<div id="cell-24" class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>var createCounter <span class="op">=</span> function(init) {</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -566,9 +564,9 @@ Example 2 --------------
     ++cur; // or cur++, it does not matter here. See below example for details
     return cur;
 }</code></pre>
-<section id="postfix-vs-prefix" class="level4">
-<h4 class="anchored" data-anchor-id="postfix-vs-prefix">Postfix vs Prefix</h4>
-<div id="cell-28" class="cell" data-execution_count="59">
+<section id="postfix-vs-prefix" class="level2">
+<h2 class="anchored" data-anchor-id="postfix-vs-prefix">Postfix vs Prefix</h2>
+<div id="cell-27" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>let cur <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>let result <span class="op">=</span> <span class="op">++</span>cur<span class="op">;</span>  <span class="op">//</span> `cur` <span class="kw">is</span> incremented first, then `result` gets the new value of `cur`</span>
@@ -579,7 +577,7 @@ Example 2 --------------
 6</code></pre>
 </div>
 </div>
-<div id="cell-29" class="cell" data-execution_count="60">
+<div id="cell-28" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>let cur <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>let result <span class="op">=</span> cur<span class="op">++;</span>  <span class="op">//</span> result gets the current value of `cur`, then `cur` <span class="kw">is</span> incremented</span>
@@ -590,7 +588,6 @@ Example 2 --------------
 6</code></pre>
 </div>
 </div>
-</section>
 </section>
 </section>
 <section id="references" class="level1">
