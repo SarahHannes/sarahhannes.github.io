@@ -2,122 +2,126 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til.html</loc>
-    <lastmod>2024-12-25T00:48:47.982Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.835Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/frontend_crash_course_part2.html</loc>
-    <lastmod>2024-12-25T00:48:46.562Z</lastmod>
+    <lastmod>2024-12-29T14:49:53.414Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/smithwaterman_py.html</loc>
-    <lastmod>2024-12-25T00:48:47.791Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.644Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/react_crash_course_part2.html</loc>
-    <lastmod>2024-12-25T00:48:47.729Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.582Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/get_data_geo2r.html</loc>
-    <lastmod>2024-12-25T00:48:47.386Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.236Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/visualizing_arrays.html</loc>
-    <lastmod>2024-12-25T00:48:47.979Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.832Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/bwt_in_python.html</loc>
-    <lastmod>2024-12-25T00:48:46.204Z</lastmod>
+    <lastmod>2024-12-29T14:49:53.056Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/diff_pam_blosum.html</loc>
-    <lastmod>2024-12-25T00:48:46.204Z</lastmod>
+    <lastmod>2024-12-29T14:49:53.056Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/frontend_crash_course_part3.html</loc>
-    <lastmod>2024-12-25T00:48:46.896Z</lastmod>
+    <lastmod>2024-12-29T14:49:53.748Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/about.html</loc>
-    <lastmod>2024-12-25T00:48:46.203Z</lastmod>
+    <lastmod>2024-12-29T14:49:53.055Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/130524_conda_ValueError.html</loc>
-    <lastmod>2024-12-25T00:48:47.983Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.836Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/140524_conda_ImportError.html</loc>
-    <lastmod>2024-12-25T00:48:47.983Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.836Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190624_howtodocker.html</loc>
-    <lastmod>2024-12-25T00:48:48.003Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.856Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/160824_docker_cache.html</loc>
-    <lastmod>2024-12-25T00:48:47.988Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.841Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/200624_numpy_datablock.html</loc>
-    <lastmod>2024-12-25T00:48:48.012Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.865Z</lastmod>
+  </url>
+  <url>
+    <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/281224_javascript_closure.html</loc>
+    <lastmod>2024-12-29T14:49:54.865Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/310824_using_postgres.html</loc>
-    <lastmod>2024-12-25T00:48:48.022Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.875Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190624_lesson0.html</loc>
-    <lastmod>2024-12-25T00:48:48.005Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.858Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/190724_how-to-save-load-fastai-model.html</loc>
-    <lastmod>2024-12-25T00:48:48.006Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.859Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/130624_fastai_AttributeError.html</loc>
-    <lastmod>2024-12-25T00:48:47.983Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.836Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/til/200624_incompleteread.html</loc>
-    <lastmod>2024-12-25T00:48:48.010Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.863Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog.html</loc>
-    <lastmod>2024-12-25T00:48:46.203Z</lastmod>
+    <lastmod>2024-12-29T14:49:53.055Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/index.html</loc>
-    <lastmod>2024-12-25T00:48:47.982Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.835Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/npm_cheatsheet.html</loc>
-    <lastmod>2024-12-25T00:48:47.472Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.322Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/react_crash_course_part1.html</loc>
-    <lastmod>2024-12-25T00:48:47.497Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.347Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/frontend_crash_course_part1.html</loc>
-    <lastmod>2024-12-25T00:48:46.354Z</lastmod>
+    <lastmod>2024-12-29T14:49:53.206Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/ab_test.html</loc>
-    <lastmod>2024-12-25T00:48:46.203Z</lastmod>
+    <lastmod>2024-12-29T14:49:53.056Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/react_crash_course_part3.html</loc>
-    <lastmod>2024-12-25T00:48:47.784Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.638Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/feed_forward_nn_in_excel.html</loc>
-    <lastmod>2024-12-25T00:48:46.229Z</lastmod>
+    <lastmod>2024-12-29T14:49:53.081Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/frontend_crash_course_part4.html</loc>
-    <lastmod>2024-12-25T00:48:47.273Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.124Z</lastmod>
   </url>
   <url>
     <loc>https://SarahHannes.github.io/sarahhannes.github.io/blog/suffix_array.html</loc>
-    <lastmod>2024-12-25T00:48:47.791Z</lastmod>
+    <lastmod>2024-12-29T14:49:54.645Z</lastmod>
   </url>
 </urlset>
