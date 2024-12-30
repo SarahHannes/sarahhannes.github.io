@@ -213,9 +213,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<blockquote class="blockquote">
+<p>Notes on Javascript nested functions</p>
+</blockquote>
 <section id="example-1" class="level1">
 <h1>Example 1</h1>
-<div id="cell-2" class="cell" data-execution_count="39">
+<div id="cell-3" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>function outside(x) {</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    function inside(y) {</span>
@@ -250,7 +253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="example-2" class="level1">
 <h1>Example 2</h1>
-<div id="cell-5" class="cell" data-execution_count="40">
+<div id="cell-6" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>function outside() {</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  const x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
@@ -276,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="example-3" class="level1">
 <h1>Example 3</h1>
-<div id="cell-8" class="cell" data-execution_count="41">
+<div id="cell-9" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>const getCode <span class="op">=</span> (</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -318,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="example-4" class="level1">
 <h1>Example 4</h1>
-<div id="cell-11" class="cell" data-execution_count="25">
+<div id="cell-12" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>const getCode <span class="op">=</span> (</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -341,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="example-5" class="level1">
 <h1>Example 5</h1>
-<div id="cell-13" class="cell" data-execution_count="42">
+<div id="cell-14" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>const getCode <span class="op">=</span> function () {</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    const apiCode <span class="op">=</span> <span class="st">"some-api-code"</span><span class="op">;</span> </span>
@@ -375,7 +378,7 @@ some-api-code--some-other-code-added-in-inner-function</code></pre>
 </section>
 <section id="example-6-multiple-arguments" class="level1">
 <h1>Example 6: Multiple Arguments</h1>
-<div id="cell-16" class="cell">
+<div id="cell-17" class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>function myConcat(separator) {</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  let result <span class="op">=</span> <span class="st">""</span><span class="op">;</span> <span class="op">//</span> initialize <span class="bu">list</span></span>
@@ -401,7 +404,7 @@ some-api-code--some-other-code-added-in-inner-function</code></pre>
 </section>
 <section id="example-7-object-with-methods" class="level1">
 <h1>Example 7: Object with methods</h1>
-<div id="cell-19" class="cell" data-execution_count="54">
+<div id="cell-20" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>const myCalc <span class="op">=</span> function(val1) {</span>
@@ -458,7 +461,7 @@ Example 2 --------------
     }
 
 }</code></pre>
-<div id="cell-21" class="cell" data-execution_count="55">
+<div id="cell-22" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>const myCalc <span class="op">=</span> function(val1) {</span>
@@ -515,7 +518,7 @@ Example 2 --------------
 </section>
 <section id="example-8" class="level1">
 <h1>Example 8</h1>
-<div id="cell-24" class="cell" data-execution_count="58">
+<div id="cell-25" class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>var createCounter <span class="op">=</span> function(init) {</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -566,7 +569,7 @@ Example 2 --------------
 }</code></pre>
 <section id="postfix-vs-prefix" class="level2">
 <h2 class="anchored" data-anchor-id="postfix-vs-prefix">Postfix vs Prefix</h2>
-<div id="cell-27" class="cell" data-execution_count="59">
+<div id="cell-28" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>let cur <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>let result <span class="op">=</span> <span class="op">++</span>cur<span class="op">;</span>  <span class="op">//</span> `cur` <span class="kw">is</span> incremented first, then `result` gets the new value of `cur`</span>
@@ -577,7 +580,7 @@ Example 2 --------------
 6</code></pre>
 </div>
 </div>
-<div id="cell-28" class="cell" data-execution_count="60">
+<div id="cell-29" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script node</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>let cur <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>let result <span class="op">=</span> cur<span class="op">++;</span>  <span class="op">//</span> result gets the current value of `cur`, then `cur` <span class="kw">is</span> incremented</span>
